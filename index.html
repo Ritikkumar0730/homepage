@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>Your Name's Webpage</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="landing">
+  <canvas id="bh"></canvas>
+  <div class="veil"></div>
+
+  <button class="menu-toggle" id="menuToggle">Menu
+    <span class="bars"><span></span><span></span></span>
+  </button>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="rule"></div>
+      <h1>Hello!</h1>
+      <div class="rule"></div>
+      <p class="tagline">
+        This is the website of Ritik Kumar<br>
+        5th-year BS+MS Researcher at Your Indian Institute of Science
+      </p>
+    </div>
+    <div class="learn">
+      <a href="research.html">Learn More</a>
+      <div class="arrow">&darr;</div>
+    </div>
+  </section>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav-panel" id="navPanel">
+    <button class="nav-close" id="navClose" aria-label="Close">&times;</button>
+    <h3>Menu</h3>
+    <a href="index.html" class="active">Home</a>
+    <a href="research.html">Research</a>
+    <a href="resources.html">Resources</a>
+    <a href="presenting.html">Better Presenting</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+<script src="blackhole.js"></script>
+<script src="menu.js"></script>
+</body>
+</html>
