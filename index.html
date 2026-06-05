@@ -4,43 +4,251 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Ritik Kumar's Webpage</title>
-<link rel="stylesheet" href="style.css" />
+<style>
+  :root{
+    --teal:#2bb6a3;
+    --dark:#2e333d;        /* slate section bg */
+    --darker:#262a32;
+    --text:#ffffff;
+    --muted:rgba(255,255,255,0.82);
+    --accent:#ff5a3c;      /* orange button */
+    --border:rgba(255,255,255,0.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color:var(--text);background:var(--dark);-webkit-font-smoothing:antialiased;line-height:1.7;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ===== fixed top bar (brand + menu) ===== */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;
+    justify-content:space-between;padding:1.25rem 2rem;
+    background:linear-gradient(to bottom,rgba(20,22,28,0.85),rgba(20,22,28,0));
+    transition:background .3s}
+  .topbar.solid{background:var(--darker);box-shadow:0 2px 18px rgba(0,0,0,.4)}
+  .brand{font-weight:700;letter-spacing:.18rem;text-transform:uppercase;font-size:1.05rem;
+    opacity:0;transition:opacity .3s;pointer-events:none}
+  .topbar.solid .brand{opacity:1;pointer-events:auto}
+  .menu-toggle{display:flex;align-items:center;gap:.7rem;background:none;border:none;color:#fff;
+    cursor:pointer;font-size:.95rem;letter-spacing:.22rem;text-transform:uppercase;font-weight:600}
+  .menu-toggle .bars{display:inline-flex;flex-direction:column;gap:5px}
+  .menu-toggle .bars span{display:block;width:26px;height:2px;background:#fff;border-radius:2px}
+
+  /* ===== HERO (full screen, photo background) ===== */
+  .hero{position:relative;height:100vh;min-height:100vh;width:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;
+    /* >>> YOUR PHOTO GOES HERE <<< change the filename to your image */
+    background:#000 url('g.jpg') center center / cover no-repeat;
+  }
+  .hero::after{content:'';position:absolute;inset:0;
+    background:radial-gradient(60% 50% at 50% 50%,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 60%),
+               linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.45));}
+  .hero .inner{position:relative;z-index:2;max-width:60rem;animation:fade 1.3s ease both}
+  .rule{width:14rem;max-width:60vw;height:2px;background:#fff;margin:1.5rem auto}
+  .hero h1{font-size:clamp(2.6rem,7vw,4rem);font-weight:700;letter-spacing:.4rem;text-transform:uppercase;
+    text-shadow:0 2px 30px rgba(0,0,0,.85)}
+  .hero .tagline{margin-top:.4rem;color:var(--muted);font-size:clamp(.95rem,2.3vw,1.3rem);
+    letter-spacing:.16rem;text-transform:uppercase;font-weight:300;text-shadow:0 2px 18px rgba(0,0,0,.9)}
+  .scrolldown{position:absolute;bottom:2.2rem;left:0;right:0;text-align:center;z-index:2}
+  .scrolldown a{font-size:.9rem;letter-spacing:.22rem;text-transform:uppercase;font-weight:600;
+    text-shadow:0 2px 14px rgba(0,0,0,.9)}
+  .arrow{margin-top:.8rem;font-size:1.4rem;animation:bounce 2s infinite}
+
+  /* ===== content sections ===== */
+  section.band{padding:5rem 2rem;display:flex;justify-content:center}
+  .band .wrap{width:min(60rem,92vw);text-align:center}
+  .band h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:700;letter-spacing:.22rem;text-transform:uppercase}
+  .band .hr{width:7rem;height:2px;background:rgba(255,255,255,.6);margin:1.2rem auto 1.8rem}
+  .band p{color:var(--muted);font-size:1.08rem;margin-bottom:1.8rem}
+  .teal{background:var(--teal)}
+  .teal p{color:rgba(255,255,255,.95)}
+
+  /* split rows (image + text) */
+  section.split{display:grid;grid-template-columns:1fr 1fr;min-height:62vh}
+  section.split .media{background-size:cover;background-position:center;min-height:320px}
+  section.split .body{display:flex;flex-direction:column;justify-content:center;padding:4rem clamp(1.5rem,5vw,5rem)}
+  section.split.dark{background:var(--dark)}
+  section.split.darker{background:var(--darker)}
+  section.split.text-left .media{order:2}
+  section.split.text-left .body{order:1}
+  section.split h2{font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:700;letter-spacing:.22rem;text-transform:uppercase;margin-bottom:1.4rem}
+  section.split p{color:var(--muted);font-size:1.08rem;margin-bottom:2rem}
+
+  .btn{display:inline-block;align-self:flex-start;padding:.95rem 2rem;border:2px solid var(--border);
+    color:#fff;text-transform:uppercase;letter-spacing:.18rem;font-size:.8rem;font-weight:600;transition:.25s}
+  .btn:hover{background:#fff;color:#1c1f26}
+  .band .btn{align-self:center}
+  .teal .btn{border-color:#fff}
+  .teal .btn:hover{background:#fff;color:var(--teal)}
+
+  /* get in touch banner */
+  .cta{position:relative;min-height:38vh;display:flex;align-items:center;justify-content:center;
+    background:#000 url('images/hero.jpg') center center / cover no-repeat;}
+  .cta::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5)}
+  .cta a{position:relative;z-index:2;background:var(--accent);color:#fff;padding:1.1rem 3.5rem;
+    text-transform:uppercase;letter-spacing:.2rem;font-weight:700;font-size:.95rem;width:min(40rem,86vw);text-align:center;
+    transition:filter .2s}
+  .cta a:hover{filter:brightness(1.1)}
+
+  footer{background:var(--darker);text-align:center;padding:3rem 2rem 3.5rem;color:var(--muted)}
+  footer .socials{margin-bottom:1.2rem;display:flex;gap:1.6rem;justify-content:center}
+  footer .socials a{font-size:1.3rem;color:var(--muted);transition:color .2s}
+  footer .socials a:hover{color:#fff}
+  footer .copy{font-size:.8rem;letter-spacing:.1rem;text-transform:uppercase}
+
+  /* ===== slide-out menu ===== */
+  .nav-overlay{position:fixed;inset:0;z-index:70;background:rgba(8,8,14,.6);backdrop-filter:blur(2px);
+    opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+  .nav-overlay.open{opacity:1;visibility:visible}
+  .nav-panel{position:fixed;top:0;right:0;height:100%;z-index:80;width:min(20rem,80vw);
+    background:rgba(16,18,24,.98);border-left:1px solid rgba(255,255,255,.15);padding:5rem 2.5rem 2rem;
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.7,0,.3,1)}
+  .nav-panel.open{transform:translateX(0)}
+  .nav-panel h3{font-size:.75rem;letter-spacing:.25rem;text-transform:uppercase;color:var(--muted);
+    padding-bottom:1rem;margin-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.15)}
+  .nav-panel a{display:block;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.08);
+    letter-spacing:.08rem;text-transform:uppercase;font-size:.82rem;transition:color .2s,padding-left .2s}
+  .nav-panel a:hover{color:var(--teal);padding-left:.4rem}
+  .nav-close{position:absolute;top:1.25rem;right:1.5rem;background:none;border:none;color:var(--muted);
+    font-size:1.8rem;cursor:pointer;line-height:1;transition:color .2s}
+  .nav-close:hover{color:#fff}
+
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* mobile: stack split rows, image on top */
+  @media(max-width:760px){
+    section.split{grid-template-columns:1fr}
+    section.split .media{min-height:240px;order:0 !important}
+    section.split .body{order:0 !important;padding:3rem 1.5rem}
+    section.split h2,section.band h2{letter-spacing:.12rem}
+    .topbar{padding:1rem 1.25rem}
+  }
+</style>
 </head>
-<!-- Background photo is set here. Change the filename/path to match your image. -->
-<body class="landing" style="background: url('g.jpg') center/contain no-repeat fixed; background-color:#000;">
-  <div class="veil"></div>
+<body>
 
-  <button class="menu-toggle" id="menuToggle">Menu
-    <span class="bars"><span></span><span></span></span>
-  </button>
+  <!-- top bar -->
+  <header class="topbar" id="topbar">
+    <a href="#top" class="brand">Ritik Kumar</a>
+    <button class="menu-toggle" id="menuToggle">Menu
+      <span class="bars"><span></span><span></span></span>
+    </button>
+  </header>
 
-  <section class="hero">
-    <div class="hero-inner">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="inner">
       <div class="rule"></div>
       <h1>Hello!</h1>
       <div class="rule"></div>
-      <p class="tagline">
-        This is the website of Ritik Kumar<br>
-        5th-year BS+MS Researcher at Indian Institute of Science
-      </p>
+      <p class="tagline">This is the website of Ritik Kumar<br>
+        5th-year BS+MS Researcher at Indian Institute of Science</p>
     </div>
-    <div class="learn">
-      <a href="research.html">Learn More</a>
+    <div class="scrolldown">
+      <a href="#research">Learn More</a>
       <div class="arrow">&darr;</div>
     </div>
   </section>
 
+  <!-- 1. Research Interests (teal band) -->
+  <section class="band teal" id="research">
+    <div class="wrap">
+      <h2>Research Interests</h2>
+      <div class="hr"></div>
+      <p>Write a clear, accessible summary of your primary research here — the systems or
+         problems you study, the techniques you use, and what makes the work exciting. Replace
+         this paragraph with your own description aimed at a broad audience.</p>
+      <a class="btn" href="#" target="_blank" rel="noopener">Click here for my CV</a>
+    </div>
+  </section>
+
+  <!-- 2. Topic A (image left, text right) -->
+  <section class="split dark" id="topic1">
+    <div class="media" style="background-image:url('images/topic1.jpg')"></div>
+    <div class="body">
+      <h2>Project / Topic One</h2>
+      <p>Describe a key project, method, or research theme here. Two or three sentences works
+         well — enough to explain what it is and why it matters, without overwhelming the reader.</p>
+      <a class="btn" href="#" target="_blank" rel="noopener">Keep reading</a>
+    </div>
+  </section>
+
+  <!-- 3. Topic B (text left, image right) -->
+  <section class="split darker text-left" id="topic2">
+    <div class="media" style="background-image:url('images/topic2.jpg')"></div>
+    <div class="body">
+      <h2>Project / Topic Two</h2>
+      <p>Another highlight — a technique, instrument, collaboration, or area you're excited
+         about. Swap in your own text and link the button to a relevant page or paper.</p>
+      <a class="btn" href="#" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </section>
+
+  <!-- 4. Better Presenting (image left, text right) -->
+  <section class="split dark text-left" id="presenting">
+    <div class="media" style="background-image:url('images/topic3.jpg')"></div>
+    <div class="body">
+      <h2>Better Presenting</h2>
+      <p>Communicating effectively to a broad audience is an essential skill at every career
+         stage. Describe any workshops, talks, or resources you offer to help others present well.</p>
+      <a class="btn" href="#" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </section>
+
+  <!-- 5. Resources (text left, image right) -->
+  <section class="split darker" id="resources">
+    <div class="media" style="background-image:url('images/topic4.jpg')"></div>
+    <div class="body">
+      <h2>Resources</h2>
+      <p>Share career and research resources you've found helpful — maybe others will too.
+         Link the button to a resources page or a document.</p>
+      <a class="btn" href="#" target="_blank" rel="noopener">Click here for resources</a>
+    </div>
+  </section>
+
+  <!-- 6. Get in touch banner -->
+  <section class="cta" id="contact">
+    <a href="mailto:you@example.com">Get in Touch</a>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener" title="GitHub">&#9670;</a>
+      <a href="#" target="_blank" rel="noopener" title="LinkedIn">&#9632;</a>
+      <a href="mailto:you@example.com" title="Email">&#9993;</a>
+    </div>
+    <div class="copy">&copy; Ritik Kumar &nbsp;|&nbsp; Design inspired by HTML5 UP</div>
+  </footer>
+
+  <!-- slide-out menu -->
   <div class="nav-overlay" id="navOverlay"></div>
   <nav class="nav-panel" id="navPanel">
     <button class="nav-close" id="navClose" aria-label="Close">&times;</button>
     <h3>Menu</h3>
-    <a href="index.html" class="active">Home</a>
-    <a href="research.html">Research</a>
-    <a href="resources.html">Resources</a>
-    <a href="presenting.html">Better Presenting</a>
-    <a href="contact.html">Contact</a>
+    <a href="#top">Home</a>
+    <a href="#research">Research</a>
+    <a href="#resources">Resources</a>
+    <a href="#presenting">Better Presenting</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-<script src="menu.js"></script>
+<script>
+  // menu open/close
+  const t=document.getElementById('menuToggle'),o=document.getElementById('navOverlay'),
+        p=document.getElementById('navPanel'),c=document.getElementById('navClose');
+  const open=()=>{o.classList.add('open');p.classList.add('open')};
+  const close=()=>{o.classList.remove('open');p.classList.remove('open')};
+  t.onclick=open;c.onclick=close;o.onclick=close;
+  // close menu when a link is clicked (so it scrolls smoothly)
+  p.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  // solidify top bar after scrolling past hero
+  const bar=document.getElementById('topbar');
+  addEventListener('scroll',()=>{bar.classList.toggle('solid',scrollY>innerHeight*0.6)});
+</script>
 </body>
 </html>
