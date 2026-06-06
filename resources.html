@@ -14,12 +14,12 @@ html { scroll-behavior: smooth; }
 :root {
   --ink: #1a1a1a;
   --mid: #555;
-  --light: #888;
+  --light: #999;
   --rule: #e0e0e0;
   --teal: #2bb6a3;
   --link: #1a5fa8;
   --link-hover: #0d3d6b;
-  --bg: #fafafa;
+  --bg: #f2f2f2;
   --serif: 'EB Garamond', Georgia, serif;
   --sans: 'DM Sans', sans-serif;
 }
@@ -33,102 +33,101 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─────────────────────────────────────────────
-   HERO  — full-width photo, only title on it
-───────────────────────────────────────────── */
+/* ── HERO ────────────────────────────── */
 .hero {
   position: relative;
   width: 100%;
-  height: 60vh;
-  min-height: 360px;
+  height: 55vh;
+  min-height: 300px;
   background: #000 url('g.jpg') center center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 .hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
-}
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  animation: heroFade 1.1s ease both;
+  background: rgba(0,0,0,.48);
 }
 .hero h1 {
+  position: relative;
+  z-index: 2;
   font-family: var(--serif);
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
   font-weight: 400;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: #fff;
   line-height: 1;
+  animation: rise .9s ease both;
 }
 
-/* ── INTRO STRIP ──────────────────────────── */
+/* ── INTRO ───────────────────────────── */
 .intro {
   background: #fff;
   border-bottom: 1px solid var(--rule);
-  padding: 3.5rem 2rem;
+  padding: 3rem 2rem;
   text-align: center;
 }
 .intro p {
   font-family: var(--serif);
-  font-size: 1.15rem;
-  line-height: 1.85;
-  color: var(--mid);
-  max-width: 740px;
-  margin: 0 auto;
   font-style: italic;
-}
-
-/* ── PAGE ─────────────────────────────────── */
-.page {
-  max-width: 1180px;
+  font-size: 1.13rem;
+  line-height: 1.9;
+  color: var(--mid);
+  max-width: 720px;
   margin: 0 auto;
-  padding: 4rem 2rem 6rem;
 }
 
-/* ─────────────────────────────────────────────
-   SECTION BOXES
-   Each section is a white card with a border.
-   Size (padding / min-height) set per section.
-───────────────────────────────────────────── */
+/* ── PAGE WRAPPER ────────────────────── */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ── SECTION BOX ─────────────────────
+   Label on LEFT  → .sec
+   Label on RIGHT → .sec.flip
+   Box width auto-sizes to content via min-height
+─────────────────────────────────────── */
 .sec {
   background: #fff;
   border: 1px solid var(--rule);
-  margin-bottom: 1.5rem;
-  display: grid;
-  grid-template-columns: 220px 1px 1fr;
-  gap: 0;
+  display: flex;
   overflow: hidden;
-  transition: box-shadow .2s;
 }
-.sec:hover { box-shadow: 0 4px 24px rgba(0,0,0,.07); }
+.sec.flip { flex-direction: row-reverse; }
 
-/* label column */
+/* label column — fixed width */
 .sec-label {
-  padding: 2rem 1.8rem;
+  flex: 0 0 200px;
+  background: #f7f7f7;
+  border-right: 1px solid var(--rule);
+  padding: 1.8rem 1.6rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: #f7f7f7;
-  border-right: 1px solid var(--rule);
+}
+.sec.flip .sec-label {
+  border-right: none;
+  border-left: 1px solid var(--rule);
 }
 .sec-num {
-  font-size: .6rem;
+  font-size: .58rem;
   font-weight: 500;
   letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--teal);
-  margin-bottom: .55rem;
+  margin-bottom: .5rem;
 }
 .sec-title {
   font-family: var(--serif);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: var(--ink);
   line-height: 1.25;
@@ -136,140 +135,152 @@ body {
 
 /* content column */
 .sec-body {
-  padding: 1.6rem 2rem;
+  flex: 1;
+  padding: 1.4rem 2rem;
 }
 
-/* link list */
-.llist {
+/* ── LINK LIST ───────────────────────
+   Each <li> is ONE row: link then desc.
+   NO columns CSS — that caused the overlap.
+─────────────────────────────────────── */
+.ll {
   list-style: none;
-  columns: 1;
+  margin: 0;
+  padding: 0;
 }
-.llist.two-col { columns: 2; column-gap: 2.5rem; }
-.llist li {
-  padding: .45rem 0;
+.ll li {
+  padding: .42rem 0;
   border-bottom: 1px solid #f0f0f0;
-  font-size: .88rem;
-  color: var(--mid);
-  break-inside: avoid;
-  line-height: 1.45;
+  font-size: .875rem;
+  line-height: 1.5;
+  /* critical: flex row keeps link + desc together */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 .3rem;
 }
-.llist li:last-child { border-bottom: none; }
+.ll li:last-child { border-bottom: none; }
 
-/* THE KEY CHANGE: links are blue + underline */
-.llist li a {
+.ll li a {
   color: var(--link);
+  font-weight: 500;
   text-decoration: underline;
   text-decoration-color: rgba(26,95,168,.35);
   text-underline-offset: 2px;
-  font-weight: 500;
-  transition: color .15s, text-decoration-color .15s;
-}
-.llist li a:hover {
-  color: var(--link-hover);
-  text-decoration-color: var(--link-hover);
-}
-.llist li .desc { color: var(--light); }
-.llist li.coming { color: #bbb; font-style: italic; }
-
-/* coming-soon note */
-.coming-note {
-  font-size: .82rem;
-  color: #bbb;
-  font-style: italic;
-  padding: .3rem 0;
-}
-
-/* ── INLINE-TEXT link style (notes, podcast) */
-.prose-link {
-  color: var(--link);
-  text-decoration: underline;
-  text-decoration-color: rgba(26,95,168,.35);
-  text-underline-offset: 2px;
-  font-weight: 500;
+  white-space: nowrap;
   transition: color .15s;
 }
-.prose-link:hover { color: var(--link-hover); }
+.ll li a:hover { color: var(--link-hover); }
 
-/* ── PODCAST — full-width dark box ────────── */
+.ll li .d {
+  color: var(--light);
+  font-size: .85rem;
+  white-space: normal;
+}
+.ll li.soon {
+  color: #bbb;
+  font-style: italic;
+  font-size: .875rem;
+}
+
+/* prose inline link */
+a.il {
+  color: var(--link);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(26,95,168,.35);
+  text-underline-offset: 2px;
+}
+a.il:hover { color: var(--link-hover); }
+
+/* ── PODCAST dark box ────────────────── */
 .podcast-box {
   background: #1a1a1a;
-  color: #fff;
   border: none;
-  padding: 2.5rem 3rem;
-  margin-bottom: 1.5rem;
-  display: grid;
-  grid-template-columns: 180px 1px 1fr;
-  gap: 0;
-  align-items: center;
+  display: flex;
   overflow: hidden;
 }
-.podcast-box .pod-label-col {
-  padding-right: 2.5rem;
+.pod-label {
+  flex: 0 0 200px;
+  padding: 1.8rem 1.6rem;
+  border-right: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.podcast-box .pod-num {
-  font-size: .6rem;
+.pod-num {
+  font-size: .58rem;
   font-weight: 500;
   letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--teal);
-  margin-bottom: .55rem;
+  margin-bottom: .5rem;
 }
-.podcast-box .pod-title {
+.pod-title {
   font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 400;
+  font-size: 1.4rem;
   color: #fff;
-  line-height: 1.2;
+  font-weight: 400;
 }
-.podcast-box .pod-divider {
-  width: 1px;
-  background: rgba(255,255,255,.15);
-  align-self: stretch;
-}
-.podcast-box .pod-body {
-  font-size: .88rem;
+.pod-body {
+  flex: 1;
+  padding: 1.4rem 2rem;
+  font-size: .875rem;
   color: rgba(255,255,255,.65);
   line-height: 1.8;
-  padding-left: 2.5rem;
+  display: flex;
+  align-items: center;
 }
+.pod-body a.il { color: var(--teal); text-decoration-color: rgba(43,182,163,.4); }
 
-/* ── BOOKS — compact 3-col ─────────────────── */
+/* ── BOOKS 3-col ─────────────────────── */
+.books-wrap {
+  background: #fff;
+  border: 1px solid var(--rule);
+  display: flex;
+  overflow: hidden;
+}
+.books-label {
+  flex: 0 0 200px;
+  background: #f7f7f7;
+  border-right: 1px solid var(--rule);
+  padding: 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 .books-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 1px;
+  background: var(--rule);
+  padding: 0;
 }
 .book-card {
   background: #fff;
-  border: 1px solid var(--rule);
-  padding: 1.3rem 1.4rem;
-  transition: box-shadow .2s;
+  padding: 1.4rem 1.6rem;
 }
-.book-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.07); }
-.book-card .book-title {
+.book-title {
   font-family: var(--serif);
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--ink);
   line-height: 1.3;
-  margin-bottom: .3rem;
+  margin-bottom: .25rem;
 }
-.book-card .book-author {
-  font-size: .8rem;
-  color: var(--light);
-}
+.book-author { font-size: .8rem; color: var(--light); }
 
-/* ── BACK ─────────────────────────────────── */
+/* ── BACK ────────────────────────────── */
 .back-wrap {
   border-top: 1px solid var(--rule);
-  padding-top: 2.5rem;
-  margin-top: 1rem;
+  padding-top: 2rem;
+  margin-top: .5rem;
 }
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: .6rem;
-  font-size: .72rem;
+  gap: .5rem;
+  font-size: .7rem;
   font-weight: 500;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -277,280 +288,282 @@ body {
   text-decoration: none;
   transition: color .2s;
 }
-.back-link::before { content: '←'; font-size: 1rem; }
 .back-link:hover { color: var(--teal); }
 
-/* ── ANIMATIONS ───────────────────────────── */
-@keyframes heroFade {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* ── ANIM ────────────────────────────── */
+@keyframes rise {
+  from { opacity:0; transform: translateY(14px); }
+  to   { opacity:1; transform: translateY(0); }
 }
 
-/* ── RESPONSIVE ───────────────────────────── */
-@media (max-width: 900px) {
-  .hero { height: 40vh; min-height: 260px; }
-  .sec { grid-template-columns: 1fr; }
-  .sec-label { border-right: none; border-bottom: 1px solid var(--rule); padding: 1.2rem 1.4rem; }
-  .llist.two-col { columns: 1; }
+/* ── RESPONSIVE ──────────────────────── */
+@media (max-width: 700px) {
+  .sec, .sec.flip, .podcast-box, .books-wrap {
+    flex-direction: column;
+  }
+  .sec-label, .pod-label, .books-label {
+    flex: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid var(--rule);
+  }
   .books-grid { grid-template-columns: 1fr; }
-  .podcast-box { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
-  .podcast-box .pod-divider { display: none; }
-  .podcast-box .pod-body { padding-left: 0; padding-top: 1rem; }
-  .page { padding: 2.5rem 1.25rem 4rem; }
+  .page { padding: 2rem 1rem 4rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- ── HERO: full-width photo, only title ── -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <h1>Resources</h1>
-  </div>
+  <h1>Resources</h1>
 </section>
 
-<!-- ── INTRO ── -->
+<!-- INTRO -->
 <div class="intro">
-  <p>A curated repository of tools, tutorials, databases, lecture notes, and links I have found invaluable in high-energy astrophysics and computational science. Credit goes entirely to the original creators. I plan to update this page continuously.</p>
+  <p>A curated repository of tools, tutorials, databases, lecture notes, and links I have found invaluable
+  in high-energy astrophysics and computational science. Credit goes entirely to the original creators.
+  I plan to update this page continuously.</p>
 </div>
 
-<!-- ── PAGE ── -->
+<!-- PAGE -->
 <div class="page">
 
-  <!-- 01 · Graduate School Applications — small (3 items, coming soon) -->
+  <!-- 01 – Graduate School Applications  [label LEFT] -->
   <div class="sec">
     <div class="sec-label">
       <div class="sec-num">01</div>
       <div class="sec-title">Graduate School Applications</div>
     </div>
     <div class="sec-body">
-      <ul class="llist">
-        <li class="coming">Research Statement Guide — Coming Soon</li>
-        <li class="coming">Academic CV Template — Coming Soon</li>
-        <li class="coming">Contacting Professors — Coming Soon</li>
+      <ul class="ll">
+        <li class="soon">Research Statement Guide — Coming Soon</li>
+        <li class="soon">Academic CV Template — Coming Soon</li>
+        <li class="soon">Contacting Professors — Coming Soon</li>
       </ul>
     </div>
   </div>
 
-  <!-- 02 · Astrophysics Resources — large (11 items, 2-col) -->
-  <div class="sec">
+  <!-- 02 – Astrophysics Resources  [label RIGHT] -->
+  <div class="sec flip">
     <div class="sec-label">
       <div class="sec-num">02</div>
       <div class="sec-title">Astrophysics Resources</div>
     </div>
     <div class="sec-body">
-      <ul class="llist two-col">
-        <li><a href="https://ui.adsabs.harvard.edu/" target="_blank">NASA ADS</a> <span class="desc">— Search and discover astronomical literature.</span></li>
-        <li><a href="https://science.nasa.gov/astrophysics/data/nasa-ipac-extragalactic-database-ned/" target="_blank">NED</a> <span class="desc">— NASA/IPAC Extragalactic Database.</span></li>
-        <li><a href="https://simbad.cds.unistra.fr/" target="_blank">SIMBAD</a> <span class="desc">— Astronomical object database.</span></li>
-        <li><a href="https://arxiv.org/archive/astro-ph" target="_blank">arXiv Astrophysics</a> <span class="desc">— Latest preprints.</span></li>
-        <li><a href="https://heasarc.gsfc.nasa.gov/" target="_blank">HEASARC</a> <span class="desc">— High-energy astrophysics archives.</span></li>
-        <li><a href="https://heasarc.gsfc.nasa.gov/docs/nustar/" target="_blank">NuSTAR</a> <span class="desc">— Mission archive and documentation.</span></li>
-        <li><a href="https://www.cosmos.esa.int/web/xmm-newton" target="_blank">XMM-Newton</a> <span class="desc">— Archive and analysis resources.</span></li>
-        <li><a href="https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/" target="_blank">HEASoft</a> <span class="desc">— High-energy astronomy software suite.</span></li>
-        <li><a href="https://heasarc.gsfc.nasa.gov/xanadu/xspec/" target="_blank">XSPEC</a> <span class="desc">— Spectral fitting software.</span></li>
-        <li><a href="https://space.mit.edu/cxc/isis/" target="_blank">ISIS</a> <span class="desc">— Interactive spectral interpretation system.</span></li>
-        <li><a href="https://cxc.cfa.harvard.edu/ciao/" target="_blank">CIAO</a> <span class="desc">— Chandra analysis software.</span></li>
+      <ul class="ll">
+        <li><a href="https://ui.adsabs.harvard.edu/" target="_blank">NASA ADS</a><span class="d"> — Search and discover astronomical literature.</span></li>
+        <li><a href="https://science.nasa.gov/astrophysics/data/nasa-ipac-extragalactic-database-ned/" target="_blank">NED</a><span class="d"> — NASA/IPAC Extragalactic Database.</span></li>
+        <li><a href="https://simbad.cds.unistra.fr/" target="_blank">SIMBAD</a><span class="d"> — Astronomical object database.</span></li>
+        <li><a href="https://arxiv.org/archive/astro-ph" target="_blank">arXiv Astrophysics</a><span class="d"> — Latest astronomy and astrophysics preprints.</span></li>
+        <li><a href="https://heasarc.gsfc.nasa.gov/" target="_blank">HEASARC</a><span class="d"> — High-energy astrophysics archives and tools.</span></li>
+        <li><a href="https://heasarc.gsfc.nasa.gov/docs/nustar/" target="_blank">NuSTAR</a><span class="d"> — Mission archive and documentation.</span></li>
+        <li><a href="https://www.cosmos.esa.int/web/xmm-newton" target="_blank">XMM-Newton</a><span class="d"> — Archive and analysis resources.</span></li>
+        <li><a href="https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/" target="_blank">HEASoft</a><span class="d"> — High-energy astronomy software suite.</span></li>
+        <li><a href="https://heasarc.gsfc.nasa.gov/xanadu/xspec/" target="_blank">XSPEC</a><span class="d"> — Spectral fitting software.</span></li>
+        <li><a href="https://space.mit.edu/cxc/isis/" target="_blank">ISIS</a><span class="d"> — Interactive spectral interpretation system.</span></li>
+        <li><a href="https://cxc.cfa.harvard.edu/ciao/" target="_blank">CIAO</a><span class="d"> — Chandra analysis software.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 03 · Machine Learning — small -->
+  <!-- 03 – Machine Learning  [label LEFT] -->
   <div class="sec">
     <div class="sec-label">
       <div class="sec-num">03</div>
       <div class="sec-title">Machine Learning for Astronomy</div>
     </div>
     <div class="sec-body">
-      <ul class="llist">
-        <li class="coming">Gaussian Processes — Coming Soon</li>
-        <li class="coming">Deep Gaussian Processes — Coming Soon</li>
-        <li class="coming">Time-Series Analysis — Coming Soon</li>
+      <ul class="ll">
+        <li class="soon">Gaussian Processes — Coming Soon</li>
+        <li class="soon">Deep Gaussian Processes — Coming Soon</li>
+        <li class="soon">Time-Series Analysis — Coming Soon</li>
       </ul>
     </div>
   </div>
 
-  <!-- 04 · Popular Astronomy — large (10 items, 2-col) -->
-  <div class="sec">
+  <!-- 04 – Popular Astronomy  [label RIGHT] -->
+  <div class="sec flip">
     <div class="sec-label">
       <div class="sec-num">04</div>
       <div class="sec-title">Popular Astronomy</div>
     </div>
     <div class="sec-body">
-      <ul class="llist two-col">
-        <li><a href="https://cosmoquest.org/" target="_blank">CosmoQuest</a> <span class="desc">— All things cosmo.</span></li>
-        <li><a href="https://www.badastronomy.com/" target="_blank">Bad Astronomy</a> <span class="desc">— Phil Plait's astronomy blog.</span></li>
-        <li><a href="https://skyandtelescope.org/" target="_blank">Sky &amp; Telescope</a> <span class="desc">— Astronomy news and observing guides.</span></li>
-        <li><a href="https://astrobites.org/" target="_blank">Astrobites</a> <span class="desc">— Journal summaries by grad students.</span></li>
-        <li><a href="https://arxiver.moonhats.com/" target="_blank">arXiver</a> <span class="desc">— Latest astro-ph, in short.</span></li>
-        <li><a href="https://www.astronomy.com/" target="_blank">Astronomy.com</a> <span class="desc">— The name is self-explanatory.</span></li>
-        <li><a href="https://astrobetter.com/" target="_blank">Astrobetter</a> <span class="desc">— Tips for doing astronomy well.</span></li>
-        <li><a href="https://www.universetoday.com/" target="_blank">Universe Today</a> <span class="desc">— Your daily dose of the Universe.</span></li>
-        <li><a href="https://www.geekwrapped.com/" target="_blank">Geekwrapped.com</a> <span class="desc">— Maybe find your first telescope here. (Not sponsored.)</span></li>
-        <li><a href="https://www.zooniverse.org/projects?discipline=astronomy" target="_blank">List of citizen science projects</a> <span class="desc">— See how you can get involved.</span></li>
+      <ul class="ll">
+        <li><a href="https://cosmoquest.org/" target="_blank">CosmoQuest</a><span class="d"> — All things cosmo.</span></li>
+        <li><a href="https://www.badastronomy.com/" target="_blank">Bad Astronomy</a><span class="d"> — Phil Plait's astronomy blog.</span></li>
+        <li><a href="https://skyandtelescope.org/" target="_blank">Sky &amp; Telescope</a><span class="d"> — Astronomy news and observing guides.</span></li>
+        <li><a href="https://astrobites.org/" target="_blank">Astrobites</a><span class="d"> — Journal summaries by grad students.</span></li>
+        <li><a href="https://arxiver.moonhats.com/" target="_blank">arXiver</a><span class="d"> — Latest astro-ph in short; check out their about page!</span></li>
+        <li><a href="https://www.astronomy.com/" target="_blank">Astronomy.com</a><span class="d"> — The name is self-explanatory.</span></li>
+        <li><a href="https://astrobetter.com/" target="_blank">Astrobetter</a><span class="d"> — To be able to do astronomy well.</span></li>
+        <li><a href="https://www.universetoday.com/" target="_blank">Universe Today</a><span class="d"> — Your dose of Universe today.</span></li>
+        <li><a href="https://www.geekwrapped.com/" target="_blank">Geekwrapped.com</a><span class="d"> — Maybe find your first telescope here. (Not sponsored.)</span></li>
+        <li><a href="https://www.zooniverse.org/projects?discipline=astronomy" target="_blank">List of citizen science projects</a><span class="d"> — See how you can get involved!</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 05 · Popular Science — small (2 items) -->
+  <!-- 05 – Popular Science  [label LEFT] -->
   <div class="sec">
     <div class="sec-label">
       <div class="sec-num">05</div>
       <div class="sec-title">Popular Science</div>
     </div>
     <div class="sec-body">
-      <ul class="llist">
-        <li><a href="https://www.science20.com/" target="_blank">Science 2.0</a> <span class="desc">— Articles on Physical Sciences, Earth Sciences, Life Sciences and more.</span></li>
-        <li><a href="https://scienceblogs.com/" target="_blank">scienceblogs</a> <span class="desc">— The name says it all.</span></li>
+      <ul class="ll">
+        <li><a href="https://www.science20.com/" target="_blank">Science 2.0</a><span class="d"> — Articles on Physical Sciences, Earth Sciences, Life Sciences and more!</span></li>
+        <li><a href="https://scienceblogs.com/" target="_blank">scienceblogs</a><span class="d"> — The name says it all.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 06 · Python + IDL — medium (5 items) -->
-  <div class="sec">
+  <!-- 06 – Python & IDL  [label RIGHT] -->
+  <div class="sec flip">
     <div class="sec-label">
       <div class="sec-num">06</div>
       <div class="sec-title">Python &amp; IDL</div>
     </div>
     <div class="sec-body">
-      <ul class="llist two-col">
-        <li><a href="https://www.python.org/" target="_blank">python.org</a> <span class="desc">— Official Python docs and examples.</span></li>
-        <li><a href="https://www.astropy.org/" target="_blank">astropy</a> <span class="desc">— Python packages for astronomers.</span></li>
-        <li><a href="https://www.tutorialspoint.com/python/" target="_blank">Tutorialspoint</a> <span class="desc">— Python programming tutorials.</span></li>
-        <li><a href="http://www.astropython.org/" target="_blank">Astropython</a> <span class="desc">— Python for astronomers.</span></li>
-        <li><a href="https://www.idlcoyote.com/" target="_blank">idlcoyote</a> <span class="desc">— THE ideal place to learn IDL. Thanks David Fanning!</span></li>
+      <ul class="ll">
+        <li><a href="https://www.python.org/" target="_blank">python.org</a><span class="d"> — The official Python website with plenty of documentation and examples.</span></li>
+        <li><a href="https://www.astropy.org/" target="_blank">astropy</a><span class="d"> — Python packages for astronomers/astronomy.</span></li>
+        <li><a href="https://www.tutorialspoint.com/python/" target="_blank">Tutorialspoint</a><span class="d"> — Many programming languages here; this link goes to the Python section.</span></li>
+        <li><a href="http://www.astropython.org/" target="_blank">Astropython</a><span class="d"> — Python for astronomers.</span></li>
+        <li><a href="https://www.idlcoyote.com/" target="_blank">idlcoyote</a><span class="d"> — THE ideal place to IDL. Thanks David Fanning!</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 07 · RF and Electronics — medium (6 items) -->
+  <!-- 07 – RF and Electronics  [label LEFT] -->
   <div class="sec">
     <div class="sec-label">
       <div class="sec-num">07</div>
       <div class="sec-title">RF and Electronics</div>
     </div>
     <div class="sec-body">
-      <ul class="llist two-col">
-        <li><a href="https://www.rfcafe.com/" target="_blank">RF Cafe</a> <span class="desc">— An amazing collection of information for all things RF.</span></li>
-        <li><a href="https://www.minicircuits.com/" target="_blank">Mini-Circuits</a> <span class="desc">— RF/IF &amp; microwave components.</span></li>
-        <li><a href="https://www.rfcafe.com/references/electrical/50-ohm-impedance.htm" target="_blank">Why 50 Ohm is the standard impedance?</a></li>
+      <ul class="ll">
+        <li><a href="https://www.rfcafe.com/" target="_blank">RF Cafe</a><span class="d"> — An amazing collection of information, opportunities and apps for all things RF.</span></li>
+        <li><a href="https://www.minicircuits.com/" target="_blank">Mini-Circuits</a><span class="d"> — RF/IF &amp; microwave components.</span></li>
+        <li><a href="https://www.rfcafe.com/references/electrical/50-ohm-impedance.htm" target="_blank">Ever wondered why 50 Ohm is the standard impedance?</a></li>
         <li><a href="https://www.youtube.com/results?search_query=ham+radio+basics" target="_blank">Useful, hands on videos on HAM Radio Stuff</a></li>
         <li><a href="https://www.youtube.com/results?search_query=look+inside+isolator" target="_blank">Video: Look inside an isolator?</a></li>
-        <li><a href="https://www.sparkfun.com/" target="_blank">Sparkfun</a> <span class="desc">— Resources and products for building your electronics.</span></li>
+        <li><a href="https://www.sparkfun.com/" target="_blank">Sparkfun</a><span class="d"> — Lots of fun, useful resources and products for building your electronics.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 08 · Cryogenics — small (3 items) -->
-  <div class="sec">
+  <!-- 08 – Cryogenics  [label RIGHT] -->
+  <div class="sec flip">
     <div class="sec-label">
       <div class="sec-num">08</div>
       <div class="sec-title">Cryogenics</div>
     </div>
     <div class="sec-body">
-      <ul class="llist">
-        <li><a href="https://www.youtube.com/results?search_query=fundamentals+of+refrigeration" target="_blank">Video: Fundamentals of Refrigeration</a> <span class="desc">— Oldie but a goodie!</span></li>
-        <li><a href="https://www.youtube.com/results?search_query=introduction+to+cryogenics" target="_blank">An introduction to cryogenics</a> <span class="desc">— Adam L Wood Craft.</span></li>
-        <li><a href="https://en.wikipedia.org/wiki/Adiabatic_demagnetization" target="_blank">Adiabatic Demagnetization Refrigeration</a> <span class="desc">— Basic principle.</span></li>
+      <ul class="ll">
+        <li><a href="https://www.youtube.com/results?search_query=fundamentals+of+refrigeration" target="_blank">Video: Fundamentals of Refrigeration</a><span class="d"> — Oldie but a goodie!</span></li>
+        <li><a href="https://www.youtube.com/results?search_query=introduction+to+cryogenics" target="_blank">An introduction to cryogenics</a><span class="d"> — Adam L Wood Craft.</span></li>
+        <li><a href="https://en.wikipedia.org/wiki/Adiabatic_demagnetization" target="_blank">Adiabatic Demagnetization Refrigeration</a><span class="d"> — Basic principle.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 09 · Graduate Life — medium (5 items) -->
+  <!-- 09 – Graduate Life  [label LEFT] -->
   <div class="sec">
     <div class="sec-label">
       <div class="sec-num">09</div>
       <div class="sec-title">Graduate Life</div>
     </div>
     <div class="sec-body">
-      <ul class="llist two-col">
-        <li><a href="https://www.gradhacker.org/" target="_blank">GradHacker</a> <span class="desc">— About graduate life and more.</span></li>
-        <li><a href="https://phdcomics.com/" target="_blank">PhDcomics</a> <span class="desc">— Laughing at grad life situations.</span></li>
-        <li><a href="https://shouldigetaphd.com/" target="_blank">Should I get a PhD</a> <span class="desc">— (Re)Thinking about getting a PhD?</span></li>
-        <li><a href="https://thesiswhisperer.com/" target="_blank">Thesis Whisperer</a> <span class="desc">— Just like the horse whisperer, but with more pages.</span></li>
-        <li><a href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html" target="_blank">How to have a bad career in Research / Academia</a> <span class="desc">— Prof. David A Patterson tells you how NOT to.</span></li>
+      <ul class="ll">
+        <li><a href="https://www.gradhacker.org/" target="_blank">GradHacker</a><span class="d"> — About graduate life and more.</span></li>
+        <li><a href="https://phdcomics.com/" target="_blank">PhDcomics</a><span class="d"> — Laughing at gradlife situations.</span></li>
+        <li><a href="https://shouldigetaphd.com/" target="_blank">Should I get a PhD</a><span class="d"> — (Re)Thinking about getting a PhD?</span></li>
+        <li><a href="https://thesiswhisperer.com/" target="_blank">Thesis Whisperer</a><span class="d"> — Just like the horse whisperer – but with more pages.</span></li>
+        <li><a href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html" target="_blank">How to have a bad career in Research / Academia</a><span class="d"> — Prof. David A Patterson tells you how NOT to.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 10 · Academia — medium (4 items) -->
-  <div class="sec">
+  <!-- 10 – Academia  [label RIGHT] -->
+  <div class="sec flip">
     <div class="sec-label">
       <div class="sec-num">10</div>
       <div class="sec-title">Academia</div>
     </div>
     <div class="sec-body">
-      <ul class="llist">
-        <li><a href="https://theprofessorisin.com/" target="_blank">The Professor is in</a> <span class="desc">— About navigating academia from an expert.</span></li>
-        <li><a href="https://femalescipro.com/" target="_blank">Female Science Professor</a> <span class="desc">— The blog is no longer updated, but is rich in all it has to offer.</span></li>
-        <li><a href="https://web.mit.edu/physics/about/advice_new_faculty.html" target="_blank">Advice for new faculty</a> <span class="desc">— A comprehensive document from the MIT Department of Physics, with links to additional reading material.</span></li>
-        <li><a href="https://dynamicecology.wordpress.com/2014/01/23/leaving-academia-after-the-postdoc-the-aftermath/" target="_blank">7 year postdoc</a> <span class="desc">— A fantastic piece. The motto: "be my best whole person."</span></li>
+      <ul class="ll">
+        <li><a href="https://theprofessorisin.com/" target="_blank">The Professor is in</a><span class="d"> — About navigating academia from an expert.</span></li>
+        <li><a href="https://femalescipro.com/" target="_blank">Female Science Professor</a><span class="d"> — No longer updated, but rich in all it has to offer.</span></li>
+        <li><a href="https://web.mit.edu/physics/about/advice_new_faculty.html" target="_blank">Advice for new faculty</a><span class="d"> — Comprehensive document from the MIT Department of Physics, with links to additional reading material.</span></li>
+        <li><a href="https://dynamicecology.wordpress.com/2014/01/23/leaving-academia-after-the-postdoc-the-aftermath/" target="_blank">7 year postdoc</a><span class="d"> — A fantastic piece; the motto is to "be my best whole person."</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 11 · General Awesomeness — medium (6 items) -->
+  <!-- 11 – General Awesomeness  [label LEFT] -->
   <div class="sec">
     <div class="sec-label">
       <div class="sec-num">11</div>
       <div class="sec-title">General Awesomeness</div>
     </div>
     <div class="sec-body">
-      <ul class="llist two-col">
-        <li><a href="https://aeon.co/" target="_blank">Aeon</a> <span class="desc">— Essays, ideas, opinions. Non-sponsored, well researched writing.</span></li>
-        <li><a href="https://www.aldaily.com/" target="_blank">Arts and Letters Daily</a> <span class="desc">— A feed of what's making waves in literature.</span></li>
-        <li><a href="https://www.allsides.com/" target="_blank">AllSides</a> <span class="desc">— News from the left, right, and center.</span></li>
-        <li><a href="https://nautil.us/" target="_blank">Nautils</a> <span class="desc">— A deep dive into a topic per issue.</span></li>
-        <li><a href="https://www.theskimm.com/" target="_blank">The Skimm</a> <span class="desc">— Morning news with coffee.</span></li>
-        <li><a href="https://www.newslaundry.com/" target="_blank">Newslaundry</a> <span class="desc">— Clean, laundered news. When people pay, people are served.</span></li>
+      <ul class="ll">
+        <li><a href="https://aeon.co/" target="_blank">Aeon</a><span class="d"> — Everything wonderful about essays, ideas, and opinions. Non-sponsored, well researched writing.</span></li>
+        <li><a href="https://www.aldaily.com/" target="_blank">Arts and Letters Daily</a><span class="d"> — A feed of what's making waves in literature.</span></li>
+        <li><a href="https://www.allsides.com/" target="_blank">AllSides</a><span class="d"> — News from the left, right, and center.</span></li>
+        <li><a href="https://nautil.us/" target="_blank">Nautils</a><span class="d"> — A deep dive into a topic per issue.</span></li>
+        <li><a href="https://www.theskimm.com/" target="_blank">The Skimm</a><span class="d"> — Morning news with coffee.</span></li>
+        <li><a href="https://www.newslaundry.com/" target="_blank">Newslaundry</a><span class="d"> — Clean, laundered news. When people pay, people are served.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- 12 · Notes — medium, prose style -->
-  <div class="sec">
+  <!-- 12 – Notes  [label RIGHT] -->
+  <div class="sec flip">
     <div class="sec-label">
       <div class="sec-num">12</div>
       <div class="sec-title">Personal Notes</div>
     </div>
     <div class="sec-body">
-      <p style="font-size:.88rem;color:var(--mid);font-style:italic;margin-bottom:1rem;">
+      <p style="font-size:.85rem;color:var(--mid);font-style:italic;margin-bottom:.9rem;">
         Some notes scribbled down during grad school days that I hope are helpful for anyone interested.
       </p>
-      <ul class="llist">
+      <ul class="ll">
         <li>
-          <a href="#" target="_blank" class="prose-link" style="color:var(--link);text-decoration:underline;text-decoration-color:rgba(26,95,168,.35);text-underline-offset:2px;font-weight:500;">Cosmology notes 1</a>
-          <span class="desc"> — Working out cosmology lectures 1 and 2 at </span>
-          <a href="https://sites.google.com/view/aaronparsons/cosmology-notes" target="_blank" style="color:var(--link);text-decoration:underline;text-decoration-color:rgba(26,95,168,.35);text-underline-offset:2px;font-weight:500;">Aaron Parson's cosmology notes</a><span class="desc">. Step-by-step calculations, no explanations.</span>
+          <a href="#" target="_blank">Cosmology notes 1</a>
+          <span class="d"> — Working out cosmology lectures 1 and 2 at </span>
+          <a href="https://sites.google.com/view/aaronparsons/cosmology-notes" target="_blank" class="il">Aaron Parson's cosmology notes</a><span class="d">. Step-by-step, no explanations.</span>
         </li>
         <li>
-          <a href="#" target="_blank" style="color:var(--link);text-decoration:underline;text-decoration-color:rgba(26,95,168,.35);text-underline-offset:2px;font-weight:500;">Basics notes 1</a>
-          <span class="desc"> — Notes on basics of astronomy: Kepler's laws, homogeneity, basic units. Casually jotted, not accompanied by explanations.</span>
+          <a href="#" target="_blank">Basics notes 1</a>
+          <span class="d"> — Notes on basics of astronomy: Kepler's laws, homogeneity, basic units. Casually jotted, no explanations.</span>
         </li>
       </ul>
     </div>
   </div>
 
-  <!-- PODCAST — dark full-width box -->
+  <!-- 13 – Podcast  [dark box] -->
   <div class="podcast-box">
-    <div class="pod-label-col">
-      <div class="pod-num">13 &nbsp;/&nbsp; Podcast</div>
+    <div class="pod-label">
+      <div class="pod-num">13 / Podcast</div>
       <div class="pod-title">HOLI-Byte</div>
     </div>
-    <div class="pod-divider"></div>
     <div class="pod-body">
-      <a href="#" target="_blank" class="prose-link">HOLI-Byte</a> is a podcast series of the
-      <a href="#" target="_blank" class="prose-link">Hands On Learning Initiative</a>
-      of which I am a co-founder. Topics are covered in English, Hindi, Tamil, Marathi, Kannada and more.
+      <a href="#" class="il" target="_blank">HOLI-Byte</a> is a podcast series of the
+      <a href="#" class="il" target="_blank">Hands On Learning Initiative</a>
+      of which I am a co-founder. Topics span English, Hindi, Tamil, Marathi, Kannada and more.
       A special thanks to all contributors. For more information check out our
-      <a href="#" target="_blank" class="prose-link">Facebook page: HOLI–Hands On Learning Initiative</a>.
+      <a href="#" class="il" target="_blank">Facebook page: HOLI–Hands On Learning Initiative</a>.
     </div>
   </div>
 
-  <!-- BOOKS — 3-col cards -->
-  <div style="margin-bottom:1.5rem;">
-    <div style="font-size:.6rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;">14 &nbsp;/&nbsp; Books</div>
-    <div style="font-family:var(--serif);font-size:1.35rem;color:var(--ink);margin-bottom:1.2rem;">Recommended Books</div>
+  <!-- 14 – Recommended Books  [label LEFT, 3 cards] -->
+  <div class="books-wrap">
+    <div class="books-label sec-label">
+      <div class="sec-num">14</div>
+      <div class="sec-title">Recommended Books</div>
+    </div>
     <div class="books-grid">
       <div class="book-card">
         <div class="book-title">An Introduction to Modern Astrophysics</div>
@@ -567,11 +580,11 @@ body {
     </div>
   </div>
 
-  <!-- BACK -->
+  <!-- Back -->
   <div class="back-wrap">
-    <a class="back-link" href="index.html">Back to Homepage</a>
+    <a class="back-link" href="index.html">← Back to Homepage</a>
   </div>
 
-</div>
+</div><!-- /page -->
 </body>
 </html>

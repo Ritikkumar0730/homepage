@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Ritik Kumar's Webpage</title>
@@ -125,9 +127,25 @@
   .cta a:hover{filter:brightness(1.1)}
 
   footer{background:var(--darker);text-align:center;padding:3rem 2rem 3.5rem;color:var(--muted)}
-  footer .socials{margin-bottom:1.2rem;display:flex;gap:1.6rem;justify-content:center}
-  footer .socials a{font-size:1.3rem;color:var(--muted);transition:color .2s}
-  footer .socials a:hover{color:#fff}
+  footer .socials{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:2rem;
+    margin-bottom:1rem;
+  }
+
+  footer .socials a{
+    color:#ffffff;
+    font-size:1.7rem;
+    text-decoration:none;
+    transition:all 0.3s ease;
+  }
+
+  footer .socials a:hover{
+    color:#2bb6a3;
+    transform:translateY(-3px);
+  }
   footer .copy{font-size:.8rem;letter-spacing:.1rem;text-transform:uppercase}
 
   /* ===== slide-out menu ===== */
@@ -255,10 +273,12 @@ Beyond black hole astrophysics, I am interested in developing computational and 
   <section class="split dark text-left" id="presenting">
     <div class="media" style="background-image:url('images/topic3.jpg')"></div>
     <div class="body">
-      <h2>Better Presenting</h2>
-      <p>Communicating effectively to a broad audience is an essential skill at every career
-         stage. Describe any workshops, talks, or resources you offer to help others present well.</p>
-      <a class="btn" href="#" target="_blank" rel="noopener">Learn more</a>
+      <h2>Beyond Research</h2>
+      <p>Science is not only about discoveries but also about communicating
+ideas, mentoring others, leading collaborations, and continuously
+improving ourselves. Here I share resources that have helped me
+grow as a researcher and as a person.</p>
+      <a class="btn" href="beyond.jpeg" target="_blank" rel="noopener">Learn more</a>
     </div>
   </section>
 
@@ -280,13 +300,33 @@ Beyond black hole astrophysics, I am interested in developing computational and 
 
   <!-- footer -->
   <footer>
-    <div class="socials">
-      <a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener" title="GitHub">&#9670;</a>
-      <a href="https://www.linkedin.com/in/ritik-kumar-3817b9223/" target="_blank" rel="noopener" title="LinkedIn">&#9632;</a>
-      <a href="mailto:hrithikk048@gmail.com" title="Email">&#9993;</a>
-    </div>
-    <div class="copy">&copy; Ritik Kumar &nbsp;|&nbsp; Design inspired by HTML5 UP</div>
-  </footer>
+  <div class="socials">
+
+    <a href="https://github.com/Ritikkumar0730"
+       target="_blank"
+       rel="noopener"
+       title="GitHub">
+       <i class="fab fa-github"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/in/ritik-kumar-3817b9223/"
+       target="_blank"
+       rel="noopener"
+       title="LinkedIn">
+       <i class="fab fa-linkedin"></i>
+    </a>
+
+    <a href="mailto:hrithikk048@gmail.com"
+       title="Email">
+       <i class="fas fa-envelope"></i>
+    </a>
+
+  </div>
+
+  <div class="copy">
+    &copy; Ritik Kumar &nbsp;|&nbsp; Design inspired by HTML5 UP
+  </div>
+</footer>
 
   <!-- slide-out menu -->
   <div class="nav-overlay" id="navOverlay"></div>
