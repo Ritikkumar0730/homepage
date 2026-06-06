@@ -28,24 +28,21 @@ body{
   line-height:1.8;
 }
 
-
 header{
   height:60vh;
   min-height:400px;
-
   background:
-  linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-  url('g.jpg');
-
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url('g.jpg');
   background-size:cover;
   background-position:center;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
   text-align:center;
+  color:#fff;
+  padding:2rem;
 }
 
 header h1{
@@ -57,6 +54,8 @@ header h1{
 header p{
   color:var(--muted);
   margin-top:1rem;
+  max-width:800px;
+  line-height:1.7;
 }
 
 .container{
@@ -92,7 +91,6 @@ header p{
   color:#2bb6a3;
 }
 
-
 .back{
   display:inline-block;
   margin-top:2rem;
@@ -103,8 +101,8 @@ header p{
 }
 
 .back:hover{
-  background:white;
-  color:black;
+  background:#2e333d;
+  color:#fff;
 }
 </style>
 </head>
@@ -113,7 +111,7 @@ header p{
 
 <header>
   <h1>Resources</h1>
-  <p>Research, Astrophysics, Machine Learning, and Graduate Applications --- Welcome to my collection of research and learning resources. Over the years, I have come across numerous tools, tutorials, databases, lecture notes, and websites that have been invaluable in my development as a researcher in high-energy astrophysics and computational science.
+  <p>Research, Astrophysics, Machine Learning, and Graduate Applications &mdash; Welcome to my collection of research and learning resources. Over the years, I have come across numerous tools, tutorials, databases, lecture notes, and websites that have been invaluable in my development as a researcher in high-energy astrophysics and computational science.
 
 This page serves as a curated repository of resources that I personally find useful for students and researchers interested in astronomy, X-ray data analysis, machine learning, scientific programming, and graduate studies. The links provided here belong to their respective authors and organizations, and full credit goes to the original creators of the content.
 
@@ -127,116 +125,130 @@ I hope you find these resources useful in your own academic and research journey
 
   <div class="section">
     <h2>Graduate School Applications</h2>
-
-    <div class="card">
-      Research Statement Guide (Coming Soon)
-    </div>
-
-    <div class="card">
-      Academic CV Template (Coming Soon)
-    </div>
-
-    <div class="card">
-      Contacting Professors (Coming Soon)
-    </div>
+    <div class="card">Research Statement Guide (Coming Soon)</div>
+    <div class="card">Academic CV Template (Coming Soon)</div>
+    <div class="card">Contacting Professors (Coming Soon)</div>
   </div>
 
- <div class="section">
+  <div class="section">
     <h2>Astrophysics Resources</h2>
-
-    <div class="card">
-    <a href="https://ui.adsabs.harvard.edu/" target="_blank">NASA ADS</a>
-    — Search and discover astronomical literature.
-    </div>
-
-    <div class="card">
-    <a href="https://science.nasa.gov/astrophysics/data/nasa-ipac-extragalactic-database-ned/" target="_blank">NED</a>
-    — NASA/IPAC Extragalactic Database.
-    </div>
-
-    <div class="card">
-    <a href="https://simbad.cds.unistra.fr/" target="_blank">SIMBAD</a>
-    — Astronomical object database.
-    </div>
-
-    <div class="card">
-    <a href="https://arxiv.org/archive/astro-ph" target="_blank">arXiv Astrophysics</a>
-    — Latest astronomy and astrophysics preprints.
-    </div>
-
-    <div class="card">
-    <a href="https://heasarc.gsfc.nasa.gov/" target="_blank">HEASARC</a>
-    — High-energy astrophysics archives and tools.
-    </div>
-    </div>
-
-<div class="section">
-    <h2>Astrophysics Resources</h2>
-
-    <div class="card">
-    <a href="https://heasarc.gsfc.nasa.gov/docs/nustar/" target="_blank">NuSTAR</a>
-    — Mission archive and documentation.
-    </div>
-
-    <div class="card">
-    <a href="https://www.cosmos.esa.int/web/xmm-newton" target="_blank">XMM-Newton</a>
-    — Archive and analysis resources.
-    </div>
-
-    <div class="card">
-    <a href="https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/" target="_blank">HEASoft</a>
-    — High-energy astronomy software suite.
-    </div>
-
-    <div class="card">
-    <a href="https://heasarc.gsfc.nasa.gov/xanadu/xspec/" target="_blank">XSPEC</a>
-    — Spectral fitting software.
-    </div>
-
-    <div class="card">
-    <a href="https://space.mit.edu/cxc/isis/" target="_blank">ISIS</a>
-    — Interactive spectral interpretation system.
-    </div>
-
-    <div class="card">
-    <a href="https://cxc.cfa.harvard.edu/ciao/" target="_blank">CIAO</a>
-    — Chandra analysis software.
-    </div>
+    <div class="card"><a href="https://ui.adsabs.harvard.edu/" target="_blank">NASA ADS</a> — Search and discover astronomical literature.</div>
+    <div class="card"><a href="https://science.nasa.gov/astrophysics/data/nasa-ipac-extragalactic-database-ned/" target="_blank">NED</a> — NASA/IPAC Extragalactic Database.</div>
+    <div class="card"><a href="https://simbad.cds.unistra.fr/" target="_blank">SIMBAD</a> — Astronomical object database.</div>
+    <div class="card"><a href="https://arxiv.org/archive/astro-ph" target="_blank">arXiv Astrophysics</a> — Latest astronomy and astrophysics preprints.</div>
+    <div class="card"><a href="https://heasarc.gsfc.nasa.gov/" target="_blank">HEASARC</a> — High-energy astrophysics archives and tools.</div>
+    <div class="card"><a href="https://heasarc.gsfc.nasa.gov/docs/nustar/" target="_blank">NuSTAR</a> — Mission archive and documentation.</div>
+    <div class="card"><a href="https://www.cosmos.esa.int/web/xmm-newton" target="_blank">XMM-Newton</a> — Archive and analysis resources.</div>
+    <div class="card"><a href="https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/" target="_blank">HEASoft</a> — High-energy astronomy software suite.</div>
+    <div class="card"><a href="https://heasarc.gsfc.nasa.gov/xanadu/xspec/" target="_blank">XSPEC</a> — Spectral fitting software.</div>
+    <div class="card"><a href="https://space.mit.edu/cxc/isis/" target="_blank">ISIS</a> — Interactive spectral interpretation system.</div>
+    <div class="card"><a href="https://cxc.cfa.harvard.edu/ciao/" target="_blank">CIAO</a> — Chandra analysis software.</div>
   </div>
 
   <div class="section">
     <h2>Machine Learning for Astronomy</h2>
+    <div class="card">Gaussian Processes (Coming Soon)</div>
+    <div class="card">Deep Gaussian Processes (Coming Soon)</div>
+    <div class="card">Time-Series Analysis (Coming Soon)</div>
+  </div>
 
-    <div class="card">
-      Gaussian Processes (Coming Soon)
-    </div>
+  <div class="section">
+    <h2>Popular Astronomy</h2>
+    <div class="card"><a href="https://cosmoquest.org/" target="_blank">CosmoQuest</a> : All things cosmo</div>
+    <div class="card"><a href="https://www.badastronomy.com/" target="_blank">Bad Astronomy</a> : Phil Plait brings you a good blog called bad astronomy</div>
+    <div class="card"><a href="https://skyandtelescope.org/" target="_blank">Sky &amp; Telescope</a> : Astronomy news and how to observe the sky etc.</div>
+    <div class="card"><a href="https://astrobites.org/" target="_blank">Astrobites</a> : Summaries of journal papers and more by grad students with guest posts by others as well</div>
+    <div class="card"><a href="https://arxiver.moonhats.com/" target="_blank">arXiver</a> : A really cool website that brings you the latest of the astro-ph in short.. check out their about page!</div>
+    <div class="card"><a href="https://www.astronomy.com/" target="_blank">Astronomy.com</a> : The name is self-explanatory</div>
+    <div class="card"><a href="https://astrobetter.com/" target="_blank">Astrobetter</a> : To be able to do astronomy well</div>
+    <div class="card"><a href="https://www.universetoday.com/" target="_blank">Universe Today</a> : Your dose of Universe today</div>
+    <div class="card"><a href="https://www.geekwrapped.com/" target="_blank">Geekwrapped.com</a> : Maybe find your first telescope here (disclaimer: I was contacted by the author of this page in a friendly email exchange, she's done a great job! I liked the website and you can check out some gifting ideas for yourself or the geek-inclined in your life.. Also: this little message is not sponsored)</div>
+    <div class="card"><a href="https://www.zooniverse.org/projects?discipline=astronomy" target="_blank">List of citizen science projects</a> : See how you can get involved!</div>
+  </div>
 
-    <div class="card">
-      Deep Gaussian Processes (Coming Soon)
-    </div>
+  <div class="section">
+    <h2>Popular Science</h2>
+    <div class="card"><a href="https://www.science20.com/" target="_blank">Science 2.0</a> : Articles on the latest in Physical Sciences, Earth Sciences, Life Sciences and more!</div>
+    <div class="card"><a href="https://scienceblogs.com/" target="_blank">scienceblogs</a> : The name says it all</div>
+  </div>
 
-    <div class="card">
-      Time-Series Analysis (Coming Soon)
-    </div>
+  <div class="section">
+    <h2>Python</h2>
+    <div class="card"><a href="https://www.python.org/" target="_blank">python.org</a> : The official python website with plenty of documentation and examples</div>
+    <div class="card"><a href="https://www.astropy.org/" target="_blank">astropy</a> : Python packages for astronomers/astronomy</div>
+    <div class="card"><a href="https://www.tutorialspoint.com/python/" target="_blank">Tutorialspoint</a> : Many programming languages here. This link takes you to the python programming section</div>
+    <div class="card"><a href="http://www.astropython.org/" target="_blank">Astropython</a> : Python for astronomers</div>
+  </div>
+
+  <div class="section">
+    <h2>IDL</h2>
+    <div class="card"><a href="https://www.idlcoyote.com/" target="_blank">idlcoyote</a> : THE ideal place to IDL.. Thanks David Fanning!</div>
+  </div>
+
+  <div class="section">
+    <h2>RF and Electronics</h2>
+    <div class="card"><a href="https://www.rfcafe.com/" target="_blank">RF Cafe</a> : An amazing collection of information, opportunities and apps for all things RF</div>
+    <div class="card"><a href="https://www.minicircuits.com/" target="_blank">Mini-Circuits</a> : RF/IF &amp; microwave components</div>
+    <div class="card"><a href="https://www.rfcafe.com/references/electrical/50-ohm-impedance.htm" target="_blank">Ever wondered why 50 Ohm is the standard impedance?</a></div>
+    <div class="card"><a href="https://www.youtube.com/results?search_query=ham+radio+basics" target="_blank">Useful, hands on videos on HAM Radio Stuff</a></div>
+    <div class="card"><a href="https://www.youtube.com/results?search_query=look+inside+isolator" target="_blank">Video: Look inside an isolator?</a></div>
+    <div class="card"><a href="https://www.sparkfun.com/" target="_blank">Sparkfun</a> : Lots of fun, useful resources and products for building your electronics</div>
+  </div>
+
+  <div class="section">
+    <h2>Cryogenics</h2>
+    <div class="card"><a href="https://www.youtube.com/results?search_query=fundamentals+of+refrigeration" target="_blank">Video: Fundamentals of Refrigeration.</a> Oldie but a goodie!</div>
+    <div class="card"><a href="https://www.youtube.com/results?search_query=introduction+to+cryogenics+adam+wood" target="_blank">An introduction to cryogenics</a>: Adam L Wood Craft</div>
+    <div class="card"><a href="https://en.wikipedia.org/wiki/Adiabatic_demagnetization" target="_blank">Adiabatic Demagnetization Refrigeration</a>, basic principle</div>
+  </div>
+
+  <div class="section">
+    <h2>Graduate Life</h2>
+    <div class="card"><a href="https://www.gradhacker.org/" target="_blank">GradHacker</a> : About graduate life and more</div>
+    <div class="card"><a href="https://phdcomics.com/" target="_blank">PhDcomics</a> : Laughing at gradlife situations</div>
+    <div class="card"><a href="https://shouldigetaphd.com/" target="_blank">Should I get a PhD</a> : (Re)Thinking about getting a PhD?</div>
+    <div class="card"><a href="https://thesiswhisperer.com/" target="_blank">Thesis Whisperer</a> : Just like the horse whisperer &ndash; but with more pages</div>
+    <div class="card"><a href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html" target="_blank">How to have a bad career in Research / Academia</a> : Slide deck from Prof. David A Patterson that delivers on the how telling you how NOT to.</div>
+  </div>
+
+  <div class="section">
+    <h2>Academia</h2>
+    <div class="card"><a href="https://theprofessorisin.com/" target="_blank">The Professor is in</a> : About navigating academia from an expert</div>
+    <div class="card"><a href="https://femalescipro.com/" target="_blank">Female Science Professor</a> : The name is self explanatory. The blog is no longer updated, but is rich in all it has to offer</div>
+    <div class="card"><a href="https://web.mit.edu/physics/about/advice_new_faculty.html" target="_blank">Advice for new faculty</a> : A comprehensive document from the MIT Department of Physics, with links to additional reading material.</div>
+    <div class="card"><a href="https://dynamicecology.wordpress.com/2014/01/23/leaving-academia-after-the-postdoc-the-aftermath/" target="_blank">7 year postdoc</a> : A fantastic piece and the closest I have come to find anyone express the approach I take to research, the motto is to &ldquo;be my best whole person&rdquo;</div>
+  </div>
+
+  <div class="section">
+    <h2>General Awesomeness</h2>
+    <div class="card"><a href="https://aeon.co/" target="_blank">Aeon</a> : Needs no introduction! Everything wonderful about essays, ideas, and opinions. Non-sponsored, well researched, writing.</div>
+    <div class="card"><a href="https://www.aldaily.com/" target="_blank">Arts and Letters Daily</a> : A feed of what's making waves in literature.</div>
+    <div class="card"><a href="https://www.allsides.com/" target="_blank">AllSides</a> : It's easy to read news that appeals to you, but for when you feel like reading reportage from all sides, left, right, and, center go here!</div>
+    <div class="card"><a href="https://nautil.us/" target="_blank">Nautils</a> : A deep dive into a topic per issue</div>
+    <div class="card"><a href="https://www.theskimm.com/" target="_blank">The Skimm</a>: Here's where I've been getting my news each morning as I sip on my coffee.</div>
+    <div class="card"><a href="https://www.newslaundry.com/" target="_blank">Newslaundry</a> : Clean, laundered news. When people pay, people are served.</div>
+  </div>
+
+  <div class="section">
+    <h2>Notes</h2>
+    <p style="margin-bottom:1rem;">In addition here are some notes I've scribbled down during grad school days that I hope are helpful for anyone interested!</p>
+    <div class="card"><a href="#" target="_blank">Cosmology notes 1</a> Just some scribbles working out the cosmology lectures 1 and 2 at <a href="https://sites.google.com/view/aaronparsons/cosmology-notes" target="_blank">Aaron Parson's cosmology notes</a>. The calculations go step by step, but not accompanied by any explanations!</div>
+    <div class="card"><a href="#" target="_blank">Basics notes 1</a> : Just some notes on basics of astronomy. A summary of things like Kepler's laws, homogenity, basic units. Not accompanied by explanations, just somethings I had jotted down casually.</div>
+  </div>
+
+  <div class="section">
+    <h2>Podcast</h2>
+    <div class="card"><a href="#" target="_blank">HOLI-Byte</a> is a podcast series of the <a href="#" target="_blank">Hands On Learning Initiative</a> of which I am a co-founder. I record and produce these podcasts which are available online for those who would like to benefit from them. A diverse range of topics are covered in these podcasts and are in several languages including English, Hindi, Tamil, Marathi, Kannada and more. A special thanks to my friends, colleagues and other contributors to HOLI Byte. We couldn't have done this without you! For more information check out our <a href="#" target="_blank">Facebook page: HOLI-Hands On Learning Initiative</a></div>
   </div>
 
   <div class="section">
     <h2>Recommended Books</h2>
-
-    <div class="card">
-      An Introduction to Modern Astrophysics — Carroll & Ostlie
-    </div>
-
-    <div class="card">
-      High Energy Astrophysics — Malcolm Longair
-    </div>
-
-    <div class="card">
-      Radiative Processes in Astrophysics — Rybicki & Lightman
-    </div>
+    <div class="card">An Introduction to Modern Astrophysics &mdash; Carroll &amp; Ostlie</div>
+    <div class="card">High Energy Astrophysics &mdash; Malcolm Longair</div>
+    <div class="card">Radiative Processes in Astrophysics &mdash; Rybicki &amp; Lightman</div>
   </div>
 
-  <a class="back" href="index.html">← Back to Homepage</a>
+  <a class="back" href="index.html">&larr; Back to Homepage</a>
 
 </div>
 
