@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Machine Learning for Gamma-Ray Bursts | Ritik Kumar</title>
+
+<style>
+
+:root{
+  --teal:#2bb6a3;
+  --dark:#2e333d;
+  --darker:#262a32;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.82);
+  --border:rgba(255,255,255,0.55);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:var(--dark);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.25rem 2rem;
+  background:var(--darker);
+  box-shadow:0 2px 18px rgba(0,0,0,.4);
+}
+
+.brand{
+  font-weight:700;
+  letter-spacing:.18rem;
+  text-transform:uppercase;
+  font-size:1.05rem;
+}
+
+.back{
+  font-size:.85rem;
+  letter-spacing:.15rem;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+.back:hover{
+  color:var(--teal);
+}
+
+.hero{
+  position:relative;
+  min-height:68vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8rem 2rem 5rem;
+  background:
+    linear-gradient(rgba(0,0,0,.48),rgba(0,0,0,.72)),
+    url('GRB.png') center center / cover no-repeat;
+}
+
+.hero .inner{
+  max-width:950px;
+}
+
+.hero h1{
+  font-size:clamp(2rem,5.5vw,3.8rem);
+  font-weight:700;
+  letter-spacing:.12rem;
+  text-transform:uppercase;
+  text-shadow:0 2px 25px rgba(0,0,0,.8);
+}
+
+.hero .subtitle{
+  margin-top:1.2rem;
+  font-size:1.15rem;
+  color:var(--muted);
+  letter-spacing:.05rem;
+}
+
+.rule{
+  width:9rem;
+  height:2px;
+  background:#fff;
+  margin:1.5rem auto;
+}
+
+.content{
+  width:min(920px,90vw);
+  margin:auto;
+  padding:5rem 0;
+}
+
+.content h2{
+  font-size:2rem;
+  letter-spacing:.13rem;
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+
+.content h3{
+  font-size:1.35rem;
+  letter-spacing:.07rem;
+  margin-top:3rem;
+  margin-bottom:1rem;
+}
+
+.content p{
+  color:var(--muted);
+  font-size:1.08rem;
+  margin-bottom:1.5rem;
+}
+
+.content ul{
+  margin:1rem 0 2rem 1.5rem;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+
+.content li{
+  margin-bottom:.65rem;
+}
+
+.research-box{
+  background:var(--darker);
+  border-left:4px solid var(--teal);
+  padding:2rem;
+  margin:2.5rem 0;
+}
+
+.research-box p{
+  margin-bottom:0;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin:2.5rem 0;
+}
+
+.metric{
+  background:var(--darker);
+  padding:1.6rem;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.metric strong{
+  display:block;
+  font-size:2rem;
+  color:var(--teal);
+  line-height:1.2;
+  margin-bottom:.5rem;
+}
+
+.metric span{
+  color:var(--muted);
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.08rem;
+}
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.65rem;
+  margin:1.5rem 0 2rem;
+}
+
+.skill{
+  border:1px solid rgba(255,255,255,.2);
+  padding:.55rem .85rem;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.resources{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.3rem;
+  margin:2.5rem 0 3rem;
+}
+
+.resource-card{
+  display:block;
+  background:var(--darker);
+  border:1px solid rgba(255,255,255,.12);
+  padding:1.8rem;
+  transition:transform .25s,border-color .25s,background .25s;
+}
+
+.resource-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--teal);
+  background:#292e37;
+}
+
+.resource-card h4{
+  font-size:1.12rem;
+  letter-spacing:.07rem;
+  text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+
+.resource-card p{
+  font-size:.96rem;
+  margin-bottom:1rem;
+}
+
+.resource-card span{
+  color:var(--teal);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.1rem;
+  text-transform:uppercase;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:1rem;
+  padding:.9rem 1.8rem;
+  border:2px solid var(--border);
+  color:#fff;
+  text-transform:uppercase;
+  letter-spacing:.16rem;
+  font-size:.8rem;
+  font-weight:600;
+  transition:.25s;
+}
+
+.btn:hover{
+  background:#fff;
+  color:#1c1f26;
+}
+
+footer{
+  background:var(--darker);
+  text-align:center;
+  padding:3rem 2rem;
+  color:var(--muted);
+}
+
+footer .copy{
+  font-size:.8rem;
+  letter-spacing:.1rem;
+  text-transform:uppercase;
+}
+
+@media(max-width:760px){
+
+  .topbar{
+    padding:1rem 1.25rem;
+  }
+
+  .hero{
+    min-height:60vh;
+    padding:7rem 1.5rem 4rem;
+  }
+
+  .content{
+    padding:3.5rem 0;
+  }
+
+  .metrics{
+    grid-template-columns:1fr;
+  }
+
+  .resources{
+    grid-template-columns:1fr;
+  }
+
+  .content h2{
+    letter-spacing:.08rem;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a href="index.html" class="brand">
+    Ritik Kumar
+  </a>
+
+  <a href="index.html" class="back">
+    ← Back to Home
+  </a>
+
+</header>
+
+<section class="hero">
+
+  <div class="inner">
+
+    <h1>Machine Learning for Gamma-Ray Bursts</h1>
+
+    <div class="rule"></div>
+
+    <p class="subtitle">
+      Machine Learning, Statistical Modelling and Uncertainty-Aware
+      Reconstruction of High-Energy Time Series
+    </p>
+
+  </div>
+
+</section>
+
+<main class="content">
+
+  <h2>Research Overview</h2>
+
+  <p>
+    My machine-learning research focuses on reconstructing and
+    analysing noisy, irregularly sampled time-series data from
+    gamma-ray bursts (GRBs). I developed machine-learning and
+    statistical methods to recover the underlying temporal behaviour
+    of GRB X-ray light curves and quantify the uncertainty associated
+    with the reconstruction.
+  </p>
+
+  <p>
+    The project combines data preprocessing, probabilistic modelling,
+    deep learning, model validation and uncertainty estimation. The
+    same research workflow has shaped how I approach difficult
+    data-driven problems: define the problem carefully, build a model,
+    test it against controlled validation data, quantify uncertainty,
+    and examine where and why the model fails.
+  </p>
+
+  <div class="metrics">
+
+    <div class="metric">
+      <strong>500+</strong>
+      <span>GRB datasets</span>
+    </div>
+
+    <div class="metric">
+      <strong>DGP</strong>
+      <span>Deep Gaussian Processes</span>
+    </div>
+
+    <div class="metric">
+      <strong>PyTorch</strong>
+      <span>Deep learning framework</span>
+    </div>
+
+  </div>
+
+  <div class="research-box">
+
+    <p>
+      My published work on GRB light-curve reconstruction demonstrates
+      an end-to-end data science workflow: handling irregular data,
+      constructing probabilistic models, comparing reconstruction
+      methods, validating predictions and reporting uncertainty rather
+      than relying only on point estimates.
+    </p>
+
+  </div>
+
+  <h3>ReFANN: Light-Curve Reconstruction</h3>
+
+  <p>
+    I worked on ReFANN, a machine-learning framework for reconstructing
+    GRB X-ray light curves. The problem is challenging because the
+    observations can contain gaps, irregular sampling, measurement
+    uncertainty and complex temporal behaviour.
+  </p>
+
+  <p>
+    I investigated neural-network and probabilistic approaches for
+    recovering the underlying light curve while retaining information
+    about the uncertainty of the reconstruction.
+  </p>
+
+  <h3>Deep Gaussian Processes</h3>
+
+  <p>
+    A central component of the work involved Gaussian-process based
+    modelling, including Deep Gaussian Processes. These models provide
+    a flexible way to represent non-linear temporal structure while
+    retaining a probabilistic description of the prediction.
+  </p>
+
+  <p>
+    This gave me practical experience working with models where
+    uncertainty is part of the output rather than something added
+    after the prediction.
+  </p>
+
+  <h3>Model Validation</h3>
+
+  <p>
+    I used cross-validation and bootstrap resampling to test the
+    robustness of the reconstruction methods. Rather than evaluating
+    a model on a single split, I examined how its performance changed
+    across different samples and perturbations of the data.
+  </p>
+
+  <p>
+    I also analysed reconstruction errors and their distributions to
+    understand systematic differences between the reconstructed and
+    observed light curves.
+  </p>
+
+  <h3>Time-Series and Statistical Modelling</h3>
+
+  <p>
+    Working with GRB light curves required careful treatment of
+    temporal structure, missing observations and measurement noise.
+    I used statistical modelling and probabilistic methods to separate
+    the inferred underlying signal from observational uncertainty.
+  </p>
+
+  <p>
+    This work developed my interest in quantitative research where
+    noisy observations must be converted into robust statistical
+    conclusions.
+  </p>
+
+  <h3>Physics-Informed Neural Networks</h3>
+
+  <p>
+    In a separate machine-learning project, I implemented
+    Physics-Informed Neural Networks in PyTorch for differential
+    equations, including 1D, 2D and 3D Burgers' equations and the
+    1D Euler equation for the Sod shock-tube problem.
+  </p>
+
+  <p>
+    I compared the neural-network solutions with classical numerical
+    approaches and analytical solutions, and investigated how the
+    choice of training and numerical parameters affected stability
+    and accuracy.
+  </p>
+
+  <h3>Research Workflow</h3>
+
+  <p>
+    Across these projects, I have worked through the complete
+    computational research cycle:
+  </p>
+
+  <ul>
+
+    <li>
+      Cleaning and structuring real-world datasets
+    </li>
+
+    <li>
+      Designing statistical and machine-learning models
+    </li>
+
+    <li>
+      Training models and tuning model parameters
+    </li>
+
+    <li>
+      Cross-validation and bootstrap-based robustness checks
+    </li>
+
+    <li>
+      Quantifying prediction uncertainty
+    </li>
+
+    <li>
+      Comparing models using quantitative error measures
+    </li>
+
+    <li>
+      Investigating failure modes and model limitations
+    </li>
+
+    <li>
+      Reproducing and validating results computationally
+    </li>
+
+  </ul>
+
+  <h3>Quantitative Research Perspective</h3>
+
+  <p>
+    The methods I use are directly relevant to quantitative,
+    data-driven research: large datasets, noisy observations,
+    statistical inference, time-series modelling, probabilistic
+    prediction, model validation and reproducible computational
+    experiments.
+  </p>
+
+  <p>
+    I am particularly interested in problems where the useful signal
+    is small compared with the noise and where model performance has
+    to be tested rigorously rather than assumed from a single result.
+    This is also why I place strong emphasis on out-of-sample
+    validation, uncertainty estimation and understanding model
+    failure modes.
+  </p>
+
+  <div class="research-box">
+
+    <p>
+      I have not used this work to claim financial-market performance.
+      Instead, it demonstrates the research and modelling skills I
+      bring to quantitative problems: working with complex data,
+      building statistical models, testing hypotheses, validating
+      results and turning computational experiments into reproducible
+      conclusions.
+    </p>
+
+  </div>
+
+  <h3>Technical Skills</h3>
+
+  <div class="skills">
+
+    <span class="skill">Python</span>
+    <span class="skill">PyTorch</span>
+    <span class="skill">NumPy</span>
+    <span class="skill">SciPy</span>
+    <span class="skill">Pandas</span>
+    <span class="skill">Astropy</span>
+    <span class="skill">Gaussian Processes</span>
+    <span class="skill">Deep Gaussian Processes</span>
+    <span class="skill">Neural Networks</span>
+    <span class="skill">PINNs</span>
+    <span class="skill">Time-Series Analysis</span>
+    <span class="skill">Statistical Modelling</span>
+    <span class="skill">Cross-Validation</span>
+    <span class="skill">Bootstrap Resampling</span>
+    <span class="skill">Uncertainty Estimation</span>
+    <span class="skill">Monte Carlo Methods</span>
+    <span class="skill">Linux / HPC</span>
+
+  </div>
+
+  <h3>Publication</h3>
+
+  <p>
+    The GRB reconstruction work resulted in a published research
+    paper. I also have additional machine-learning and scientific
+    research work in progress.
+  </p>
+
+  <a class="btn"
+     href="https://arxiv.org/abs/2506.23681"
+     target="_blank"
+     rel="noopener">
+    Read the Paper
+  </a>
+
+  <h3>Research Resources</h3>
+
+  <p>
+    I have collected selected papers, project documents, technical
+    notes, code and further reading related to machine learning,
+    statistical modelling and quantitative data analysis.
+  </p>
+
+  <div class="resources">
+
+    <a class="resource-card"
+       href="https://arxiv.org/abs/2506.23681"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Published Paper</h4>
+
+      <p>
+        My published work on reconstructing GRB X-ray light curves
+        using machine-learning and probabilistic methods.
+      </p>
+
+      <span>Read Paper →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Research Documents</h4>
+
+      <p>
+        Project notes, presentations, figures and supporting material
+        from my machine-learning research.
+      </p>
+
+      <span>View Documents →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Machine Learning Projects</h4>
+
+      <p>
+        Additional work involving neural networks, probabilistic
+        modelling, PINNs and computational experiments.
+      </p>
+
+      <span>Explore Projects →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Technical Notes</h4>
+
+      <p>
+        Notes on Gaussian Processes, uncertainty estimation,
+        validation, statistical modelling and time-series analysis.
+      </p>
+
+      <span>View Notes →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Quantitative Research Reading</h4>
+
+      <p>
+        Selected resources on statistical learning, time-series
+        modelling, machine learning and quantitative research.
+      </p>
+
+      <span>Reading List →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="https://github.com/Ritikkumar0730"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Code &amp; GitHub</h4>
+
+      <p>
+        Selected computational projects, Python work and research
+        code available through my GitHub profile.
+      </p>
+
+      <span>View GitHub →</span>
+
+    </a>
+
+  </div>
+
+  <a class="btn" href="index.html">
+    ← Back to Research
+  </a>
+
+</main>
+
+<footer>
+
+  <div class="copy">
+    © Ritik Kumar | Indian Institute of Science
+  </div>
+
+</footer>
+
+</body>
+</html>
