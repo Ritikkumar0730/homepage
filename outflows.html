@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Ultra Fast Outflows | Ritik Kumar</title>
+
+<style>
+
+:root{
+  --teal:#2bb6a3;
+  --dark:#2e333d;
+  --darker:#262a32;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.82);
+  --border:rgba(255,255,255,0.55);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:var(--dark);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.25rem 2rem;
+  background:var(--darker);
+  box-shadow:0 2px 18px rgba(0,0,0,.4);
+}
+
+.brand{
+  font-weight:700;
+  letter-spacing:.18rem;
+  text-transform:uppercase;
+  font-size:1.05rem;
+}
+
+.back{
+  font-size:.85rem;
+  letter-spacing:.15rem;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+.back:hover{
+  color:var(--teal);
+}
+
+.hero{
+  position:relative;
+  min-height:65vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8rem 2rem 5rem;
+  background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.68)),
+    url('outflows.jpeg') center center / cover no-repeat;
+}
+
+.hero .inner{
+  max-width:900px;
+}
+
+.hero h1{
+  font-size:clamp(2.1rem,6vw,4rem);
+  font-weight:700;
+  letter-spacing:.18rem;
+  text-transform:uppercase;
+  text-shadow:0 2px 25px rgba(0,0,0,.8);
+}
+
+.hero .subtitle{
+  margin-top:1.2rem;
+  font-size:1.15rem;
+  color:var(--muted);
+  letter-spacing:.06rem;
+}
+
+.rule{
+  width:9rem;
+  height:2px;
+  background:#fff;
+  margin:1.5rem auto;
+}
+
+.content{
+  width:min(900px,90vw);
+  margin:auto;
+  padding:5rem 0;
+}
+
+.content h2{
+  font-size:2rem;
+  letter-spacing:.14rem;
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+
+.content h3{
+  font-size:1.35rem;
+  letter-spacing:.08rem;
+  margin-top:3rem;
+  margin-bottom:1rem;
+}
+
+.content p{
+  color:var(--muted);
+  font-size:1.08rem;
+  margin-bottom:1.5rem;
+}
+
+.content ul{
+  margin:1rem 0 2rem 1.5rem;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+
+.content li{
+  margin-bottom:.65rem;
+}
+
+.research-box{
+  background:var(--darker);
+  border-left:4px solid var(--teal);
+  padding:2rem;
+  margin:2.5rem 0;
+}
+
+.research-box p{
+  margin-bottom:0;
+}
+
+.resources{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.3rem;
+  margin:2.5rem 0 3rem;
+}
+
+.resource-card{
+  display:block;
+  background:var(--darker);
+  border:1px solid rgba(255,255,255,.12);
+  padding:1.8rem;
+  transition:transform .25s,border-color .25s,background .25s;
+}
+
+.resource-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--teal);
+  background:#292e37;
+}
+
+.resource-card h4{
+  font-size:1.15rem;
+  letter-spacing:.08rem;
+  text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+
+.resource-card p{
+  font-size:.98rem;
+  margin-bottom:1rem;
+}
+
+.resource-card span{
+  color:var(--teal);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.1rem;
+  text-transform:uppercase;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:1rem;
+  padding:.9rem 1.8rem;
+  border:2px solid var(--border);
+  color:#fff;
+  text-transform:uppercase;
+  letter-spacing:.16rem;
+  font-size:.8rem;
+  font-weight:600;
+  transition:.25s;
+}
+
+.btn:hover{
+  background:#fff;
+  color:#1c1f26;
+}
+
+footer{
+  background:var(--darker);
+  text-align:center;
+  padding:3rem 2rem;
+  color:var(--muted);
+}
+
+footer .copy{
+  font-size:.8rem;
+  letter-spacing:.1rem;
+  text-transform:uppercase;
+}
+
+@media(max-width:760px){
+
+  .topbar{
+    padding:1rem 1.25rem;
+  }
+
+  .hero{
+    min-height:60vh;
+    padding:7rem 1.5rem 4rem;
+  }
+
+  .content{
+    padding:3.5rem 0;
+  }
+
+  .content h2{
+    letter-spacing:.09rem;
+  }
+
+  .resources{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a href="index.html" class="brand">
+    Ritik Kumar
+  </a>
+
+  <a href="index.html" class="back">
+    ← Back to Home
+  </a>
+
+</header>
+
+<section class="hero">
+
+  <div class="inner">
+
+    <h1>Ultra Fast Outflows</h1>
+
+    <div class="rule"></div>
+
+    <p class="subtitle">
+      Searching for High-Velocity Outflows in Active Galactic Nuclei
+    </p>
+
+  </div>
+
+</section>
+
+<main class="content">
+
+  <h2>Research Overview</h2>
+
+  <p>
+    My research investigates ultra fast outflows in active galactic
+    nuclei using archival XMM-Newton observations. These highly
+    ionised winds can carry material away from the central regions
+    of a galaxy at a substantial fraction of the speed of light.
+  </p>
+
+  <p>
+    I developed a systematic, Python-based workflow to search for and
+    analyse absorption signatures associated with high-velocity
+    outflows in large X-ray datasets.
+  </p>
+
+  <div class="research-box">
+
+    <p>
+      The project combines large-scale data processing, automated
+      source selection, X-ray spectral modelling, photoionisation
+      modelling and statistical testing to identify and characterise
+      candidate ultra fast outflows.
+    </p>
+
+  </div>
+
+  <h3>Large-Scale Data Analysis</h3>
+
+  <p>
+    I built a Python pipeline to cross-match a large AGN catalogue
+    with the XMM-Newton archive and systematically select observations
+    suitable for high-quality spectral analysis.
+  </p>
+
+  <ul>
+
+    <li>
+      Cross-matching large astronomical catalogues with XMM-Newton observations
+    </li>
+
+    <li>
+      Automated observation and source selection
+    </li>
+
+    <li>
+      X-ray data reduction and spectral extraction
+    </li>
+
+    <li>
+      Signal-to-noise and count-based quality filtering
+    </li>
+
+    <li>
+      Parallel processing for large observational datasets
+    </li>
+
+  </ul>
+
+  <h3>Searching for Outflows</h3>
+
+  <p>
+    The analysis focuses on identifying absorption features in the
+    X-ray spectra that can indicate highly ionised gas moving at
+    relativistic velocities.
+  </p>
+
+  <p>
+    I use spectral modelling to establish the underlying continuum
+    and then investigate statistically significant absorption
+    signatures. Candidate features are examined across the relevant
+    energy range and tested against alternative spectral models.
+  </p>
+
+  <h3>Photoionisation Modelling</h3>
+
+  <p>
+    A major part of the analysis involves modelling the physical
+    properties of the absorbing gas. I developed custom XSTAR
+    photoionisation grids when existing publicly available models
+    were not sufficient to reproduce the observed soft X-ray
+    signatures.
+  </p>
+
+  <p>
+    The grids allow the absorption spectrum to be explored as a
+    function of physical parameters such as ionisation state,
+    column density and turbulent velocity.
+  </p>
+
+  <h3>Statistical Analysis</h3>
+
+  <p>
+    Candidate absorption features are evaluated using statistical
+    model comparison and parameter estimation. I use χ² fitting,
+    simulations and uncertainty analysis to assess whether additional
+    spectral components are supported by the data.
+  </p>
+
+  <p>
+    For parameter inference in more complex models, I also use
+    Markov Chain Monte Carlo methods to explore posterior parameter
+    distributions, correlations and degeneracies.
+  </p>
+
+  <h3>Key Result</h3>
+
+  <p>
+    In one of the luminous quasars studied, I identified evidence
+    for multi-phase ultra fast outflows with inferred velocities of
+    approximately 0.22c and 0.32c.
+  </p>
+
+  <p>
+    This work required combining automated data analysis with
+    detailed physical modelling and independent validation of the
+    detected absorption features.
+  </p>
+
+  <h3>Research and Manuscript</h3>
+
+  <p>
+    This work is being developed into a manuscript for submission to
+    the Monthly Notices of the Royal Astronomical Society (MNRAS).
+    The project involves collaboration with researchers working on
+    X-ray spectroscopy and active galactic nuclei.
+  </p>
+
+  <h3>Technical Skills</h3>
+
+  <ul>
+
+    <li>Python</li>
+    <li>NumPy, SciPy and Astropy</li>
+    <li>XMM-Newton SAS</li>
+    <li>XSPEC</li>
+    <li>XSTAR photoionisation modelling</li>
+    <li>Large-scale data processing</li>
+    <li>Parallel computing</li>
+    <li>Statistical model comparison</li>
+    <li>Markov Chain Monte Carlo</li>
+    <li>Linux / HPC environments</li>
+
+  </ul>
+
+  <h3>Research Resources</h3>
+
+  <p>
+    I have collected selected papers, research documents, analysis
+    material and references related to this project. These resources
+    provide additional details about the scientific background,
+    methodology and analysis.
+  </p>
+
+  <div class="resources">
+
+    <a class="resource-card" href="#" target="_blank" rel="noopener">
+
+      <h4>Papers &amp; Manuscripts</h4>
+
+      <p>
+        Published papers and manuscripts related to ultra fast
+        outflows and AGN X-ray spectroscopy.
+      </p>
+
+      <span>View Papers →</span>
+
+    </a>
+
+    <a class="resource-card" href="#" target="_blank" rel="noopener">
+
+      <h4>Research Documents</h4>
+
+      <p>
+        Selected project documents, notes, presentations and
+        supporting research material.
+      </p>
+
+      <span>View Documents →</span>
+
+    </a>
+
+    <a class="resource-card" href="#" target="_blank" rel="noopener">
+
+      <h4>Spectral Modelling</h4>
+
+      <p>
+        Resources related to XSTAR photoionisation modelling,
+        XSPEC spectral fitting and model construction.
+      </p>
+
+      <span>Explore Modelling →</span>
+
+    </a>
+
+    <a class="resource-card" href="#" target="_blank" rel="noopener">
+
+      <h4>Further Reading</h4>
+
+      <p>
+        Selected papers and references that provide the scientific
+        background for this research.
+      </p>
+
+      <span>Reading List →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="https://github.com/Ritikkumar0730"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Code &amp; Analysis</h4>
+
+      <p>
+        Selected computational work, Python analysis and research
+        projects available on GitHub.
+      </p>
+
+      <span>View GitHub →</span>
+
+    </a>
+
+  </div>
+
+  <a class="btn" href="index.html">
+    ← Back to Research
+  </a>
+
+</main>
+
+<footer>
+
+  <div class="copy">
+    © Ritik Kumar | Indian Institute of Science
+  </div>
+
+</footer>
+
+</body>
+</html>
