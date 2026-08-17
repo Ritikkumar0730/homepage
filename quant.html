@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Quantitative & Computational Research | Ritik Kumar</title>
+
+<style>
+
+:root{
+  --teal:#2bb6a3;
+  --dark:#2e333d;
+  --darker:#262a32;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.82);
+  --border:rgba(255,255,255,0.55);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:var(--dark);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.25rem 2rem;
+  background:var(--darker);
+  box-shadow:0 2px 18px rgba(0,0,0,.4);
+}
+
+.brand{
+  font-weight:700;
+  letter-spacing:.18rem;
+  text-transform:uppercase;
+  font-size:1.05rem;
+}
+
+.back{
+  font-size:.85rem;
+  letter-spacing:.15rem;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+.back:hover{
+  color:var(--teal);
+}
+
+.hero{
+  position:relative;
+  min-height:68vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8rem 2rem 5rem;
+  background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.72)),
+    url('quant.jpeg') center center / cover no-repeat;
+}
+
+.hero .inner{
+  max-width:950px;
+}
+
+.hero h1{
+  font-size:clamp(2rem,5.5vw,3.8rem);
+  font-weight:700;
+  letter-spacing:.11rem;
+  text-transform:uppercase;
+  text-shadow:0 2px 25px rgba(0,0,0,.8);
+}
+
+.hero .subtitle{
+  margin-top:1.2rem;
+  font-size:1.15rem;
+  color:var(--muted);
+  letter-spacing:.05rem;
+}
+
+.rule{
+  width:9rem;
+  height:2px;
+  background:#fff;
+  margin:1.5rem auto;
+}
+
+.content{
+  width:min(920px,90vw);
+  margin:auto;
+  padding:5rem 0;
+}
+
+.content h2{
+  font-size:2rem;
+  letter-spacing:.13rem;
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+
+.content h3{
+  font-size:1.35rem;
+  letter-spacing:.07rem;
+  margin-top:3rem;
+  margin-bottom:1rem;
+}
+
+.content p{
+  color:var(--muted);
+  font-size:1.08rem;
+  margin-bottom:1.5rem;
+}
+
+.content ul{
+  margin:1rem 0 2rem 1.5rem;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+
+.content li{
+  margin-bottom:.65rem;
+}
+
+.research-box{
+  background:var(--darker);
+  border-left:4px solid var(--teal);
+  padding:2rem;
+  margin:2.5rem 0;
+}
+
+.research-box p{
+  margin-bottom:0;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin:2.5rem 0;
+}
+
+.metric{
+  background:var(--darker);
+  padding:1.6rem;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.metric strong{
+  display:block;
+  font-size:1.7rem;
+  color:var(--teal);
+  line-height:1.3;
+  margin-bottom:.5rem;
+}
+
+.metric span{
+  color:var(--muted);
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.07rem;
+}
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.65rem;
+  margin:1.5rem 0 2rem;
+}
+
+.skill{
+  border:1px solid rgba(255,255,255,.2);
+  padding:.55rem .85rem;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+
+.pipeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin:2rem 0 3rem;
+}
+
+.pipeline-step{
+  background:var(--darker);
+  border:1px solid rgba(255,255,255,.1);
+  padding:1.35rem;
+  min-height:130px;
+}
+
+.pipeline-step strong{
+  display:block;
+  color:var(--teal);
+  font-size:1rem;
+  letter-spacing:.06rem;
+  text-transform:uppercase;
+  margin-bottom:.55rem;
+}
+
+.pipeline-step span{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.resources{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.3rem;
+  margin:2.5rem 0 3rem;
+}
+
+.resource-card{
+  display:block;
+  background:var(--darker);
+  border:1px solid rgba(255,255,255,.12);
+  padding:1.8rem;
+  transition:transform .25s,border-color .25s,background .25s;
+}
+
+.resource-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--teal);
+  background:#292e37;
+}
+
+.resource-card h4{
+  font-size:1.12rem;
+  letter-spacing:.07rem;
+  text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+
+.resource-card p{
+  font-size:.96rem;
+  margin-bottom:1rem;
+}
+
+.resource-card span{
+  color:var(--teal);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.1rem;
+  text-transform:uppercase;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:1rem;
+  padding:.9rem 1.8rem;
+  border:2px solid var(--border);
+  color:#fff;
+  text-transform:uppercase;
+  letter-spacing:.16rem;
+  font-size:.8rem;
+  font-weight:600;
+  transition:.25s;
+}
+
+.btn:hover{
+  background:#fff;
+  color:#1c1f26;
+}
+
+footer{
+  background:var(--darker);
+  text-align:center;
+  padding:3rem 2rem;
+  color:var(--muted);
+}
+
+footer .copy{
+  font-size:.8rem;
+  letter-spacing:.1rem;
+  text-transform:uppercase;
+}
+
+@media(max-width:760px){
+
+  .topbar{
+    padding:1rem 1.25rem;
+  }
+
+  .hero{
+    min-height:60vh;
+    padding:7rem 1.5rem 4rem;
+  }
+
+  .content{
+    padding:3.5rem 0;
+  }
+
+  .metrics{
+    grid-template-columns:1fr;
+  }
+
+  
+.pipeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin:2rem 0 3rem;
+}
+
+.pipeline-step{
+  background:var(--darker);
+  border:1px solid rgba(255,255,255,.1);
+  padding:1.35rem;
+  min-height:130px;
+}
+
+.pipeline-step strong{
+  display:block;
+  color:var(--teal);
+  font-size:1rem;
+  letter-spacing:.06rem;
+  text-transform:uppercase;
+  margin-bottom:.55rem;
+}
+
+.pipeline-step span{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.resources{
+    grid-template-columns:1fr;
+  }
+
+  .content h2{
+    letter-spacing:.08rem;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a href="index.html" class="brand">
+    Ritik Kumar
+  </a>
+
+  <a href="index.html" class="back">
+    ← Back to Home
+  </a>
+
+</header>
+
+<section class="hero">
+
+  <div class="inner">
+
+    <h1>Quantitative &amp; Computational Research</h1>
+
+    <div class="rule"></div>
+
+    <p class="subtitle">
+      Statistical Modelling, Scientific Computing, Data Analysis and
+      Machine Learning
+    </p>
+
+  </div>
+
+</section>
+
+<main class="content">
+
+  <h2>Research Approach</h2>
+
+  <p>
+    My research involves building computational methods to work with
+    large, noisy and complex datasets. Across my projects, I combine
+    statistical modelling, numerical methods, machine learning and
+    scientific computing to turn raw data into reproducible results.
+  </p>
+
+  <p>
+    I enjoy problems where the underlying signal is difficult to
+    isolate, the data are imperfect, and the model has to be tested
+    carefully rather than accepted from a single result.
+  </p>
+
+  <div class="metrics">
+
+    <div class="metric">
+      <strong>Python</strong>
+      <span>Primary research language</span>
+    </div>
+
+    <div class="metric">
+      <strong>ML + Statistics</strong>
+      <span>Modelling toolkit</span>
+    </div>
+
+    <div class="metric">
+      <strong>HPC</strong>
+      <span>Large-scale computation</span>
+    </div>
+
+  </div>
+
+  <div class="research-box">
+
+    <p>
+      My computational work follows a research cycle of data
+      preparation, hypothesis formation, model development,
+      parameter estimation, validation, uncertainty analysis and
+      reproducible evaluation.
+    </p>
+
+  </div>
+
+  <h3>Large-Scale Data Analysis</h3>
+
+  <p>
+    I have developed Python pipelines for processing large
+    observational datasets, including catalogue cross-matching,
+    automated source selection, quality filtering, data reduction
+    and multi-epoch analysis.
+  </p>
+
+  <p>
+    I use vectorised numerical operations, structured data processing
+    and parallel computation when appropriate to make research
+    workflows efficient and reproducible.
+  </p>
+
+  <ul>
+
+    <li>
+      Large catalogue cross-matching and data selection
+    </li>
+
+    <li>
+      Automated data-processing pipelines
+    </li>
+
+    <li>
+      Multi-epoch and multi-instrument datasets
+    </li>
+
+    <li>
+      Parallel processing and HPC workflows
+    </li>
+
+    <li>
+      Quality control and signal-to-noise based filtering
+    </li>
+
+  </ul>
+
+  <h3>Statistical Modelling</h3>
+
+  <p>
+    I use statistical modelling to estimate parameters, compare
+    competing hypotheses and quantify uncertainty. My experience
+    includes likelihood-based fitting, χ² model comparison,
+    simulation-based testing and probabilistic modelling.
+  </p>
+
+  <p>
+    I also use Markov Chain Monte Carlo methods to explore parameter
+    distributions, correlations and degeneracies in models with
+    multiple interacting parameters.
+  </p>
+
+  <h3>Time-Series Analysis</h3>
+
+  <p>
+    Working with transient astronomical observations has given me
+    extensive experience with time-dependent and irregularly sampled
+    data. I analyse temporal structure, missing observations,
+    measurement noise and changing signal behaviour.
+  </p>
+
+  <p>
+    In my machine-learning work, I developed methods for reconstructing
+    noisy and irregularly sampled GRB X-ray light curves using
+    Gaussian-process based and neural-network approaches.
+  </p>
+
+  <h3>Machine Learning</h3>
+
+  <p>
+    My machine-learning work includes Deep Gaussian Processes,
+    neural networks and Physics-Informed Neural Networks implemented
+    in PyTorch. I use machine learning as a modelling tool while
+    maintaining emphasis on validation, uncertainty and interpretation.
+  </p>
+
+  <p>
+    I have worked with cross-validation, bootstrap resampling,
+    uncertainty estimation and quantitative error analysis to test
+    whether model performance is robust to changes in the data.
+  </p>
+
+  <h3>Numerical Methods</h3>
+
+  <p>
+    I have implemented and compared numerical methods for solving
+    differential equations, including Runge-Kutta and finite
+    difference approaches alongside Physics-Informed Neural Networks.
+  </p>
+
+  <p>
+    These projects required attention to numerical stability,
+    discretisation, convergence and the effect of computational
+    parameters on the final solution.
+  </p>
+
+  <h3>Model Validation and Robustness</h3>
+
+  <p>
+    I place particular emphasis on checking whether a result is
+    genuinely supported by the data. Depending on the problem, I use
+    cross-validation, bootstrap resampling, simulations, parameter
+    uncertainty, model comparison and controlled numerical tests.
+  </p>
+
+  <p>
+    I also examine failure modes and parameter degeneracies rather
+    than focusing only on the final performance metric.
+  </p>
+
+  <div class="research-box">
+
+    <p>
+      This approach is important to me because a model that performs
+      well on one dataset or one experiment is not necessarily a
+      robust model. I therefore try to understand how sensitive a
+      result is to the data, assumptions, parameters and validation
+      procedure.
+    </p>
+
+  </div>
+
+  <h3>Computational Research at Scale</h3>
+
+  <p>
+    I have worked in Linux and HPC environments for computational
+    research, including processing multi-epoch datasets and running
+    parameter-intensive analyses. I have experience structuring
+    workflows so that data preparation, modelling and statistical
+    analysis can be repeated systematically.
+  </p>
+
+  <p>
+    My research code is primarily written in Python, with scientific
+    computing libraries used for numerical analysis, data handling
+    and machine learning.
+  </p>
+
+  <h3>Quantitative Research Skills</h3>
+
+  <div class="skills">
+
+    <span class="skill">Python</span>
+    <span class="skill">NumPy</span>
+    <span class="skill">SciPy</span>
+    <span class="skill">Pandas</span>
+    <span class="skill">PyTorch</span>
+    <span class="skill">Astropy</span>
+    <span class="skill">Statistical Modelling</span>
+    <span class="skill">Time-Series Analysis</span>
+    <span class="skill">Machine Learning</span>
+    <span class="skill">Gaussian Processes</span>
+    <span class="skill">Deep Learning</span>
+    <span class="skill">MCMC</span>
+    <span class="skill">Monte Carlo</span>
+    <span class="skill">Cross-Validation</span>
+    <span class="skill">Bootstrap Resampling</span>
+    <span class="skill">Uncertainty Estimation</span>
+    <span class="skill">Numerical Methods</span>
+    <span class="skill">Parallel Computing</span>
+    <span class="skill">Linux / HPC</span>
+
+  </div>
+
+  <h3>Selected Research Projects</h3>
+
+  <p>
+    My quantitative and computational work is distributed across
+    several research projects. Each project applies a different
+    combination of statistical inference, machine learning,
+    numerical computation and large-scale data analysis.
+  </p>
+
+  <ul>
+
+    <li>
+      Machine-learning reconstruction of GRB X-ray light curves
+      using Gaussian-process and neural-network methods.
+    </li>
+
+    <li>
+      Physics-Informed Neural Networks for differential equations
+      and comparison with classical numerical methods.
+    </li>
+
+    <li>
+      Large-scale XMM-Newton catalogue analysis using automated
+      Python pipelines and parallel processing.
+    </li>
+
+    <li>
+      Multi-epoch X-ray spectral modelling with statistical
+      parameter estimation and MCMC analysis.
+    </li>
+
+    <li>
+      Development and testing of computational workflows for
+      reproducible scientific analysis.
+    </li>
+
+  </ul>
+
+  <h3>Why Quantitative Research</h3>
+
+  <p>
+    I am interested in quantitative research because it combines
+    mathematical reasoning, statistics, programming and empirical
+    testing. I particularly enjoy taking an open-ended problem,
+    deciding what can actually be measured from the available data,
+    building a model and then testing whether the evidence supports
+    the hypothesis.
+  </p>
+
+  <p>
+    My current research has trained me to work with noisy data,
+    uncertainty, complex models and computational experiments. I want
+    to apply these skills to new data-driven problems and continue
+    developing my understanding of statistical modelling and
+    quantitative decision-making.
+  </p>
+
+
+  <h3>Probability, Statistics and Inference</h3>
+
+  <p>
+    My quantitative coursework and research have given me a strong foundation
+    in probability, statistics, linear algebra, multivariable calculus,
+    optimisation and statistical inference. I use these ideas when deciding
+    how to formulate a model, estimate parameters and evaluate whether an
+    observed effect is statistically meaningful.
+  </p>
+
+  <p>
+    In research, I work with likelihood-based fitting, uncertainty
+    propagation, correlation analysis, Monte Carlo simulations, bootstrap
+    resampling and posterior parameter distributions. I pay particular
+    attention to uncertainty and to the difference between a model fitting
+    the observed data and a model being genuinely supported by the evidence.
+  </p>
+
+  <div class="research-box">
+    <p>
+      <strong>Quantitative focus:</strong> probability, statistical inference,
+      parameter estimation, hypothesis testing, uncertainty quantification,
+      Monte Carlo methods, bootstrap methods and model comparison.
+    </p>
+  </div>
+
+  <h3>Optimisation and Parameter Estimation</h3>
+
+  <p>
+    Many of my projects involve estimating several interacting parameters
+    from noisy observations. I have worked with numerical optimisation,
+    likelihood-based fitting and MCMC sampling to explore parameter spaces,
+    uncertainties and degeneracies.
+  </p>
+
+  <p>
+    I am interested in optimisation not only as a mathematical problem but
+    also as a practical research problem: choosing a suitable objective,
+    understanding parameter sensitivity, checking convergence and testing
+    whether the resulting solution is stable.
+  </p>
+
+  <div class="research-box">
+    <p>
+      <strong>Resource:</strong>
+      <a href="#" style="color:var(--teal);">Add optimisation notes / project
+      document / code here →</a>
+    </p>
+  </div>
+
+  <h3>Signal Processing and Pattern Detection</h3>
+
+  <p>
+    A recurring part of my research is finding weak or physically meaningful
+    signals in noisy measurements. I have worked with spectral features,
+    temporal structure, signal-to-noise selection and statistical tests to
+    distinguish meaningful patterns from fluctuations.
+  </p>
+
+  <p>
+    This has trained me to think carefully about detection thresholds,
+    selection effects, false positives, model assumptions and the robustness
+    of a signal under changes in the data or analysis procedure.
+  </p>
+
+  <div class="research-box">
+    <p>
+      <strong>Resource:</strong>
+      <a href="#" style="color:var(--teal);">Add signal-processing notes,
+      analysis plots or project material here →</a>
+    </p>
+  </div>
+
+  <h3>Feature Engineering and Data Preparation</h3>
+
+  <p>
+    I have built research pipelines in which raw observations first have to
+    be cleaned, filtered, transformed and structured before statistical or
+    machine-learning models can be applied. This includes catalogue
+    cross-matching, quality cuts, signal-to-noise filtering, feature
+    construction and automated data selection.
+  </p>
+
+  <p>
+    I consider data preparation part of the modelling process. Poor data
+    quality, leakage, selection effects or inconsistent preprocessing can
+    produce apparently strong results that do not generalise.
+  </p>
+
+  <div class="research-box">
+    <p>
+      <strong>Resource:</strong>
+      <a href="#" style="color:var(--teal);">Add data pipeline / feature
+      engineering notebook here →</a>
+    </p>
+  </div>
+
+  <h3>Generalisation, Overfitting and Validation</h3>
+
+  <p>
+    I use validation as a central part of model development. Depending on
+    the problem, I use held-out data, cross-validation, bootstrap
+    resampling, simulations and sensitivity analysis to test whether a
+    result survives reasonable changes in the experimental setup.
+  </p>
+
+  <p>
+    In machine-learning projects, I have worked with noisy and irregularly
+    sampled data where overfitting can be particularly important. I compare
+    model behaviour rather than relying on a single training metric.
+  </p>
+
+  <div class="research-box">
+    <p>
+      <strong>Resource:</strong>
+      <a href="#" style="color:var(--teal);">Add validation experiments,
+      comparison plots or notebook here →</a>
+    </p>
+  </div>
+
+  <h3>Research Pipeline</h3>
+
+  <p>
+    I generally approach a computational research problem through the
+    following sequence:
+  </p>
+
+  <div class="pipeline">
+
+    <div class="pipeline-step">
+      <strong>1. Problem</strong>
+      <span>Define the measurable question and assumptions.</span>
+    </div>
+
+    <div class="pipeline-step">
+      <strong>2. Data</strong>
+      <span>Collect, clean, filter and structure the dataset.</span>
+    </div>
+
+    <div class="pipeline-step">
+      <strong>3. Hypothesis</strong>
+      <span>Develop a quantitative explanation or testable idea.</span>
+    </div>
+
+    <div class="pipeline-step">
+      <strong>4. Model</strong>
+      <span>Build a statistical, numerical or ML model.</span>
+    </div>
+
+    <div class="pipeline-step">
+      <strong>5. Validation</strong>
+      <span>Test generalisation, uncertainty and robustness.</span>
+    </div>
+
+    <div class="pipeline-step">
+      <strong>6. Interpretation</strong>
+      <span>Understand the result, limitations and failure modes.</span>
+    </div>
+
+  </div>
+
+  <h3>From Research to Quantitative Finance</h3>
+
+  <p>
+    I am particularly interested in applying this research framework to
+    systematic quantitative problems. The parts I find most compelling are
+    hypothesis generation, large-scale data analysis, statistical signal
+    discovery, model validation and understanding whether an apparent
+    pattern remains robust outside the data used to discover it.
+  </p>
+
+  <p>
+    I am actively developing my understanding of financial time series,
+    systematic investing, market microstructure, portfolio construction,
+    risk and backtesting. I do not present my scientific projects as
+    financial trading experience; instead, I see them as a strong foundation
+    in the research process required to work on quantitative problems.
+  </p>
+
+  <div class="research-box">
+    <p>
+      <strong>Quant research learning:</strong>
+      <a href="#" style="color:var(--teal);">Financial time-series notes →</a>
+      &nbsp; | &nbsp;
+      <a href="#" style="color:var(--teal);">Systematic trading notes →</a>
+      &nbsp; | &nbsp;
+      <a href="#" style="color:var(--teal);">Backtesting notes →</a>
+    </p>
+  </div>
+
+  <h3>Technical Stack</h3>
+
+  <div class="skills">
+
+    <span class="skill">Python</span>
+    <span class="skill">NumPy</span>
+    <span class="skill">Pandas</span>
+    <span class="skill">SciPy</span>
+    <span class="skill">PyTorch</span>
+    <span class="skill">Matplotlib</span>
+    <span class="skill">Astropy</span>
+    <span class="skill">Jupyter</span>
+    <span class="skill">Git</span>
+    <span class="skill">Linux</span>
+    <span class="skill">HPC</span>
+    <span class="skill">Parallel Processing</span>
+    <span class="skill">XSPEC</span>
+    <span class="skill">MCMC</span>
+    <span class="skill">Monte Carlo</span>
+    <span class="skill">Gaussian Processes</span>
+    <span class="skill">Deep Learning</span>
+    <span class="skill">PINNs</span>
+    <span class="skill">Statistical Inference</span>
+    <span class="skill">Time-Series Analysis</span>
+    <span class="skill">Numerical Methods</span>
+
+  </div>
+
+  <h3>Selected Quantitative Research Materials</h3>
+
+  <p>
+    I am building this section as a working research portfolio. The links
+    below will contain the actual notebooks, papers, plots, code and notes
+    rather than only descriptions of the projects.
+  </p>
+
+  <div class="resources">
+
+    <a class="resource-card" href="#">
+      <h4>Probability &amp; Statistics</h4>
+      <p>Probability notes, statistical inference, hypothesis testing and selected problem-solving work.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Time-Series Analysis</h4>
+      <p>Notes and projects involving temporal data, irregular sampling, forecasting and statistical structure.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Machine Learning</h4>
+      <p>Model implementations, experiments, validation studies and ML research documents.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Statistical Modelling</h4>
+      <p>Parameter estimation, MCMC, model comparison, uncertainty analysis and simulation studies.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Numerical Methods</h4>
+      <p>Numerical integration, differential equations, optimisation and computational experiments.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Data Engineering</h4>
+      <p>Large-scale data pipelines, cleaning, filtering, parallel processing and reproducible workflows.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Quantitative Finance</h4>
+      <p>My notes and learning material on financial markets, systematic strategies, signals and backtesting.</p>
+      <span>Add Resource →</span>
+    </a>
+
+    <a class="resource-card" href="#">
+      <h4>Research Code</h4>
+      <p>Selected research repositories, notebooks and computational implementations.</p>
+      <span>Add Resource →</span>
+    </a>
+
+  </div>
+
+  <h3>Research Resources</h3>
+
+  <p>
+    I have collected selected papers, project documents, technical
+    notes, code and further reading related to my computational and
+    quantitative research.
+  </p>
+
+  <div class="resources">
+
+    <a class="resource-card"
+       href="ml.html">
+
+      <h4>Machine Learning Research</h4>
+
+      <p>
+        Detailed work on GRB reconstruction, Deep Gaussian Processes,
+        neural networks, PINNs and uncertainty-aware modelling.
+      </p>
+
+      <span>Explore ML Research →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="coronae.html">
+
+      <h4>Statistical Modelling</h4>
+
+      <p>
+        Multi-epoch modelling, parameter estimation, model comparison
+        and MCMC-based analysis.
+      </p>
+
+      <span>Explore Modelling →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#">
+
+      <h4>Research Papers</h4>
+
+      <p>
+        Selected published papers and manuscripts from my research
+        projects.
+      </p>
+
+      <span>View Papers →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#">
+
+      <h4>Technical Documents</h4>
+
+      <p>
+        Research notes, project documents, presentations and
+        computational material.
+      </p>
+
+      <span>View Documents →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="#">
+
+      <h4>Quantitative Reading</h4>
+
+      <p>
+        Selected resources on probability, statistics, time-series
+        analysis, machine learning and quantitative methods.
+      </p>
+
+      <span>Reading List →</span>
+
+    </a>
+
+    <a class="resource-card"
+       href="https://github.com/Ritikkumar0730"
+       target="_blank"
+       rel="noopener">
+
+      <h4>Code &amp; GitHub</h4>
+
+      <p>
+        Selected Python projects, computational work and research
+        code available through my GitHub profile.
+      </p>
+
+      <span>View GitHub →</span>
+
+    </a>
+
+  </div>
+
+  <a class="btn" href="index.html">
+    ← Back to Home
+  </a>
+
+</main>
+
+<footer>
+
+  <div class="copy">
+    © Ritik Kumar | Indian Institute of Science
+  </div>
+
+</footer>
+
+</body>
+</html>
+  .pipeline{
+    grid-template-columns:1fr;
+  }
+
+
