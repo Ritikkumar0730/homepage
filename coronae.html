@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Coronae | Ritik Kumar</title>
+
+<style>
+
+:root{
+  --teal:#2bb6a3;
+  --dark:#2e333d;
+  --darker:#262a32;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.82);
+  --border:rgba(255,255,255,0.55);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:var(--dark);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+
+/* ===== TOP BAR ===== */
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:1.25rem 2rem;
+
+  background:var(--darker);
+
+  box-shadow:0 2px 18px rgba(0,0,0,.4);
+}
+
+.brand{
+  font-weight:700;
+  letter-spacing:.18rem;
+  text-transform:uppercase;
+  font-size:1.05rem;
+}
+
+.back{
+  font-size:.85rem;
+  letter-spacing:.15rem;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+.back:hover{
+  color:var(--teal);
+}
+
+
+/* ===== HERO ===== */
+
+.hero{
+  position:relative;
+
+  min-height:65vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:8rem 2rem 5rem;
+
+  background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.65)),
+    url('coronae.jpeg')
+    center center / cover no-repeat;
+}
+
+.hero .inner{
+  max-width:850px;
+}
+
+.hero h1{
+  font-size:clamp(2.2rem,6vw,4rem);
+  font-weight:700;
+  letter-spacing:.25rem;
+  text-transform:uppercase;
+
+  text-shadow:0 2px 25px rgba(0,0,0,.8);
+}
+
+.hero .subtitle{
+  margin-top:1.2rem;
+
+  font-size:1.15rem;
+
+  color:var(--muted);
+
+  letter-spacing:.08rem;
+}
+
+.rule{
+  width:9rem;
+  height:2px;
+
+  background:#fff;
+
+  margin:1.5rem auto;
+}
+
+
+/* ===== CONTENT ===== */
+
+.content{
+  width:min(900px,90vw);
+
+  margin:auto;
+
+  padding:5rem 0;
+}
+
+.content h2{
+  font-size:2rem;
+
+  letter-spacing:.16rem;
+
+  text-transform:uppercase;
+
+  margin-bottom:1.5rem;
+}
+
+.content h3{
+  font-size:1.35rem;
+
+  letter-spacing:.08rem;
+
+  margin-top:3rem;
+
+  margin-bottom:1rem;
+}
+
+.content p{
+  color:var(--muted);
+
+  font-size:1.08rem;
+
+  margin-bottom:1.5rem;
+}
+
+.content ul{
+  margin:1rem 0 2rem 1.5rem;
+
+  color:var(--muted);
+
+  font-size:1.05rem;
+}
+
+.content li{
+  margin-bottom:.6rem;
+}
+
+
+/* ===== RESEARCH BOX ===== */
+
+.research-box{
+  background:var(--darker);
+
+  border-left:4px solid var(--teal);
+
+  padding:2rem;
+
+  margin:2.5rem 0;
+}
+
+.research-box p{
+  margin-bottom:0;
+}
+
+
+/* ===== BUTTON ===== */
+
+.btn{
+  display:inline-block;
+
+  margin-top:1rem;
+
+  padding:.9rem 1.8rem;
+
+  border:2px solid var(--border);
+
+  color:#fff;
+
+  text-transform:uppercase;
+
+  letter-spacing:.16rem;
+
+  font-size:.8rem;
+
+  font-weight:600;
+
+  transition:.25s;
+}
+
+.btn:hover{
+  background:#fff;
+  color:#1c1f26;
+}
+
+
+/* ===== FOOTER ===== */
+
+footer{
+  background:var(--darker);
+
+  text-align:center;
+
+  padding:3rem 2rem;
+
+  color:var(--muted);
+}
+
+footer .copy{
+  font-size:.8rem;
+
+  letter-spacing:.1rem;
+
+  text-transform:uppercase;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media(max-width:760px){
+
+  .topbar{
+    padding:1rem 1.25rem;
+  }
+
+  .hero{
+    min-height:60vh;
+    padding:7rem 1.5rem 4rem;
+  }
+
+  .content{
+    padding:3.5rem 0;
+  }
+
+  .content h2{
+    letter-spacing:.1rem;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ===== TOP BAR ===== -->
+
+<header class="topbar">
+
+  <a href="index.html" class="brand">
+    Ritik Kumar
+  </a>
+
+  <a href="index.html" class="back">
+    ← Back to Home
+  </a>
+
+</header>
+
+
+
+<!-- ===== HERO ===== -->
+
+<section class="hero">
+
+  <div class="inner">
+
+    <h1>Coronae</h1>
+
+    <div class="rule"></div>
+
+    <p class="subtitle">
+      X-ray Coronae Around Supermassive Black Holes
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- ===== MAIN CONTENT ===== -->
+
+<main class="content">
+
+
+  <h2>Research Overview</h2>
+
+  <p>
+    I study the hot X-ray emitting coronae surrounding supermassive
+    black holes using multi-epoch NuSTAR and XMM-Newton observations.
+    My work focuses on understanding the physical properties of these
+    compact regions through broadband X-ray spectral analysis.
+  </p>
+
+  <p>
+    I work with observational datasets from multiple epochs and use
+    Python-based data reduction and analysis together with X-ray
+    spectral modelling to investigate variations in the coronal
+    properties of active galactic nuclei.
+  </p>
+
+
+  <div class="research-box">
+
+    <p>
+      The central goal is to use quantitative analysis of X-ray
+      observations to constrain the physical conditions of the
+      corona and understand how these properties evolve across
+      different observational epochs.
+    </p>
+
+  </div>
+
+
+
+  <h3>Data and Analysis</h3>
+
+  <p>
+    My analysis involves working with multi-epoch X-ray observations
+    from NuSTAR and XMM-Newton. The workflow includes data reduction,
+    background filtering, spectral extraction, grouping and broadband
+    spectral modelling.
+  </p>
+
+  <ul>
+
+    <li>
+      Multi-epoch NuSTAR observations
+    </li>
+
+    <li>
+      XMM-Newton observations
+    </li>
+
+    <li>
+      Python-based data processing and analysis
+    </li>
+
+    <li>
+      X-ray spectral modelling using XSPEC
+    </li>
+
+    <li>
+      Statistical comparison of competing models
+    </li>
+
+    <li>
+      Parameter estimation and uncertainty analysis
+    </li>
+
+  </ul>
+
+
+
+  <h3>Coronal Temperature</h3>
+
+  <p>
+    One of my research directions is constraining the temperature of
+    the hot X-ray corona using broadband X-ray observations. I analyse
+    the high-energy X-ray spectrum to investigate the spectral
+    cutoff and infer the physical properties of the Comptonising
+    corona.
+  </p>
+
+  <p>
+    By comparing multiple observations of the same source, I investigate
+    whether the inferred coronal properties remain stable or vary
+    between different epochs.
+  </p>
+
+
+
+  <h3>Statistical Modelling</h3>
+
+  <p>
+    The analysis relies on quantitative model fitting and statistical
+    inference. I use parameter estimation, uncertainty analysis and
+    model comparison to determine which physical models provide an
+    adequate description of the observed data.
+  </p>
+
+  <p>
+    For more complex models, I also use Markov Chain Monte Carlo
+    methods to explore parameter distributions and investigate
+    correlations and degeneracies between model parameters.
+  </p>
+
+
+
+  <h3>Computational Research</h3>
+
+  <p>
+    These projects require processing large observational datasets
+    and maintaining reproducible analysis workflows. I use Python,
+    Linux-based environments and high-performance computing resources
+    for data processing, modelling and statistical analysis.
+  </p>
+
+
+
+  <h3>Technical Tools</h3>
+
+  <ul>
+
+    <li>Python</li>
+
+    <li>NumPy and SciPy</li>
+
+    <li>Astropy</li>
+
+    <li>XSPEC</li>
+
+    <li>NuSTARDAS</li>
+
+    <li>XMM-Newton SAS</li>
+
+    <li>Linux / HPC</li>
+
+    <li>Markov Chain Monte Carlo</li>
+
+  </ul>
+
+
+
+  <a class="btn"
+     href="index.html">
+
+    ← Back to Research
+
+  </a>
+
+
+</main>
+
+
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+  <div class="copy">
+
+    © Ritik Kumar | Indian Institute of Science
+
+  </div>
+
+</footer>
+
+
+</body>
+
+</html>
