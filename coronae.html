@@ -397,6 +397,21 @@ footer .copy{
 
   </ul>
 
+  <h3>Fractional variability</h3>
+  <p>
+    <ul>
+      <li>1. Accretion Flow Dynamics: It indicates whether variability is driven by intrinsic fluctuations within the accretion disk or by reprocessing of X-rays. Recent studies suggest that optical/UV fractional variability supports models of propagating fluctuations in the disk rather than simple X-ray illumination, as the variability amplitude often disconnects between UV and X-ray bands.</li>
+      <li>2. Black Hole Mass Estimation: Fractional variability serves as a proxy for black hole mass due to a strong anticorrelation: sources with higher fractional variability typically host lower-mass black holes. This relationship allows astronomers to estimate masses for AGN where traditional reverberation mapping is not feasible, provided the light curves are sufficiently long and high-quality. 
+
+</li>
+      <li>3. Emitting Region Geometry: The metric acts as a proxy for the distance of the emitting region from the central engine. Since fractional variability typically decreases with increasing wavelength it confirms that shorter wavelengths (X-rays/UV) originate from more compact, turbulent regions closer to the black hole, while longer wavelengths (optical/IR) come from larger, more stable disk radii. </li>
+    </ul>
+
+
+
+
+  </p>
+
 
   <h3>Data</h3>
 
@@ -438,16 +453,127 @@ footer .copy{
   <h3>Spectral Analysis</h3>
 
   <p>
-    It was all started with the simple model which is constant*tbabs*ztbabs*poerlaw. Constant is for the cross-calibration which plays a very important role, it gives the flux ratio received by the detector and when we make the 
-    model component we need to multiply the each model with their so that it capture the correct flux get by the detector. Tbabs represent the milkyway galaxy absorption, for almost all source we know galactic absorption, we freeze it in our model to correct the gaalctic abosrption.
-    zTbabs represent the intrinsic absorption in host galaxy which is used how the gases are distributed in source and how much the they are absobing their host galaxies light. 
+  <ul>
+    <ls>
+        <strong>Continuum modelling:</strong>
+    I begin with a simple model,
+    <code>constant*tbabs*ztbabs*powerlaw</code>, to establish the
+    underlying X-ray continuum. The <code>constant</code> component accounts
+    for cross-calibration differences between detectors by allowing their
+    relative flux normalisations to vary. <code>tbabs</code> accounts for
+    absorption by the Milky Way, with the Galactic column density fixed to
+    the known value for each source. <code>ztbabs</code> accounts for
+    intrinsic absorption by cold, neutral material at the redshift of the
+    source. This initial modelling allows us to determine whether additional
+    absorption is required and to establish a reliable baseline continuum.
+    </ls>
+    <ls><strong>Coronal continuum and Comptonisation:</strong>
+    I then replace the phenomenological power-law continuum with
+    <code>nthcomp</code> to describe the physical Comptonisation process in
+    the corona. Soft seed photons produced by the accretion flow enter the
+    hot, compact corona, where inverse Compton scattering transfers energy
+    from the hot electrons to the photons, producing the observed
+    high-energy X-ray continuum. The <code>nthcomp</code> model allows us to
+    constrain physical properties of the corona, particularly the electron
+    temperature and photon index. These parameters provide information about
+    the coronal heating and cooling processes and the physical state of the
+    X-ray emitting region.
+
+    </ls>
+    <ls>
+    <strong>Reflection modelling:</strong>
+    After establishing the primary continuum, I include X-ray reflection
+    from surrounding material. I use <code>pexrav</code> for neutral
+    reflection, <code>xillverCp</code> for ionised or neutral reflection in
+    the non-relativistic regime, and <code>relxill</code> variants for
+    reflection from ionised material in the relativistic regime close to
+    the black hole. Reflection features, particularly the Fe K emission
+    line and the Compton hump, provide information about the geometry,
+    ionisation state and location of the reflecting material.
+
+    </ls>
+    <ls>
+       <strong>Intrinsic absorption:</strong>
+    For some sources, intrinsic absorption is negligible, indicating that
+    additional cold, neutral material in the host galaxy is not required
+    by the data. For sources showing significant absorption, additional
+    absorption models are introduced to characterise the intervening
+    material and its effect on the observed X-ray spectrum.
+    </ls>
+    <ls>
+        <strong>Multi-epoch spectral analysis:</strong>
+    I apply the same modelling methodology across multiple observations of
+    the same source to determine which properties remain stable and which
+    change with time. By comparing the inferred coronal temperature,
+    photon index, absorption and reflection properties across epochs, I
+    investigate the long-term evolution of the corona and its connection
+    with changes in the accretion environment.</ls>
+  </ul>
+
+  <h3>Timing Analysis</h3>
+  <p>
+  Spectral modelling provides information about the physical state of the
+  X-ray emitting region, while timing analysis allows us to investigate how
+  rapidly that region changes with time. I analyse X-ray light curves to
+  quantify variability on different timescales and to investigate whether
+  changes in the continuum are associated with changes in the spectral
+  state of the source.
+  </p> 
+  <ul>
+    <li>
+    <strong>Light curves and variability:</strong>
+    I construct background-subtracted X-ray light curves from the
+    observations and compare their variability across different energy
+    bands. This allows us to identify changes in the X-ray emission and
+    determine whether variability is stronger at particular energies. 
+    I construct X-ray light curves by plotting count rate or flux as a function 
+    of time to investigate whether the source varies and how strongly its emission changes.
+    </li>
+    <li>
+    <strong>Power spectral analysis:</strong>
+    I use power spectral analysis to study how the variability amplitude is
+  distributed across different temporal frequencies. By plotting variability
+  power against frequency, I can identify the characteristic timescales on
+  which the X-ray emission changes and investigate whether these timescales
+  vary between observations or energy bands. Power spectral analysis, where 
+  variability power is plotted against frequency, to determine the characteristic
+   timescales on which the X-ray emission varies.
+    </li>
+
+    <li>
+    <strong>Energy-dependent variability:</strong>
+    I compare variability measures obtained from soft and hard X-ray bands to
+  determine whether different energy components vary differently. This
+  helps me investigate whether changes in the primary coronal emission,
+  softer seed-photon emission, or reflected emission contribute differently
+  to the observed variability.
+    </li>
+
+    <li>
+    <strong>Spectral-timing connection:</strong>
+    I combine the timing results with my multi-epoch spectral modelling by
+  comparing variability properties with parameters such as coronal
+  temperature, photon index and reflection strength. This allows me to
+  investigate whether changes in the physical state of the corona are
+  accompanied by changes in its variability behaviour, providing constraints
+  on the evolution and geometry of the X-ray emitting region.
+    </li>
+
+
+
+
+
+
+  </ul>
+  <p>
+  By combining multi-epoch spectral and timing analysis, I investigate the
+  physical evolution of AGN coronae and how changes in coronal heating,
+  cooling and geometry may be connected to the broader accretion process.
+  In particular, tracking the coronal temperature across multiple epochs
+  allows us to test whether the corona is a persistent structure or a
+  dynamically evolving component of the accretion system.
   </p>
 
-  <p>
-    By comparing multiple observations of the same source, I investigate
-    whether the inferred coronal properties remain stable or vary
-    between different epochs.
-  </p>
 
 
 
@@ -476,7 +602,7 @@ footer .copy{
 
   <p>
     The analysis relies on quantitative model fitting and statistical
-    inference. I use parameter estimation, uncertainty analysis and
+    inference. I use parameter estimation, uncertainty analysis, and
     model comparison to determine which physical models provide an
     adequate description of the observed data.
   </p>
