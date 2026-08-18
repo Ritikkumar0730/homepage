@@ -403,13 +403,16 @@ footer .copy{
   <p>
     In this particular work, we have used the two catalogue which are NLSY1 and BLSY1. They have the entries some time thousand. Basically the sources present in these catalogue are taken from different survey. Since, we are working with Nustar Data, therefore we need to see the sources among the catalogue which are present 
     in the NuSTAR with some search radius so that the other source does not interfer with the other source. So, now here comes the concept, we use the:
-    1. Astrometric accuracy — how accurately the X-ray source position is known.
-    2. PSF size / PSF wings — how far photons from a source can spread spatially.
-    3. Extraction region/radius — the region you actually use to collect the target photons.\\
+  </p>
+  <ul> 
+    <li>1. Astrometric accuracy — how accurately the X-ray source position is known.</li>
+    <li>2. PSF size / PSF wings — how far photons from a source can spread spatially.</li>
+    <li>3. Extraction region/radius — the region you actually use to collect the target photons.</li>
+  </ul> 
     For example, if your target is at position (ra1, dec1) and another source is at (ra2, dec2), you calculate their angular separation. Then you ask whether that separation is sufficiently large compared with the NuSTAR PSF and your extraction radius.
     NuSTAR's angular resolution is approximately: 18" and the typical absolute astrometric uncertainty is about ±8″.
 
-  </p>
+  
 
   <p>
     By comparing multiple observations of the same source, I investigate
@@ -422,8 +425,22 @@ footer .copy{
 
   <p>
     Please find the attachment for data reduction.
-    <a class="btn" href="Nustar_guide.pdf" target="_blank" rel="noopener">Astrophysics CV</a>
+    <a class="btn" href="Nustar_guide.pdf" target="_blank" rel="noopener">NuSTAR Guide</a>
 
+  </p>
+
+  <p>
+    Write the things you computer should have so that NuSTADAS, HeaSoft run smoothly.
+  </p>
+
+
+
+  <h3>Spectral Analysis</h3>
+
+  <p>
+    It was all started with the simple model which is constant*tbabs*ztbabs*poerlaw. Constant is for the cross-calibration which plays a very important role, it gives the flux ratio received by the detector and when we make the 
+    model component we need to multiply the each model with their so that it capture the correct flux get by the detector. Tbabs represent the milkyway galaxy absorption, for almost all source we know galactic absorption, we freeze it in our model to correct the gaalctic abosrption.
+    zTbabs represent the intrinsic absorption in host galaxy which is used how the gases are distributed in source and how much the they are absobing their host galaxies light. 
   </p>
 
   <p>
@@ -431,6 +448,7 @@ footer .copy{
     whether the inferred coronal properties remain stable or vary
     between different epochs.
   </p>
+
 
 
 
