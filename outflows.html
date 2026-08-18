@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="utf-8">
@@ -41,6 +42,9 @@ a{
   text-decoration:none;
 }
 
+
+/* ================= TOP BAR ================= */
+
 .topbar{
   position:fixed;
   top:0;
@@ -73,6 +77,9 @@ a{
   color:var(--teal);
 }
 
+
+/* ================= HERO ================= */
+
 .hero{
   position:relative;
   min-height:65vh;
@@ -81,13 +88,14 @@ a{
   justify-content:center;
   text-align:center;
   padding:8rem 2rem 5rem;
+
   background:
-    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.68)),
+    linear-gradient(rgba(0,0,0,.52),rgba(0,0,0,.72)),
     url('outflows.jpeg') center center / cover no-repeat;
 }
 
 .hero .inner{
-  max-width:900px;
+  max-width:950px;
 }
 
 .hero h1{
@@ -112,8 +120,11 @@ a{
   margin:1.5rem auto;
 }
 
+
+/* ================= CONTENT ================= */
+
 .content{
-  width:min(900px,90vw);
+  width:min(920px,90vw);
   margin:auto;
   padding:5rem 0;
 }
@@ -128,7 +139,7 @@ a{
 .content h3{
   font-size:1.35rem;
   letter-spacing:.08rem;
-  margin-top:3rem;
+  margin-top:3.2rem;
   margin-bottom:1rem;
 }
 
@@ -148,6 +159,9 @@ a{
   margin-bottom:.65rem;
 }
 
+
+/* ================= RESEARCH BOX ================= */
+
 .research-box{
   background:var(--darker);
   border-left:4px solid var(--teal);
@@ -158,6 +172,37 @@ a{
 .research-box p{
   margin-bottom:0;
 }
+
+
+/* ================= QUANTITATIVE WORKFLOW ================= */
+
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.2rem;
+  margin:2.5rem 0 3rem;
+}
+
+.workflow-card{
+  background:var(--darker);
+  border:1px solid rgba(255,255,255,.12);
+  padding:1.7rem;
+}
+
+.workflow-card h4{
+  font-size:1.05rem;
+  letter-spacing:.08rem;
+  text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+
+.workflow-card p{
+  font-size:.98rem;
+  margin-bottom:0;
+}
+
+
+/* ================= RESOURCE CARDS ================= */
 
 .resources{
   display:grid;
@@ -200,6 +245,9 @@ a{
   text-transform:uppercase;
 }
 
+
+/* ================= BUTTON ================= */
+
 .btn{
   display:inline-block;
   margin-top:1rem;
@@ -218,6 +266,9 @@ a{
   color:#1c1f26;
 }
 
+
+/* ================= FOOTER ================= */
+
 footer{
   background:var(--darker);
   text-align:center;
@@ -230,6 +281,9 @@ footer .copy{
   letter-spacing:.1rem;
   text-transform:uppercase;
 }
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:760px){
 
@@ -250,6 +304,10 @@ footer .copy{
     letter-spacing:.09rem;
   }
 
+  .workflow{
+    grid-template-columns:1fr;
+  }
+
   .resources{
     grid-template-columns:1fr;
   }
@@ -260,7 +318,11 @@ footer .copy{
 
 </head>
 
+
 <body>
+
+
+<!-- ================= TOP BAR ================= -->
 
 <header class="topbar">
 
@@ -273,6 +335,9 @@ footer .copy{
   </a>
 
 </header>
+
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -290,246 +355,426 @@ footer .copy{
 
 </section>
 
+
+<!-- ================= MAIN CONTENT ================= -->
+
 <main class="content">
 
-  <h2>Research Overview</h2>
 
-  <p>
-    My research investigates ultra fast outflows in active galactic
-    nuclei using archival XMM-Newton observations. These highly
-    ionised winds can carry material away from the central regions
-    of a galaxy at a substantial fraction of the speed of light.
-  </p>
+<h2>Research Overview</h2>
 
-  <p>
-    I developed a systematic, Python-based workflow to search for and
-    analyse absorption signatures associated with high-velocity
-    outflows in large X-ray datasets.
-  </p>
+<p>
+Ultra-fast outflows (UFOs) are highly ionised winds launched from the
+innermost regions of active galactic nuclei, with velocities reaching a
+substantial fraction of the speed of light. These outflows provide a
+direct probe of the extreme environment close to a supermassive black
+hole and may carry significant amounts of energy and momentum into the
+host galaxy.
+</p>
 
-  <div class="research-box">
+<p>
+My work focuses on systematically searching for these high-velocity
+outflows using archival XMM-Newton observations. I developed a
+Python-based analysis pipeline to process large astronomical datasets,
+select high-quality observations and identify statistically significant
+absorption features associated with ionised outflowing gas.
+</p>
 
-    <p>
-      The project combines large-scale data processing, automated
-      source selection, X-ray spectral modelling, photoionisation
-      modelling and statistical testing to identify and characterise
-      candidate ultra fast outflows.
-    </p>
 
-  </div>
+<div class="research-box">
 
-  <h3>Large-Scale Data Analysis</h3>
+<p>
+<strong>Core idea:</strong> convert a large astronomical archive into a
+systematic statistical search problem — automatically identify promising
+datasets, detect candidate spectral features, test their significance,
+and then use physical photoionisation models to characterise the
+underlying gas.
+</p>
 
-  <p>
-    I built a Python pipeline to cross-match a large AGN catalogue
-    with the XMM-Newton archive and systematically select observations
-    suitable for high-quality spectral analysis.
-  </p>
+</div>
 
-  <ul>
 
-    <li>
-      Cross-matching large astronomical catalogues with XMM-Newton observations
-    </li>
+<!-- ================= WHY UFOs MATTER ================= -->
 
-    <li>
-      Automated observation and source selection
-    </li>
+<h3>Why Ultra-Fast Outflows Matter</h3>
 
-    <li>
-      X-ray data reduction and spectral extraction
-    </li>
+<p>
+Because these winds originate close to the central black hole, their
+velocity, ionisation state and column density provide information about
+the conditions of the innermost accretion environment. Measuring their
+properties can therefore help constrain how accretion energy is
+transferred from the central engine into the surrounding environment.
+</p>
 
-    <li>
-      Signal-to-noise and count-based quality filtering
-    </li>
+<p>
+Understanding these outflows is also important for studying AGN
+feedback: energetic winds can transport momentum and energy into the
+host galaxy and potentially influence the evolution of gas, star
+formation and the growth of the central black hole.
+</p>
 
-    <li>
-      Parallel processing for large observational datasets
-    </li>
 
-  </ul>
+<!-- ================= DATA PIPELINE ================= -->
 
-  <h3>Searching for Outflows</h3>
+<h3>Large-Scale Data Analysis</h3>
 
-  <p>
-    The analysis focuses on identifying absorption features in the
-    X-ray spectra that can indicate highly ionised gas moving at
-    relativistic velocities.
-  </p>
+<p>
+I built a Python pipeline to cross-match large AGN catalogues with the
+XMM-Newton archive and systematically identify observations suitable for
+high-quality UFO searches.
+</p>
 
-  <p>
-    I use spectral modelling to establish the underlying continuum
-    and then investigate statistically significant absorption
-    signatures. Candidate features are examined across the relevant
-    energy range and tested against alternative spectral models.
-  </p>
+<ul>
 
-  <h3>Photoionisation Modelling</h3>
+<li>
+Cross-matching large astronomical catalogues with XMM-Newton observations
+</li>
 
-  <p>
-    A major part of the analysis involves modelling the physical
-    properties of the absorbing gas. I developed custom XSTAR
-    photoionisation grids when existing publicly available models
-    were not sufficient to reproduce the observed soft X-ray
-    signatures.
-  </p>
+<li>
+Automated observation and source selection
+</li>
 
-  <p>
-    The grids allow the absorption spectrum to be explored as a
-    function of physical parameters such as ionisation state,
-    column density and turbulent velocity.
-  </p>
+<li>
+X-ray data reduction and spectral extraction
+</li>
 
-  <h3>Statistical Analysis</h3>
+<li>
+Count-based and signal-to-noise quality filtering
+</li>
 
-  <p>
-    Candidate absorption features are evaluated using statistical
-    model comparison and parameter estimation. I use χ² fitting,
-    simulations and uncertainty analysis to assess whether additional
-    spectral components are supported by the data.
-  </p>
+<li>
+Automated processing of large observational datasets
+</li>
 
-  <p>
-    For parameter inference in more complex models, I also use
-    Markov Chain Monte Carlo methods to explore posterior parameter
-    distributions, correlations and degeneracies.
-  </p>
+<li>
+Parallel computation for computationally intensive analysis
+</li>
 
-  <h3>Key Result</h3>
+</ul>
 
-  <p>
-    In one of the luminous quasars studied, I identified evidence
-    for multi-phase ultra fast outflows with inferred velocities of
-    approximately 0.22c and 0.32c.
-  </p>
 
-  <p>
-    This work required combining automated data analysis with
-    detailed physical modelling and independent validation of the
-    detected absorption features.
-  </p>
+<!-- ================= SEARCH ================= -->
 
-  <h3>Research and Manuscript</h3>
+<h3>Searching for Outflows</h3>
 
-  <p>
-    This work is being developed into a manuscript for submission to
-    the Monthly Notices of the Royal Astronomical Society (MNRAS).
-    The project involves collaboration with researchers working on
-    X-ray spectroscopy and active galactic nuclei.
-  </p>
+<p>
+The search focuses on absorption features in the X-ray spectrum produced
+by highly ionised gas moving at relativistic velocities. In particular,
+features associated with highly ionised iron in the Fe-K energy band can
+provide a powerful signature of fast outflowing material.
+</p>
 
-  <h3>Technical Skills</h3>
+<p>
+I first establish a physically motivated continuum model and then
+search for statistically significant deviations from that baseline.
+Candidate absorption features are subsequently tested using alternative
+spectral models and statistical simulations.
+</p>
 
-  <ul>
 
-    <li>Python</li>
-    <li>NumPy, SciPy and Astropy</li>
-    <li>XMM-Newton SAS</li>
-    <li>XSPEC</li>
-    <li>XSTAR photoionisation modelling</li>
-    <li>Large-scale data processing</li>
-    <li>Parallel computing</li>
-    <li>Statistical model comparison</li>
-    <li>Markov Chain Monte Carlo</li>
-    <li>Linux / HPC environments</li>
+<!-- ================= PHYSICAL MODELLING ================= -->
 
-  </ul>
+<h3>Photoionisation Modelling</h3>
 
-  <h3>Research Resources</h3>
+<p>
+Detecting an absorption feature is only the first step. To determine the
+physical properties of the outflowing gas, I use photoionisation
+modelling to connect the observed absorption spectrum with parameters
+such as ionisation, column density and turbulent velocity.
+</p>
 
-  <p>
-    I have collected selected papers, research documents, analysis
-    material and references related to this project. These resources
-    provide additional details about the scientific background,
-    methodology and analysis.
-  </p>
+<p>
+I developed custom XSTAR photoionisation grids for both soft-X-ray
+absorption features and Fe-K absorption signatures when the available
+models were insufficient to describe the observed spectra.
+</p>
 
-  <div class="resources">
+<p>
+These grids allow the observed absorption to be interpreted in terms of
+the physical state of the gas and provide a consistent framework for
+comparing different outflow candidates.
+</p>
 
-    <a class="resource-card" href="#" target="_blank" rel="noopener">
 
-      <h4>Papers &amp; Manuscripts</h4>
+<!-- ================= STATISTICS ================= -->
 
-      <p>
-        Published papers and manuscripts related to ultra fast
-        outflows and AGN X-ray spectroscopy.
-      </p>
+<h3>Statistical Inference</h3>
 
-      <span>View Papers →</span>
+<p>
+A central part of the analysis is determining whether an apparent
+spectral feature represents a genuine physical signal or a statistical
+fluctuation. I use spectral fitting, parameter estimation, uncertainty
+analysis and Monte Carlo simulations to evaluate candidate features.
+</p>
 
-    </a>
+<p>
+For more complex models, I use Markov Chain Monte Carlo methods to
+explore posterior parameter distributions, correlations and parameter
+degeneracies.
+</p>
 
-    <a class="resource-card" href="#" target="_blank" rel="noopener">
 
-      <h4>Research Documents</h4>
+<!-- ================= QUANTITATIVE WORKFLOW ================= -->
 
-      <p>
-        Selected project documents, notes, presentations and
-        supporting research material.
-      </p>
+<h3>Quantitative Analysis Workflow</h3>
 
-      <span>View Documents →</span>
+<p>
+The project follows a reproducible analysis pipeline in which each stage
+reduces the search space while preserving statistically meaningful
+information.
+</p>
 
-    </a>
+<div class="workflow">
 
-    <a class="resource-card" href="#" target="_blank" rel="noopener">
+<div class="workflow-card">
 
-      <h4>Spectral Modelling</h4>
+<h4>01 — Data Selection</h4>
 
-      <p>
-        Resources related to XSTAR photoionisation modelling,
-        XSPEC spectral fitting and model construction.
-      </p>
+<p>
+Large catalogues and archival observations are filtered using objective
+quality criteria to construct a statistically useful analysis sample.
+</p>
 
-      <span>Explore Modelling →</span>
+</div>
 
-    </a>
 
-    <a class="resource-card" href="#" target="_blank" rel="noopener">
+<div class="workflow-card">
 
-      <h4>Further Reading</h4>
+<h4>02 — Signal Detection</h4>
 
-      <p>
-        Selected papers and references that provide the scientific
-        background for this research.
-      </p>
+<p>
+Automated spectral analysis is used to identify candidate absorption
+features across a large number of observations.
+</p>
 
-      <span>Reading List →</span>
+</div>
 
-    </a>
 
-    <a class="resource-card"
-       href="https://github.com/Ritikkumar0730"
-       target="_blank"
-       rel="noopener">
+<div class="workflow-card">
 
-      <h4>Code &amp; Analysis</h4>
+<h4>03 — Model Comparison</h4>
 
-      <p>
-        Selected computational work, Python analysis and research
-        projects available on GitHub.
-      </p>
+<p>
+Alternative spectral models are compared to determine whether additional
+physical components are statistically supported by the data.
+</p>
 
-      <span>View GitHub →</span>
+</div>
 
-    </a>
 
-  </div>
+<div class="workflow-card">
 
-  <a class="btn" href="index.html">
-    ← Back to Research
-  </a>
+<h4>04 — Parameter Inference</h4>
+
+<p>
+Physical parameters and their uncertainties are estimated using spectral
+fitting, simulations and MCMC-based inference.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= KEY RESULTS ================= -->
+
+<h3>Key Results</h3>
+
+<p>
+The search identified sources showing both warm absorption and
+ultra-fast outflows through absorption features associated with highly
+ionised gas. Several of the identified sources provide new candidates
+for studying fast winds across different ionisation phases.
+</p>
+
+<p>
+In one luminous quasar, the analysis revealed evidence for multi-phase
+ultra-fast outflows with inferred velocities of approximately 0.22c and
+0.32c.
+</p>
+
+<p>
+An important aspect of the project is the identification of outflows
+across different energy regimes. Soft-X-ray absorption can trace lower
+ionisation phases of the wind, while Fe-K absorption provides a probe of
+highly ionised material closer to the central engine.
+</p>
+
+
+<!-- ================= RESEARCH SKILLS ================= -->
+
+<h3>Technical and Quantitative Skills</h3>
+
+<ul>
+
+<li>Python-based scientific data analysis</li>
+
+<li>NumPy, SciPy and Astropy</li>
+
+<li>Large-scale astronomical data processing</li>
+
+<li>Automated data pipelines</li>
+
+<li>XMM-Newton SAS</li>
+
+<li>XSPEC spectral modelling</li>
+
+<li>XSTAR photoionisation modelling</li>
+
+<li>Statistical model comparison</li>
+
+<li>Monte Carlo simulations</li>
+
+<li>Markov Chain Monte Carlo</li>
+
+<li>Uncertainty estimation</li>
+
+<li>Parallel computation</li>
+
+<li>Linux / HPC environments</li>
+
+</ul>
+
+
+<!-- ================= QUANT CONNECTION ================= -->
+
+<h3>Computational Approach</h3>
+
+<p>
+Although the scientific application is astrophysics, the underlying
+workflow is fundamentally quantitative: large-scale data processing,
+feature detection, statistical hypothesis testing, model comparison,
+parameter estimation and uncertainty quantification.
+</p>
+
+<p>
+The project has strengthened my ability to turn complex, noisy datasets
+into reproducible quantitative analyses while carefully distinguishing
+statistically significant signals from fluctuations and modelling
+uncertainties.
+</p>
+
+
+<!-- ================= MANUSCRIPT ================= -->
+
+<h3>Research and Manuscript</h3>
+
+<p>
+This work is being developed into a manuscript for submission to the
+Monthly Notices of the Royal Astronomical Society (MNRAS). The project
+involves collaboration with researchers working on X-ray spectroscopy
+and active galactic nuclei.
+</p>
+
+
+<!-- ================= RESOURCES ================= -->
+
+<h3>Research Resources</h3>
+
+<p>
+I have collected selected papers, project documents, analysis material,
+and references related to this research. These resources provide
+additional details about the scientific background, data analysis,
+spectral modelling and statistical methodology.
+</p>
+
+
+<div class="resources">
+
+
+<a class="resource-card" href="#" target="_blank" rel="noopener">
+
+<h4>Papers &amp; Manuscripts</h4>
+
+<p>
+Published papers, manuscripts and literature related to ultra-fast
+outflows, AGN winds and X-ray spectroscopy.
+</p>
+
+<span>View Papers →</span>
+
+</a>
+
+
+<a class="resource-card" href="#" target="_blank" rel="noopener">
+
+<h4>Research Documents</h4>
+
+<p>
+Project notes, presentations, analysis documents and supporting
+research material.
+</p>
+
+<span>View Documents →</span>
+
+</a>
+
+
+<a class="resource-card" href="#" target="_blank" rel="noopener">
+
+<h4>XSTAR &amp; Spectral Modelling</h4>
+
+<p>
+Resources related to XSTAR photoionisation grids, XSPEC modelling and
+the physical interpretation of absorption features.
+</p>
+
+<span>Explore Modelling →</span>
+
+</a>
+
+
+<a class="resource-card" href="#" target="_blank" rel="noopener">
+
+<h4>Further Reading</h4>
+
+<p>
+Selected literature covering AGN winds, UFOs, photoionisation and
+black-hole feedback.
+</p>
+
+<span>Reading List →</span>
+
+</a>
+
+
+<a class="resource-card"
+   href="https://github.com/Ritikkumar0730"
+   target="_blank"
+   rel="noopener">
+
+<h4>Code &amp; Analysis</h4>
+
+<p>
+Selected Python analysis, computational projects and research code
+available on GitHub.
+</p>
+
+<span>View GitHub →</span>
+
+</a>
+
+
+</div>
+
+
+<a class="btn" href="index.html">
+← Back to Research
+</a>
+
 
 </main>
 
+
 <footer>
 
-  <div class="copy">
-    © Ritik Kumar | Indian Institute of Science
-  </div>
+<div class="copy">
+© Ritik Kumar | Indian Institute of Science
+</div>
 
 </footer>
 
+
 </body>
+
 </html>
