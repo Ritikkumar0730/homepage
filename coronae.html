@@ -337,8 +337,8 @@ footer .copy{
 
   <p>
     I work with observational datasets from multiple epochs and use
-    Python-based data reduction and analysis together with X-ray
-    spectral modelling to investigate variations in the coronal
+    Python-based data reduction, analysis together with X-ray
+    spectral modelling and timing analysis to investigate variations in the coronal
     properties of active galactic nuclei.
   </p>
 
@@ -380,7 +380,7 @@ footer .copy{
     </li>
 
     <li>
-      X-ray spectral modelling using XSPEC
+      X-ray spectral modelling using XSPEC/ISIS
     </li>
 
     <li>
@@ -391,7 +391,48 @@ footer .copy{
       Parameter estimation and uncertainty analysis
     </li>
 
+    <li>
+      Timing analysis: making the light curve for different energies band to see the flux variability with hardness ratio, spectral variability to see the spectral change with intensity, and in final we find the fractional variability with their uncertainties, Fractional variability tells you how large the intrinsic variations in a quantity are relative to its mean value. 
+    </li>
+
   </ul>
+
+
+  <h3>Data</h3>
+
+  <p>
+    In this particular work, we have used the two catalogue which are NLSY1 and BLSY1. They have the entries some time thousand. Basically the sources present in these catalogue are taken from different survey. Since, we are working with Nustar Data, therefore we need to see the sources among the catalogue which are present 
+    in the NuSTAR with some search radius so that the other source does not interfer with the other source. So, now here comes the concept, we use the:
+    1. Astrometric accuracy — how accurately the X-ray source position is known.
+    2. PSF size / PSF wings — how far photons from a source can spread spatially.
+    3. Extraction region/radius — the region you actually use to collect the target photons.\\
+    For example, if your target is at position (ra1, dec1) and another source is at (ra2, dec2), you calculate their angular separation. Then you ask whether that separation is sufficiently large compared with the NuSTAR PSF and your extraction radius.
+    NuSTAR's angular resolution is approximately: 18" and the typical absolute astrometric uncertainty is about ±8″.
+
+  </p>
+
+  <p>
+    By comparing multiple observations of the same source, I investigate
+    whether the inferred coronal properties remain stable or vary
+    between different epochs.
+  </p>
+
+
+  <h3>Data Reduction</h3>
+
+  <p>
+    Please find the attachment for data reduction.
+    <a class="btn" href="Nustar_guide.pdf" target="_blank" rel="noopener">Astrophysics CV</a>
+
+  </p>
+
+  <p>
+    By comparing multiple observations of the same source, I investigate
+    whether the inferred coronal properties remain stable or vary
+    between different epochs.
+  </p>
+
+
 
 
 
