@@ -1,328 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Ultra Fast Outflows | Ritik Kumar</title>
+<title>Ultra-Fast Outflows | Ritik Kumar</title>
 
 <style>
+  :root{
+    --teal:#2bb6a3;
+    --dark:#2e333d;
+    --darker:#262a32;
+    --text:#ffffff;
+    --muted:rgba(255,255,255,0.82);
+    --border:rgba(255,255,255,0.55);
+  }
 
-:root{
-  --teal:#2bb6a3;
-  --dark:#2e333d;
-  --darker:#262a32;
-  --text:#ffffff;
-  --muted:rgba(255,255,255,0.82);
-  --border:rgba(255,255,255,0.55);
-}
+  *{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+  }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+  html{
+    scroll-behavior:smooth;
+  }
 
-html{
-  scroll-behavior:smooth;
-}
+  body{
+    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color:var(--text);
+    background:var(--dark);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.7;
+  }
 
-body{
-  font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
-  color:var(--text);
-  background:var(--dark);
-  -webkit-font-smoothing:antialiased;
-  line-height:1.7;
-}
+  a{
+    color:inherit;
+    text-decoration:none;
+  }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-
-/* ================= TOP BAR ================= */
-
-.topbar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:50;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:1.25rem 2rem;
-  background:var(--darker);
-  box-shadow:0 2px 18px rgba(0,0,0,.4);
-}
-
-.brand{
-  font-weight:700;
-  letter-spacing:.18rem;
-  text-transform:uppercase;
-  font-size:1.05rem;
-}
-
-.back{
-  font-size:.85rem;
-  letter-spacing:.15rem;
-  text-transform:uppercase;
-  font-weight:600;
-}
-
-.back:hover{
-  color:var(--teal);
-}
-
-
-/* ================= HERO ================= */
-
-.hero{
-  position:relative;
-  min-height:65vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:8rem 2rem 5rem;
-
-  background:
-    linear-gradient(rgba(0,0,0,.52),rgba(0,0,0,.72)),
-    url('outflows.jpeg') center center / cover no-repeat;
-}
-
-.hero .inner{
-  max-width:950px;
-}
-
-.hero h1{
-  font-size:clamp(2.1rem,6vw,4rem);
-  font-weight:700;
-  letter-spacing:.18rem;
-  text-transform:uppercase;
-  text-shadow:0 2px 25px rgba(0,0,0,.8);
-}
-
-.hero .subtitle{
-  margin-top:1.2rem;
-  font-size:1.15rem;
-  color:var(--muted);
-  letter-spacing:.06rem;
-}
-
-.rule{
-  width:9rem;
-  height:2px;
-  background:#fff;
-  margin:1.5rem auto;
-}
-
-
-/* ================= CONTENT ================= */
-
-.content{
-  width:min(920px,90vw);
-  margin:auto;
-  padding:5rem 0;
-}
-
-.content h2{
-  font-size:2rem;
-  letter-spacing:.14rem;
-  text-transform:uppercase;
-  margin-bottom:1.5rem;
-}
-
-.content h3{
-  font-size:1.35rem;
-  letter-spacing:.08rem;
-  margin-top:3.2rem;
-  margin-bottom:1rem;
-}
-
-.content p{
-  color:var(--muted);
-  font-size:1.08rem;
-  margin-bottom:1.5rem;
-}
-
-.content ul{
-  margin:1rem 0 2rem 1.5rem;
-  color:var(--muted);
-  font-size:1.05rem;
-}
-
-.content li{
-  margin-bottom:.65rem;
-}
-
-
-/* ================= RESEARCH BOX ================= */
-
-.research-box{
-  background:var(--darker);
-  border-left:4px solid var(--teal);
-  padding:2rem;
-  margin:2.5rem 0;
-}
-
-.research-box p{
-  margin-bottom:0;
-}
-
-
-/* ================= QUANTITATIVE WORKFLOW ================= */
-
-.workflow{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.2rem;
-  margin:2.5rem 0 3rem;
-}
-
-.workflow-card{
-  background:var(--darker);
-  border:1px solid rgba(255,255,255,.12);
-  padding:1.7rem;
-}
-
-.workflow-card h4{
-  font-size:1.05rem;
-  letter-spacing:.08rem;
-  text-transform:uppercase;
-  margin-bottom:.7rem;
-}
-
-.workflow-card p{
-  font-size:.98rem;
-  margin-bottom:0;
-}
-
-
-/* ================= RESOURCE CARDS ================= */
-
-.resources{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.3rem;
-  margin:2.5rem 0 3rem;
-}
-
-.resource-card{
-  display:block;
-  background:var(--darker);
-  border:1px solid rgba(255,255,255,.12);
-  padding:1.8rem;
-  transition:transform .25s,border-color .25s,background .25s;
-}
-
-.resource-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--teal);
-  background:#292e37;
-}
-
-.resource-card h4{
-  font-size:1.15rem;
-  letter-spacing:.08rem;
-  text-transform:uppercase;
-  margin-bottom:.7rem;
-}
-
-.resource-card p{
-  font-size:.98rem;
-  margin-bottom:1rem;
-}
-
-.resource-card span{
-  color:var(--teal);
-  font-size:.8rem;
-  font-weight:600;
-  letter-spacing:.1rem;
-  text-transform:uppercase;
-}
-
-
-/* ================= BUTTON ================= */
-
-.btn{
-  display:inline-block;
-  margin-top:1rem;
-  padding:.9rem 1.8rem;
-  border:2px solid var(--border);
-  color:#fff;
-  text-transform:uppercase;
-  letter-spacing:.16rem;
-  font-size:.8rem;
-  font-weight:600;
-  transition:.25s;
-}
-
-.btn:hover{
-  background:#fff;
-  color:#1c1f26;
-}
-
-
-/* ================= FOOTER ================= */
-
-footer{
-  background:var(--darker);
-  text-align:center;
-  padding:3rem 2rem;
-  color:var(--muted);
-}
-
-footer .copy{
-  font-size:.8rem;
-  letter-spacing:.1rem;
-  text-transform:uppercase;
-}
-
-
-/* ================= MOBILE ================= */
-
-@media(max-width:760px){
+  /* ===== Top bar ===== */
 
   .topbar{
-    padding:1rem 1.25rem;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.25rem 2rem;
+    background:var(--darker);
+    box-shadow:0 2px 18px rgba(0,0,0,.4);
   }
+
+  .brand{
+    font-weight:700;
+    letter-spacing:.18rem;
+    text-transform:uppercase;
+    font-size:1.05rem;
+  }
+
+  .back{
+    font-size:.85rem;
+    letter-spacing:.16rem;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  .back:hover{
+    color:var(--teal);
+  }
+
+  /* ===== Hero ===== */
 
   .hero{
-    min-height:60vh;
-    padding:7rem 1.5rem 4rem;
+    position:relative;
+    min-height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:7rem 2rem 5rem;
+
+    background:
+      linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.65)),
+      url('outflows.jpeg') center center / cover no-repeat;
   }
 
-  .content{
-    padding:3.5rem 0;
+  .hero .inner{
+    max-width:65rem;
+    position:relative;
+    z-index:2;
   }
 
-  .content h2{
-    letter-spacing:.09rem;
+  .hero h1{
+    font-size:clamp(2.3rem,6vw,4rem);
+    font-weight:700;
+    letter-spacing:.25rem;
+    text-transform:uppercase;
+    text-shadow:0 2px 25px rgba(0,0,0,.9);
   }
 
-  .workflow{
-    grid-template-columns:1fr;
+  .rule{
+    width:10rem;
+    height:2px;
+    background:#fff;
+    margin:1.4rem auto;
   }
+
+  .hero p{
+    color:var(--muted);
+    font-size:clamp(1rem,2vw,1.25rem);
+    max-width:55rem;
+    margin:auto;
+  }
+
+  /* ===== Content ===== */
+
+  section{
+    padding:5rem 2rem;
+  }
+
+  .wrap{
+    width:min(65rem,92vw);
+    margin:auto;
+  }
+
+  h2{
+    font-size:clamp(1.6rem,4vw,2.1rem);
+    letter-spacing:.18rem;
+    text-transform:uppercase;
+    margin-bottom:1rem;
+  }
+
+  h3{
+    font-size:1.25rem;
+    letter-spacing:.08rem;
+    margin-bottom:.8rem;
+  }
+
+  .hr{
+    width:7rem;
+    height:2px;
+    background:rgba(255,255,255,.6);
+    margin:1rem 0 2rem;
+  }
+
+  p{
+    color:var(--muted);
+    font-size:1.06rem;
+    margin-bottom:1.5rem;
+  }
+
+  .teal{
+    background:var(--teal);
+  }
+
+  .dark{
+    background:var(--dark);
+  }
+
+  .darker{
+    background:var(--darker);
+  }
+
+  /* ===== Methodology cards ===== */
+
+  .method-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.3rem;
+    margin-top:2.5rem;
+  }
+
+  .method-card{
+    border:1px solid rgba(255,255,255,.2);
+    padding:2rem 1.5rem;
+    background:rgba(0,0,0,.12);
+  }
+
+  .method-card .number{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:.6rem;
+    color:#fff;
+  }
+
+  .method-card h3{
+    text-transform:uppercase;
+    font-size:1rem;
+    letter-spacing:.12rem;
+  }
+
+  .method-card p{
+    font-size:.96rem;
+    margin-bottom:0;
+  }
+
+  /* ===== Research pipeline ===== */
+
+  .pipeline{
+    margin-top:2.5rem;
+  }
+
+  .step{
+    border-left:3px solid var(--teal);
+    padding:0 0 2.2rem 1.8rem;
+    margin-left:.5rem;
+    position:relative;
+  }
+
+  .step::before{
+    content:"";
+    position:absolute;
+    left:-9px;
+    top:0;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--teal);
+  }
+
+  .step:last-child{
+    padding-bottom:0;
+  }
+
+  .step h3{
+    margin-bottom:.4rem;
+  }
+
+  /* ===== Highlight box ===== */
+
+  .highlight{
+    border:1px solid rgba(255,255,255,.35);
+    padding:2rem;
+    margin-top:2rem;
+    background:rgba(0,0,0,.15);
+  }
+
+  .highlight strong{
+    color:#fff;
+  }
+
+  /* ===== Resources ===== */
 
   .resources{
-    grid-template-columns:1fr;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
+    margin-top:2rem;
   }
 
-}
+  .resource{
+    border:1px solid rgba(255,255,255,.25);
+    padding:1.5rem;
+  }
 
+  .resource h3{
+    text-transform:uppercase;
+    letter-spacing:.1rem;
+    font-size:1rem;
+  }
+
+  .resource a{
+    display:inline-block;
+    margin-top:.5rem;
+    padding:.7rem 1.2rem;
+    border:1px solid var(--border);
+    text-transform:uppercase;
+    letter-spacing:.1rem;
+    font-size:.75rem;
+    font-weight:600;
+  }
+
+  .resource a:hover{
+    background:#fff;
+    color:#1c1f26;
+  }
+
+  /* ===== Buttons ===== */
+
+  .btn{
+    display:inline-block;
+    padding:.9rem 1.8rem;
+    border:2px solid var(--border);
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:.16rem;
+    font-size:.78rem;
+    font-weight:600;
+    margin-top:.5rem;
+  }
+
+  .btn:hover{
+    background:#fff;
+    color:#1c1f26;
+  }
+
+  /* ===== Footer ===== */
+
+  footer{
+    background:var(--darker);
+    text-align:center;
+    padding:3rem 2rem;
+    color:var(--muted);
+  }
+
+  footer p{
+    font-size:.8rem;
+    letter-spacing:.1rem;
+    text-transform:uppercase;
+    margin:0;
+  }
+
+  /* ===== Mobile ===== */
+
+  @media(max-width:760px){
+
+    .method-grid{
+      grid-template-columns:1fr;
+    }
+
+    .resources{
+      grid-template-columns:1fr;
+    }
+
+    .hero{
+      min-height:65vh;
+    }
+
+    section{
+      padding:4rem 1.5rem;
+    }
+
+    .topbar{
+      padding:1rem 1.25rem;
+    }
+
+    .brand{
+      font-size:.9rem;
+    }
+
+    .back{
+      font-size:.7rem;
+    }
+  }
 </style>
-
 </head>
 
 
 <body>
 
-
-<!-- ================= TOP BAR ================= -->
+<!-- ===== TOP BAR ===== -->
 
 <header class="topbar">
 
@@ -331,24 +362,27 @@ footer .copy{
   </a>
 
   <a href="index.html" class="back">
-    ← Back to Home
+    ← Back to Research
   </a>
 
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- ===== HERO ===== -->
 
 <section class="hero">
 
   <div class="inner">
 
-    <h1>Ultra Fast Outflows</h1>
+    <div class="rule"></div>
+
+    <h1>Ultra-Fast Outflows</h1>
 
     <div class="rule"></div>
 
-    <p class="subtitle">
-      Searching for High-Velocity Outflows in Active Galactic Nuclei
+    <p>
+      Searching for powerful winds from supermassive black holes
+      through systematic X-ray spectral analysis of a large quasar catalogue.
     </p>
 
   </div>
@@ -356,425 +390,462 @@ footer .copy{
 </section>
 
 
-<!-- ================= MAIN CONTENT ================= -->
+<!-- ===== INTRODUCTION ===== -->
 
-<main class="content">
+<section class="teal">
 
+  <div class="wrap">
 
-<h2>Research Overview</h2>
+    <h2>Why Ultra-Fast Outflows?</h2>
 
-<p>
-Ultra-fast outflows (UFOs) are highly ionised winds launched from the
-innermost regions of active galactic nuclei, with velocities reaching a
-substantial fraction of the speed of light. These outflows provide a
-direct probe of the extreme environment close to a supermassive black
-hole and may carry significant amounts of energy and momentum into the
-host galaxy.
-</p>
+    <div class="hr"></div>
 
-<p>
-My work focuses on systematically searching for these high-velocity
-outflows using archival XMM-Newton observations. I developed a
-Python-based analysis pipeline to process large astronomical datasets,
-select high-quality observations and identify statistically significant
-absorption features associated with ionised outflowing gas.
-</p>
+    <p>
+      Ultra-fast outflows (UFOs) are highly ionised winds launched from the
+      innermost regions of active galactic nuclei, with velocities reaching
+      a significant fraction of the speed of light. Because they originate
+      close to the central supermassive black hole, these winds provide a
+      powerful probe of the connection between black-hole accretion,
+      radiation and feedback on the surrounding galaxy.
+    </p>
 
+    <p>
+      Detecting and characterising UFOs allows us to investigate how energy
+      and momentum are transferred from the accretion flow into the
+      surrounding environment, and how these powerful winds may influence
+      the evolution of their host galaxies.
+    </p>
 
-<div class="research-box">
+  </div>
 
-<p>
-<strong>Core idea:</strong> convert a large astronomical archive into a
-systematic statistical search problem — automatically identify promising
-datasets, detect candidate spectral features, test their significance,
-and then use physical photoionisation models to characterise the
-underlying gas.
-</p>
+</section>
 
-</div>
 
+<!-- ===== LARGE DATASET ===== -->
 
-<!-- ================= WHY UFOs MATTER ================= -->
+<section class="dark">
 
-<h3>Why Ultra-Fast Outflows Matter</h3>
+  <div class="wrap">
 
-<p>
-Because these winds originate close to the central black hole, their
-velocity, ionisation state and column density provide information about
-the conditions of the innermost accretion environment. Measuring their
-properties can therefore help constrain how accretion energy is
-transferred from the central engine into the surrounding environment.
-</p>
+    <h2>From a Million Quasars to a Focused Sample</h2>
 
-<p>
-Understanding these outflows is also important for studying AGN
-feedback: energetic winds can transport momentum and energy into the
-host galaxy and potentially influence the evolution of gas, star
-formation and the growth of the central black hole.
-</p>
+    <div class="hr"></div>
 
+    <p>
+      Rather than beginning with a small pre-selected sample, I developed
+      a systematic search starting from the Million Quasars (Milliquas)
+      catalogue. The goal was to identify previously unexplored sources
+      with sufficient X-ray data to search for highly ionised absorption
+      signatures associated with ultra-fast outflows.
+    </p>
 
-<!-- ================= DATA PIPELINE ================= -->
+    <div class="method-grid">
 
-<h3>Large-Scale Data Analysis</h3>
+      <div class="method-card">
 
-<p>
-I built a Python pipeline to cross-match large AGN catalogues with the
-XMM-Newton archive and systematically identify observations suitable for
-high-quality UFO searches.
-</p>
+        <div class="number">01</div>
 
-<ul>
+        <h3>Large Catalogue</h3>
 
-<li>
-Cross-matching large astronomical catalogues with XMM-Newton observations
-</li>
+        <p>
+          Started from approximately one million quasars in the
+          Milliquas catalogue and cross-matched the sources with archival
+          X-ray observations.
+        </p>
 
-<li>
-Automated observation and source selection
-</li>
+      </div>
 
-<li>
-X-ray data reduction and spectral extraction
-</li>
 
-<li>
-Count-based and signal-to-noise quality filtering
-</li>
+      <div class="method-card">
 
-<li>
-Automated processing of large observational datasets
-</li>
+        <div class="number">02</div>
 
-<li>
-Parallel computation for computationally intensive analysis
-</li>
+        <h3>Data Selection</h3>
 
-</ul>
+        <p>
+          Applied observational quality requirements, including sufficient
+          X-ray exposure and usable archived observation IDs, to retain
+          sources suitable for detailed spectral analysis.
+        </p>
 
+      </div>
 
-<!-- ================= SEARCH ================= -->
 
-<h3>Searching for Outflows</h3>
+      <div class="method-card">
 
-<p>
-The search focuses on absorption features in the X-ray spectrum produced
-by highly ionised gas moving at relativistic velocities. In particular,
-features associated with highly ionised iron in the Fe-K energy band can
-provide a powerful signature of fast outflowing material.
-</p>
+        <div class="number">03</div>
 
-<p>
-I first establish a physically motivated continuum model and then
-search for statistically significant deviations from that baseline.
-Candidate absorption features are subsequently tested using alternative
-spectral models and statistical simulations.
-</p>
+        <h3>Final Sample</h3>
 
+        <p>
+          After systematic filtering and spectral verification, we arrived
+          at a final sample of 26 sources showing evidence for ultra-fast
+          outflows that have not previously been studied in detail.
+        </p>
 
-<!-- ================= PHYSICAL MODELLING ================= -->
+      </div>
 
-<h3>Photoionisation Modelling</h3>
+    </div>
 
-<p>
-Detecting an absorption feature is only the first step. To determine the
-physical properties of the outflowing gas, I use photoionisation
-modelling to connect the observed absorption spectrum with parameters
-such as ionisation, column density and turbulent velocity.
-</p>
+  </div>
 
-<p>
-I developed custom XSTAR photoionisation grids for both soft-X-ray
-absorption features and Fe-K absorption signatures when the available
-models were insufficient to describe the observed spectra.
-</p>
+</section>
 
-<p>
-These grids allow the observed absorption to be interpreted in terms of
-the physical state of the gas and provide a consistent framework for
-comparing different outflow candidates.
-</p>
 
+<!-- ===== SELECTION PIPELINE ===== -->
 
-<!-- ================= STATISTICS ================= -->
+<section class="darker">
 
-<h3>Statistical Inference</h3>
+  <div class="wrap">
 
-<p>
-A central part of the analysis is determining whether an apparent
-spectral feature represents a genuine physical signal or a statistical
-fluctuation. I use spectral fitting, parameter estimation, uncertainty
-analysis and Monte Carlo simulations to evaluate candidate features.
-</p>
+    <h2>Systematic Search Pipeline</h2>
 
-<p>
-For more complex models, I use Markov Chain Monte Carlo methods to
-explore posterior parameter distributions, correlations and parameter
-degeneracies.
-</p>
+    <div class="hr"></div>
 
+    <p>
+      The sample was progressively reduced using observational and
+      spectroscopic criteria. This approach allows the final UFO candidates
+      to be selected through a reproducible analysis rather than by
+      subjective visual inspection alone.
+    </p>
 
-<!-- ================= QUANTITATIVE WORKFLOW ================= -->
 
-<h3>Quantitative Analysis Workflow</h3>
+    <div class="pipeline">
 
-<p>
-The project follows a reproducible analysis pipeline in which each stage
-reduces the search space while preserving statistically meaningful
-information.
-</p>
+      <div class="step">
 
-<div class="workflow">
+        <h3>1. Catalogue Cross-Matching</h3>
 
-<div class="workflow-card">
+        <p>
+          Starting from the Milliquas catalogue, I searched for corresponding
+          archival X-ray observations and identified sources with suitable
+          XMM-Newton data.
+        </p>
 
-<h4>01 — Data Selection</h4>
+      </div>
 
-<p>
-Large catalogues and archival observations are filtered using objective
-quality criteria to construct a statistically useful analysis sample.
-</p>
 
-</div>
+      <div class="step">
 
+        <h3>2. Sufficient Exposure</h3>
 
-<div class="workflow-card">
+        <p>
+          Sources were filtered according to the available exposure and
+          data quality. Observations with insufficient statistics were
+          removed because weak absorption features cannot be reliably
+          distinguished from statistical fluctuations.
+        </p>
 
-<h4>02 — Signal Detection</h4>
+      </div>
 
-<p>
-Automated spectral analysis is used to identify candidate absorption
-features across a large number of observations.
-</p>
 
-</div>
+      <div class="step">
 
+        <h3>3. Archived Observation IDs</h3>
 
-<div class="workflow-card">
+        <p>
+          I retained sources with usable archived observation IDs so that
+          the complete reduction and spectral-analysis pipeline could be
+          reproduced from the publicly available X-ray data.
+        </p>
 
-<h4>03 — Model Comparison</h4>
+      </div>
 
-<p>
-Alternative spectral models are compared to determine whether additional
-physical components are statistically supported by the data.
-</p>
 
-</div>
+      <div class="step">
 
+        <h3>4. Continuum and Reflection Modelling</h3>
 
-<div class="workflow-card">
+        <p>
+          Candidate spectra were modelled using physically motivated
+          continuum and reflection models. This step is important because
+          reflection features can sometimes mimic or weaken apparent
+          absorption signatures in the Fe-K band.
+        </p>
 
-<h4>04 — Parameter Inference</h4>
+      </div>
 
-<p>
-Physical parameters and their uncertainties are estimated using spectral
-fitting, simulations and MCMC-based inference.
-</p>
 
-</div>
+      <div class="step">
 
-</div>
+        <h3>5. Outflow Signature Verification</h3>
 
+        <p>
+          A source was retained only when the absorption signature survived
+          the inclusion of the appropriate reflection model, reducing the
+          possibility that the candidate feature was produced by an
+          incorrectly modelled continuum or reflection component.
+        </p>
 
-<!-- ================= KEY RESULTS ================= -->
+      </div>
 
-<h3>Key Results</h3>
 
-<p>
-The search identified sources showing both warm absorption and
-ultra-fast outflows through absorption features associated with highly
-ionised gas. Several of the identified sources provide new candidates
-for studying fast winds across different ionisation phases.
-</p>
+      <div class="step">
 
-<p>
-In one luminous quasar, the analysis revealed evidence for multi-phase
-ultra-fast outflows with inferred velocities of approximately 0.22c and
-0.32c.
-</p>
+        <h3>6. Final UFO Candidates</h3>
 
-<p>
-An important aspect of the project is the identification of outflows
-across different energy regimes. Soft-X-ray absorption can trace lower
-ionisation phases of the wind, while Fe-K absorption provides a probe of
-highly ionised material closer to the central engine.
-</p>
+        <p>
+          Applying the complete selection and spectral-modelling procedure
+          resulted in 26 final sources showing evidence for ultra-fast
+          outflows and providing a sample for further detailed study.
+        </p>
 
+      </div>
 
-<!-- ================= RESEARCH SKILLS ================= -->
+    </div>
 
-<h3>Technical and Quantitative Skills</h3>
+  </div>
 
-<ul>
+</section>
 
-<li>Python-based scientific data analysis</li>
 
-<li>NumPy, SciPy and Astropy</li>
+<!-- ===== SPECTRAL ANALYSIS ===== -->
 
-<li>Large-scale astronomical data processing</li>
+<section class="dark">
 
-<li>Automated data pipelines</li>
+  <div class="wrap">
 
-<li>XMM-Newton SAS</li>
+    <h2>Fe-K Absorption and Photoionisation Modelling</h2>
 
-<li>XSPEC spectral modelling</li>
+    <div class="hr"></div>
 
-<li>XSTAR photoionisation modelling</li>
+    <p>
+      The Fe-K energy band provides an important window into highly ionised
+      gas moving at high velocities. Blueshifted absorption from highly
+      ionised iron can reveal the velocity, ionisation state and column
+      density of the outflowing material.
+    </p>
 
-<li>Statistical model comparison</li>
+    <p>
+      I first establish a physically motivated description of the underlying
+      X-ray continuum and reflection spectrum. Candidate absorption features
+      are then tested against alternative spectral models to determine
+      whether they remain statistically and physically significant.
+    </p>
 
-<li>Monte Carlo simulations</li>
+    <p>
+      For soft X-ray absorption features that could not be adequately
+      described by the available <strong>zxipcf</strong> model, I developed
+      custom <strong>XSTAR photoionisation grids</strong>. I also developed
+      XSTAR grids for modelling highly ionised absorption associated with
+      Fe-K features.
+    </p>
 
-<li>Markov Chain Monte Carlo</li>
+    <div class="highlight">
 
-<li>Uncertainty estimation</li>
+      <p>
+        <strong>Key idea:</strong>
+        reflection modelling is an essential part of the UFO search because
+        an incorrectly modelled reflection spectrum can produce or hide
+        apparent absorption features. The outflow candidates are therefore
+        required to survive the full spectral modelling procedure.
+      </p>
 
-<li>Parallel computation</li>
+    </div>
 
-<li>Linux / HPC environments</li>
+  </div>
 
-</ul>
+</section>
 
 
-<!-- ================= QUANT CONNECTION ================= -->
+<!-- ===== SCIENTIFIC IMPACT ===== -->
 
-<h3>Computational Approach</h3>
+<section class="teal">
 
-<p>
-Although the scientific application is astrophysics, the underlying
-workflow is fundamentally quantitative: large-scale data processing,
-feature detection, statistical hypothesis testing, model comparison,
-parameter estimation and uncertainty quantification.
-</p>
+  <div class="wrap">
 
-<p>
-The project has strengthened my ability to turn complex, noisy datasets
-into reproducible quantitative analyses while carefully distinguishing
-statistically significant signals from fluctuations and modelling
-uncertainties.
-</p>
+    <h2>What Can These Outflows Tell Us?</h2>
 
+    <div class="hr"></div>
 
-<!-- ================= MANUSCRIPT ================= -->
+    <p>
+      Measuring the velocity, ionisation and column density of the outflowing
+      gas allows us to estimate the physical properties of the wind and
+      investigate its connection with the central accretion flow.
+    </p>
 
-<h3>Research and Manuscript</h3>
+    <p>
+      The inferred outflow properties can be used to study the kinetic
+      power and momentum carried by the wind, providing insight into whether
+      AGN-driven outflows can transfer sufficient energy into their host
+      galaxies to influence their evolution.
+    </p>
 
-<p>
-This work is being developed into a manuscript for submission to the
-Monthly Notices of the Royal Astronomical Society (MNRAS). The project
-involves collaboration with researchers working on X-ray spectroscopy
-and active galactic nuclei.
-</p>
+    <p>
+      The final sample therefore provides an opportunity to study UFOs
+      systematically rather than as isolated detections, and to search for
+      common relationships between outflow properties and the underlying
+      properties of the active galactic nucleus.
+    </p>
 
+  </div>
 
-<!-- ================= RESOURCES ================= -->
+</section>
 
-<h3>Research Resources</h3>
 
-<p>
-I have collected selected papers, project documents, analysis material,
-and references related to this research. These resources provide
-additional details about the scientific background, data analysis,
-spectral modelling and statistical methodology.
-</p>
+<!-- ===== COMPUTATIONAL APPROACH ===== -->
 
+<section class="darker">
 
-<div class="resources">
+  <div class="wrap">
 
+    <h2>Computational and Statistical Analysis</h2>
 
-<a class="resource-card" href="#" target="_blank" rel="noopener">
+    <div class="hr"></div>
 
-<h4>Papers &amp; Manuscripts</h4>
+    <p>
+      This project combines large-scale catalogue processing with automated
+      data reduction, X-ray spectral modelling and statistical evaluation.
+      I developed Python-based workflows to search and filter large
+      astronomical datasets and to organise the subsequent spectral analysis.
+    </p>
 
-<p>
-Published papers, manuscripts and literature related to ultra-fast
-outflows, AGN winds and X-ray spectroscopy.
-</p>
+    <p>
+      The analysis requires distinguishing genuine physical absorption
+      features from statistical fluctuations and modelling uncertainties.
+      This makes robust model comparison, parameter estimation and
+      reproducible computational workflows central to the analysis.
+    </p>
 
-<span>View Papers →</span>
+    <a class="btn" href="quantitative-computational-research.html">
+      Quantitative & Computational Work
+    </a>
 
-</a>
+  </div>
 
+</section>
 
-<a class="resource-card" href="#" target="_blank" rel="noopener">
 
-<h4>Research Documents</h4>
+<!-- ===== RESOURCES ===== -->
 
-<p>
-Project notes, presentations, analysis documents and supporting
-research material.
-</p>
+<section class="dark">
 
-<span>View Documents →</span>
+  <div class="wrap">
 
-</a>
+    <h2>Research Resources</h2>
 
+    <div class="hr"></div>
 
-<a class="resource-card" href="#" target="_blank" rel="noopener">
+    <p>
+      Detailed material from this project, including papers, analysis
+      documents, scripts and relevant background literature, will be
+      collected here.
+    </p>
 
-<h4>XSTAR &amp; Spectral Modelling</h4>
 
-<p>
-Resources related to XSTAR photoionisation grids, XSPEC modelling and
-the physical interpretation of absorption features.
-</p>
+    <div class="resources">
 
-<span>Explore Modelling →</span>
+      <div class="resource">
 
-</a>
+        <h3>Research Paper</h3>
 
+        <p>
+          Paper or manuscript describing the ultra-fast outflow search
+          and final sample.
+        </p>
 
-<a class="resource-card" href="#" target="_blank" rel="noopener">
+        <!-- Replace # with your paper link -->
+        <a href="#" target="_blank" rel="noopener">
+          View Paper
+        </a>
 
-<h4>Further Reading</h4>
+      </div>
 
-<p>
-Selected literature covering AGN winds, UFOs, photoionisation and
-black-hole feedback.
-</p>
 
-<span>Reading List →</span>
+      <div class="resource">
 
-</a>
+        <h3>Analysis Documents</h3>
 
+        <p>
+          Supporting documents describing source selection, spectral
+          modelling and analysis methodology.
+        </p>
 
-<a class="resource-card"
-   href="https://github.com/Ritikkumar0730"
-   target="_blank"
-   rel="noopener">
+        <!-- Replace # with your document link -->
+        <a href="#" target="_blank" rel="noopener">
+          View Documents
+        </a>
 
-<h4>Code &amp; Analysis</h4>
+      </div>
 
-<p>
-Selected Python analysis, computational projects and research code
-available on GitHub.
-</p>
 
-<span>View GitHub →</span>
+      <div class="resource">
 
-</a>
+        <h3>Code & Pipelines</h3>
 
+        <p>
+          Python workflows, catalogue processing and analysis tools used
+          throughout the project.
+        </p>
 
-</div>
+        <a href="https://github.com/Ritikkumar0730"
+           target="_blank"
+           rel="noopener">
+          View GitHub
+        </a>
 
+      </div>
 
-<a class="btn" href="index.html">
-← Back to Research
-</a>
 
+      <div class="resource">
 
-</main>
+        <h3>Background Reading</h3>
 
+        <p>
+          Selected literature and resources on AGN winds, UFOs,
+          photoionisation and X-ray spectroscopy.
+        </p>
+
+        <!-- Replace # with your resources page -->
+        <a href="resources.html">
+          Reading Material
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===== FINAL STATEMENT ===== -->
+
+<section class="teal">
+
+  <div class="wrap">
+
+    <h2>From Large-Scale Search to Physical Insight</h2>
+
+    <div class="hr"></div>
+
+    <p>
+      This project brings together astronomical observations, large-scale
+      data selection, computational analysis, statistical modelling and
+      physical interpretation to investigate one of the most energetic
+      forms of feedback from accreting supermassive black holes.
+    </p>
+
+    <a class="btn" href="index.html">
+      Back to Main Page
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ===== FOOTER ===== -->
 
 <footer>
 
-<div class="copy">
-© Ritik Kumar | Indian Institute of Science
-</div>
+  <p>
+    © Ritik Kumar | Indian Institute of Science
+  </p>
 
 </footer>
 
 
 </body>
-
 </html>
