@@ -9,789 +9,1334 @@
 <style>
 
 :root{
-  --teal:#2bb6a3;
-  --dark:#2e333d;
-  --darker:#262a32;
-  --text:#ffffff;
-  --muted:rgba(255,255,255,0.82);
-  --border:rgba(255,255,255,0.45);
+    --bg:#10141b;
+    --bg2:#171c25;
+    --card:#1d2430;
+    --card2:#222b38;
+    --text:#ffffff;
+    --muted:#b8c0cc;
+    --teal:#2bb6a3;
+    --blue:#4f8cff;
+    --purple:#8b6cff;
+    --orange:#ff8a4c;
+    --pink:#e76fba;
+    --border:rgba(255,255,255,.12);
 }
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
-  color:var(--text);
-  background:var(--dark);
-  line-height:1.7;
-  -webkit-font-smoothing:antialiased;
+    font-family:"Source Sans Pro","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
 }
 
 a{
-  color:inherit;
-  text-decoration:none;
+    color:inherit;
+    text-decoration:none;
 }
 
-/* ================= TOP BAR ================= */
+
+/* =========================
+   TOP NAVIGATION
+========================= */
 
 .topbar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:50;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:1.25rem 2rem;
-
-  background:rgba(20,22,28,0.95);
-  box-shadow:0 2px 18px rgba(0,0,0,.35);
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.1rem 2rem;
+    background:rgba(16,20,27,.94);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(10px);
 }
 
 .brand{
-  font-weight:700;
-  letter-spacing:.16rem;
-  text-transform:uppercase;
-  font-size:1rem;
+    font-size:.95rem;
+    font-weight:700;
+    letter-spacing:.16rem;
+    text-transform:uppercase;
 }
 
 .back{
-  font-size:.8rem;
-  letter-spacing:.16rem;
-  text-transform:uppercase;
-  font-weight:600;
+    font-size:.78rem;
+    letter-spacing:.12rem;
+    text-transform:uppercase;
+    color:var(--muted);
+    transition:.2s;
 }
 
 .back:hover{
-  color:var(--teal);
+    color:var(--teal);
 }
 
-/* ================= HERO ================= */
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  position:relative;
-  min-height:75vh;
+    min-height:78vh;
+    padding:9rem 2rem 6rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-
-  padding:7rem 2rem 5rem;
-
-  background:
-    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.7)),
-    url('GRB.png') center center / cover no-repeat;
+    background:
+        linear-gradient(rgba(8,12,18,.68),rgba(8,12,18,.92)),
+        url("GRB.png") center/cover no-repeat;
 }
 
-.hero .inner{
-  position:relative;
-  z-index:2;
-  max-width:62rem;
+.hero-inner{
+    max-width:900px;
+}
+
+.hero .eyebrow{
+    color:var(--teal);
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.22rem;
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
 }
 
 .hero h1{
-  font-size:clamp(2.2rem,6vw,4rem);
-  letter-spacing:.25rem;
-  text-transform:uppercase;
-  font-weight:700;
+    font-size:clamp(2.2rem,6vw,4.2rem);
+    line-height:1.15;
+    letter-spacing:.12rem;
+    text-transform:uppercase;
 }
 
-.rule{
-  width:10rem;
-  max-width:60vw;
-  height:2px;
-  background:#fff;
-  margin:1.4rem auto;
+.hero .line{
+    width:90px;
+    height:2px;
+    background:var(--teal);
+    margin:1.7rem auto;
 }
 
 .hero p{
-  color:var(--muted);
-  font-size:clamp(1rem,2.2vw,1.25rem);
-  max-width:52rem;
-  margin:auto;
+    max-width:760px;
+    margin:auto;
+    color:var(--muted);
+    font-size:1.12rem;
 }
 
-/* ================= GENERAL SECTIONS ================= */
+
+/* =========================
+   GENERAL
+========================= */
+
+.container{
+    width:min(1100px,92vw);
+    margin:auto;
+}
 
 section{
-  padding:5rem 2rem;
+    padding:5rem 0;
 }
 
-.wrap{
-  width:min(62rem,92vw);
-  margin:auto;
+.section-title{
+    text-align:center;
+    margin-bottom:3rem;
 }
 
-h2{
-  font-size:clamp(1.6rem,4vw,2.1rem);
-  letter-spacing:.18rem;
-  text-transform:uppercase;
-  margin-bottom:1.2rem;
+.section-title h2{
+    font-size:clamp(1.7rem,4vw,2.3rem);
+    text-transform:uppercase;
+    letter-spacing:.16rem;
 }
 
-h3{
-  font-size:1.25rem;
-  letter-spacing:.08rem;
-  margin-bottom:1rem;
+.section-title .line{
+    width:70px;
+    height:2px;
+    background:var(--teal);
+    margin:1rem auto;
 }
 
-.hr{
-  width:7rem;
-  height:2px;
-  background:rgba(255,255,255,.6);
-  margin:1rem 0 2rem;
+.section-title p{
+    max-width:750px;
+    margin:auto;
+    color:var(--muted);
 }
 
-p{
-  color:var(--muted);
-  font-size:1.05rem;
-  margin-bottom:1.5rem;
+
+/* =========================
+   PROJECT OVERVIEW
+========================= */
+
+.overview{
+    background:var(--bg2);
 }
 
-strong{
-  color:#fff;
+.overview-text{
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+    color:var(--muted);
+    font-size:1.08rem;
 }
 
-/* ================= INTRO ================= */
-
-.intro{
-  background:var(--teal);
+.stats{
+    margin-top:3rem;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
 }
 
-.intro p{
-  color:rgba(255,255,255,.95);
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:1.7rem 1rem;
+    text-align:center;
+    border-radius:12px;
+    transition:.25s;
 }
 
-/* ================= TECHNICAL SECTIONS ================= */
-
-.dark{
-  background:var(--dark);
+.stat:hover{
+    transform:translateY(-5px);
+    border-color:rgba(43,182,163,.55);
 }
 
-.darker{
-  background:var(--darker);
+.stat strong{
+    display:block;
+    font-size:1.8rem;
+    color:var(--teal);
 }
 
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.5rem;
-  margin-top:2rem;
+.stat span{
+    display:block;
+    color:var(--muted);
+    font-size:.82rem;
+    text-transform:uppercase;
+    letter-spacing:.08rem;
 }
 
-.card{
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.12);
-  padding:2rem;
+
+/* =========================
+   MODEL CARDS
+========================= */
+
+.models{
+    background:var(--bg);
 }
 
-.card p{
-  font-size:.98rem;
-  margin-bottom:.8rem;
+.model-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
 }
 
-.number{
-  font-size:.8rem;
-  color:var(--teal);
-  letter-spacing:.15rem;
-  text-transform:uppercase;
-  font-weight:700;
-  margin-bottom:.6rem;
+.model-card{
+    position:relative;
+    overflow:hidden;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:2rem;
+    transition:.3s ease;
 }
 
-/* ================= RESULTS ================= */
+.model-card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(255,255,255,.3);
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.model-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:var(--teal);
+}
+
+.model-card.blue::before{
+    background:var(--blue);
+}
+
+.model-card.purple::before{
+    background:var(--purple);
+}
+
+.model-card.orange::before{
+    background:var(--orange);
+}
+
+.model-card.pink::before{
+    background:var(--pink);
+}
+
+.model-number{
+    color:var(--muted);
+    font-size:.72rem;
+    letter-spacing:.16rem;
+    text-transform:uppercase;
+}
+
+.model-card h3{
+    margin:.5rem 0 1rem;
+    font-size:1.45rem;
+}
+
+.model-card p{
+    color:var(--muted);
+    font-size:.98rem;
+}
+
+.model-details{
+    margin-top:1.3rem;
+    padding-top:1.1rem;
+    border-top:1px solid var(--border);
+}
+
+.model-details span{
+    display:inline-block;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:.35rem .7rem;
+    margin:.25rem .15rem;
+    font-size:.72rem;
+    color:#dce2ea;
+}
+
+
+/* =========================
+   SIAMESE FEATURE
+========================= */
+
+.siamese-section{
+    background:
+        radial-gradient(circle at 15% 20%,rgba(79,140,255,.12),transparent 35%),
+        var(--bg2);
+}
+
+.siamese-box{
+    background:var(--card);
+    border:1px solid rgba(79,140,255,.25);
+    border-radius:18px;
+    padding:2.5rem;
+}
+
+.siamese-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.7rem;
+    margin:2rem 0;
+}
+
+.flow-box{
+    padding:.8rem 1rem;
+    border-radius:10px;
+    background:var(--card2);
+    border:1px solid var(--border);
+    font-size:.82rem;
+    text-align:center;
+}
+
+.flow-arrow{
+    color:var(--blue);
+    font-size:1.3rem;
+}
+
+.siamese-box p{
+    color:var(--muted);
+}
+
+
+/* =========================
+   UNCERTAINTY
+========================= */
+
+.validation{
+    background:var(--bg);
+}
+
+.validation-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.2rem;
+}
+
+.validation-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.6rem;
+}
+
+.validation-card h3{
+    font-size:1.1rem;
+    margin-bottom:.7rem;
+}
+
+.validation-card p{
+    color:var(--muted);
+    font-size:.93rem;
+}
+
+
+/* =========================
+   RESULTS
+========================= */
 
 .results{
-  background:var(--darker);
+    background:var(--bg2);
 }
 
-.result-box{
-  border-left:3px solid var(--teal);
-  padding:1rem 1.5rem;
-  margin:1.2rem 0;
-  background:rgba(255,255,255,.035);
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.2rem;
 }
 
-.result-box strong{
-  font-size:1.2rem;
+.result{
+    padding:1.8rem;
+    background:var(--card);
+    border-radius:14px;
+    border:1px solid var(--border);
 }
 
-/* ================= QUANT CONNECTION ================= */
+.result .number{
+    font-size:2rem;
+    font-weight:700;
+    color:var(--teal);
+}
+
+.result h3{
+    margin:.4rem 0;
+    font-size:1rem;
+}
+
+.result p{
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+
+/* =========================
+   QUANTITATIVE SKILLS
+========================= */
 
 .quant{
-  background:#20242b;
+    background:var(--bg);
 }
 
-.quant-highlight{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1rem;
-  margin-top:2rem;
+.quant-box{
+    max-width:900px;
+    margin:auto;
+    background:linear-gradient(135deg,#1b2430,#151b24);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:2.5rem;
 }
 
-.quant-item{
-  padding:1.5rem;
-  border:1px solid rgba(255,255,255,.15);
-  text-align:center;
+.quant-box p{
+    color:var(--muted);
 }
 
-.quant-item h3{
-  font-size:1rem;
-  text-transform:uppercase;
-  letter-spacing:.08rem;
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.6rem;
+    margin-top:1.5rem;
 }
 
-.quant-item p{
-  font-size:.9rem;
+.skill{
+    padding:.55rem .85rem;
+    border-radius:8px;
+    background:rgba(43,182,163,.09);
+    border:1px solid rgba(43,182,163,.25);
+    color:#dcefea;
+    font-size:.78rem;
 }
 
-/* ================= RESOURCES ================= */
+
+/* =========================
+   RESOURCES
+========================= */
 
 .resources{
-  background:var(--dark);
+    background:var(--bg2);
+}
+
+.resource-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+}
+
+.resource{
+    padding:1.5rem;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:12px;
+    transition:.25s;
+}
+
+.resource:hover{
+    transform:translateY(-4px);
+    border-color:var(--teal);
+}
+
+.resource h3{
+    font-size:1rem;
+    margin-bottom:.5rem;
+}
+
+.resource p{
+    color:var(--muted);
+    font-size:.85rem;
 }
 
 .btn{
-  display:inline-block;
-  padding:.9rem 1.8rem;
-  border:2px solid var(--border);
-
-  text-transform:uppercase;
-  letter-spacing:.14rem;
-  font-size:.78rem;
-  font-weight:600;
-
-  margin:.4rem .5rem .4rem 0;
-
-  transition:.25s;
+    display:inline-block;
+    margin-top:1rem;
+    padding:.7rem 1.2rem;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:5px;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.1rem;
+    transition:.2s;
 }
 
 .btn:hover{
-  background:#fff;
-  color:#1c1f26;
+    background:#fff;
+    color:#111;
 }
 
-/* ================= FOOTER ================= */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-  background:var(--darker);
-  text-align:center;
-  padding:3rem 2rem;
-  color:var(--muted);
+    background:#0b0e13;
+    text-align:center;
+    padding:3rem 1rem;
+    color:var(--muted);
 }
 
 footer p{
-  font-size:.8rem;
-  letter-spacing:.08rem;
+    font-size:.78rem;
+    letter-spacing:.08rem;
 }
 
-/* ================= MOBILE ================= */
 
-@media(max-width:760px){
+/* =========================
+   MOBILE
+========================= */
 
-  .card-grid{
-    grid-template-columns:1fr;
-  }
+@media(max-width:800px){
 
-  .quant-highlight{
-    grid-template-columns:1fr;
-  }
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .topbar{
-    padding:1rem 1.2rem;
-  }
+    .model-grid{
+        grid-template-columns:1fr;
+    }
 
-  section{
-    padding:4rem 1.5rem;
-  }
+    .validation-grid,
+    .result-grid,
+    .resource-grid{
+        grid-template-columns:1fr;
+    }
 
-  .hero{
-    min-height:70vh;
-  }
+    .hero{
+        min-height:75vh;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:4rem 0;
+    }
+
+    .siamese-box,
+    .quant-box{
+        padding:1.5rem;
+    }
 
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= TOP BAR ================= -->
+
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <header class="topbar">
 
-  <a href="index.html" class="brand">
-    Ritik Kumar
-  </a>
+    <a class="brand" href="index.html">
+        Ritik Kumar
+    </a>
 
-  <a href="index.html#topic3" class="back">
-    ← Back to Research
-  </a>
+    <a class="back" href="index.html">
+        ← Back to Research
+    </a>
 
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-  <div class="inner">
+    <div class="hero-inner">
 
-    <div class="rule"></div>
+        <div class="eyebrow">
+            Machine Learning · Probabilistic Modelling · Astrophysics
+        </div>
 
-    <h1>
-      Machine Learning for Gamma-Ray Bursts
-    </h1>
+        <h1>
+            Machine Learning for<br>
+            Gamma-Ray Bursts
+        </h1>
 
-    <div class="rule"></div>
-
-    <p>
-      Probabilistic modelling, deep learning and uncertainty-aware
-      reconstruction of irregular astronomical time-series data.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- ================= INTRO ================= -->
-
-<section class="intro">
-
-  <div class="wrap">
-
-    <h2>Overview</h2>
-
-    <div class="hr"></div>
-
-    <p>
-      Gamma-ray bursts (GRBs) are among the most energetic transient
-      phenomena in the Universe. Their X-ray light curves contain
-      information about the evolution of the relativistic outflow and
-      the physical processes operating after the initial burst.
-    </p>
-
-    <p>
-      A major challenge is that astronomical observations are often
-      noisy, irregularly sampled and affected by observational gaps.
-      My work focuses on reconstructing these missing regions while
-      quantifying the uncertainty associated with the predictions.
-    </p>
-
-    <p>
-      Working with the National Astronomical Observatory of Japan,
-      I developed and evaluated multiple machine-learning approaches
-      for GRB X-ray light-curve reconstruction, including ReFANN,
-      Siamese Neural Networks and Deep Gaussian Processes.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- ================= PROBLEM ================= -->
-
-<section class="dark">
-
-  <div class="wrap">
-
-    <h2>The Problem</h2>
-
-    <div class="hr"></div>
-
-    <p>
-      Observational gaps can make it difficult to accurately determine
-      important properties of GRB light curves. Missing data can
-      propagate into uncertainties in quantities such as the plateau
-      end time, flux and temporal slope.
-    </p>
-
-    <p>
-      Rather than treating reconstruction as simple interpolation,
-      I approached it as a probabilistic time-series inference problem:
-      infer the underlying temporal behaviour from incomplete and noisy
-      observations while retaining information about uncertainty.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- ================= METHODS ================= -->
-
-<section class="darker">
-
-  <div class="wrap">
-
-    <h2>Machine-Learning Framework</h2>
-
-    <div class="hr"></div>
-
-    <div class="card-grid">
-
-      <div class="card">
-
-        <div class="number">01 — ReFANN</div>
-
-        <h3>Uncertainty-Aware Neural Network</h3>
+        <div class="line"></div>
 
         <p>
-          I implemented ReFANN using heteroscedastic prediction heads
-          to reconstruct missing portions of GRB light curves while
-          estimating predictive uncertainty.
+            Developing uncertainty-aware machine-learning and probabilistic
+            approaches for reconstructing irregularly sampled X-ray light curves
+            of gamma-ray bursts.
         </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="number">02 — Deep Gaussian Processes</div>
-
-        <h3>Probabilistic Time-Series Modelling</h3>
-
-        <p>
-          Deep Gaussian Processes were used to model complex temporal
-          structure while naturally representing uncertainty in the
-          reconstructed light curve.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="number">03 — Siamese Networks</div>
-
-        <h3>Learning Temporal Similarity</h3>
-
-        <p>
-          I explored Siamese architectures that compare a partially
-          observed light curve with reference information to learn
-          useful representations for reconstruction.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="number">04 — Physics-Informed Learning</div>
-
-        <h3>Constrained Model Training</h3>
-
-        <p>
-          I incorporated physics-informed constraints into the learning
-          objective alongside probabilistic loss functions to encourage
-          physically meaningful reconstructions.
-        </p>
-
-      </div>
 
     </div>
 
-  </div>
-
 </section>
 
 
-<!-- ================= VALIDATION ================= -->
+<!-- =========================
+     OVERVIEW
+========================= -->
 
-<section class="dark">
+<section class="overview">
 
-  <div class="wrap">
+<div class="container">
 
-    <h2>Statistical Validation</h2>
+    <div class="section-title">
 
-    <div class="hr"></div>
+        <h2>The Problem</h2>
 
-    <p>
-      Model performance was evaluated using cross-validation,
-      bootstrap resampling and uncertainty estimation rather than
-      relying on a single train-test split.
-    </p>
-
-    <div class="card-grid">
-
-      <div class="card">
-
-        <h3>Cross-Validation</h3>
+        <div class="line"></div>
 
         <p>
-          Five-fold cross-validation was used to evaluate whether
-          reconstruction performance generalised beyond the training
-          subset.
+            Gamma-ray burst X-ray light curves often contain temporal gaps,
+            irregular sampling and observational uncertainties. Reconstructing
+            the underlying temporal behaviour requires models that can learn
+            complex patterns while quantifying the uncertainty of their
+            predictions.
         </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Bootstrap Resampling</h3>
-
-        <p>
-          Bootstrap resampling was used to assess the robustness of
-          model-derived statistics and reconstruction performance.
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Uncertainty Quantification</h3>
-
-        <p>
-          Predictive uncertainty was explicitly evaluated rather than
-          reporting reconstructed values without an estimate of their
-          reliability.
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Error Analysis</h3>
-
-        <p>
-          Reconstruction quality was assessed using quantitative error
-          metrics and comparison against benchmark approaches.
-        </p>
-
-      </div>
 
     </div>
 
-  </div>
+
+    <div class="overview-text">
+
+        <p>
+            My work investigates several machine-learning and probabilistic
+            approaches to this reconstruction problem. Rather than relying on
+            a single architecture, I implemented and evaluated different
+            modelling strategies and compared their predictive performance,
+            uncertainty estimates and robustness.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>545</strong>
+            <span>GRBs in dataset</span>
+        </div>
+
+        <div class="stat">
+            <strong>522</strong>
+            <span>GRBs processed by ReFANN</span>
+        </div>
+
+        <div class="stat">
+            <strong>521</strong>
+            <span>GRBs analysed with DGP</span>
+        </div>
+
+        <div class="stat">
+            <strong>5-fold</strong>
+            <span>Cross validation</span>
+        </div>
+
+    </div>
+
+</div>
 
 </section>
 
 
-<!-- ================= RESULTS ================= -->
+<!-- =========================
+     MODELS
+========================= -->
+
+<section class="models">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>Models & Methods</h2>
+
+        <div class="line"></div>
+
+        <p>
+            Each model addresses the reconstruction problem from a different
+            quantitative perspective.
+        </p>
+
+    </div>
+
+
+    <div class="model-grid">
+
+
+        <!-- GP -->
+
+        <div class="model-card">
+
+            <div class="model-number">
+                Model 01
+            </div>
+
+            <h3>Gaussian Processes</h3>
+
+            <p>
+                Gaussian Processes provide a probabilistic framework for
+                modelling temporal data and reconstructing missing regions of
+                a light curve while naturally representing uncertainty in the
+                inferred function.
+            </p>
+
+            <div class="model-details">
+
+                <span>Probabilistic Regression</span>
+                <span>Time-Series</span>
+                <span>Uncertainty</span>
+                <span>Non-parametric</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DGP -->
+
+        <div class="model-card blue">
+
+            <div class="model-number">
+                Model 02
+            </div>
+
+            <h3>Deep Gaussian Process</h3>
+
+            <p>
+                I implemented a two-layer Deep Gaussian Process in GPyTorch.
+                Each Gaussian-process layer learns latent representations of
+                the data, allowing the model to capture more complex temporal
+                structure while retaining probabilistic outputs.
+            </p>
+
+            <div class="model-details">
+
+                <span>2 GP Layers</span>
+                <span>GPyTorch</span>
+                <span>RBF Kernel</span>
+                <span>Variational Strategy</span>
+                <span>Inducing Points</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ReFANN -->
+
+        <div class="model-card purple">
+
+            <div class="model-number">
+                Model 03
+            </div>
+
+            <h3>ReFANN</h3>
+
+            <p>
+                ReFANN is a neural-network based reconstruction pipeline
+                designed for irregularly sampled GRB light curves. The model
+                was evaluated using quantitative error metrics and uncertainty
+                estimates across a large GRB sample.
+            </p>
+
+            <div class="model-details">
+
+                <span>PyTorch</span>
+                <span>Neural Network</span>
+                <span>Heteroscedastic Output</span>
+                <span>Regression</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Siamese -->
+
+        <div class="model-card orange">
+
+            <div class="model-number">
+                Model 04
+            </div>
+
+            <h3>Siamese Neural Network</h3>
+
+            <p>
+                I implemented a Siamese architecture using a shared encoder
+                to learn representations from related GRB light-curve
+                information. The learned representations were combined using
+                query, reference, difference and Hadamard-product features.
+            </p>
+
+            <div class="model-details">
+
+                <span>Shared Encoder</span>
+                <span>Reference Anchors</span>
+                <span>Feature Fusion</span>
+                <span>128-D Representation</span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SIAMESE DETAILS
+========================= -->
+
+<section class="siamese-section">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>Siamese Architecture</h2>
+
+        <div class="line"></div>
+
+        <p>
+            A closer look at the representation-learning approach used in
+            the reconstruction problem.
+        </p>
+
+    </div>
+
+
+    <div class="siamese-box">
+
+        <p>
+            The Siamese network uses a shared encoder so that related inputs
+            are transformed into a common representation space. The model
+            combines the query and reference representations together with
+            their difference and Hadamard product before producing a
+            128-dimensional representation.
+        </p>
+
+
+        <div class="siamese-flow">
+
+            <div class="flow-box">
+                Query
+            </div>
+
+            <div class="flow-arrow">
+                +
+            </div>
+
+            <div class="flow-box">
+                Reference
+            </div>
+
+            <div class="flow-arrow">
+                →
+            </div>
+
+            <div class="flow-box">
+                Shared Encoder
+            </div>
+
+            <div class="flow-arrow">
+                →
+            </div>
+
+            <div class="flow-box">
+                Feature Fusion
+            </div>
+
+            <div class="flow-arrow">
+                →
+            </div>
+
+            <div class="flow-box">
+                128-D Representation
+            </div>
+
+        </div>
+
+
+        <p>
+            The fusion uses the query representation, reference
+            representation, their difference and their Hadamard product.
+            The model also incorporates MC Dropout for uncertainty estimation
+            and a physics-informed composite loss consisting of Gaussian
+            negative log-likelihood and a monotonicity penalty.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     UNCERTAINTY & VALIDATION
+========================= -->
+
+<section class="validation">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>Uncertainty & Validation</h2>
+
+        <div class="line"></div>
+
+        <p>
+            Reconstruction is only useful when the reliability of the inferred
+            light curve can also be quantified.
+        </p>
+
+    </div>
+
+
+    <div class="validation-grid">
+
+
+        <div class="validation-card">
+
+            <h3>MC Dropout & MCMC Sampling</h3>
+
+            <p>
+                I used dropout-based stochastic sampling to estimate predictive
+        uncertainty and investigate the stability of the reconstructed
+        light curves. Repeated stochastic forward passes were used to
+        obtain distributions of model predictions rather than relying on
+        a single deterministic estimate.
+            </p>
+
+        </div>
+
+
+        <div class="validation-card">
+
+            <h3>Bootstrap Resampling</h3>
+
+            <p>
+                Bootstrap resampling was used to assess the robustness of
+                inferred quantities against variations in the sampled data.
+            </p>
+
+        </div>
+
+
+        <div class="validation-card">
+
+            <h3>Cross-Validation</h3>
+
+            <p>
+                ReFANN was evaluated using 5-fold cross-validation to test
+                model performance across different subsets of the available
+                observations.
+            </p>
+
+        </div>
+
+
+        <div class="validation-card">
+
+            <h3>Robust Statistics</h3>
+
+            <p>
+                Robust statistical methods included IQR-based uncertainty
+                estimation and 3-sigma MAD-based outlier rejection.
+            </p>
+
+        </div>
+
+
+        <div class="validation-card">
+
+            <h3>Ablation Studies</h3>
+
+            <p>
+                Embedding dimensions of 16, 32 and 64 were compared to
+                investigate the effect of representation size on model
+                behaviour.
+            </p>
+
+        </div>
+
+
+        <div class="validation-card">
+
+            <h3>Confidence Intervals</h3>
+
+            <p>
+                95% confidence intervals were reported to quantify the
+                statistical uncertainty associated with the reconstructed
+                quantities.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     RESULTS
+========================= -->
 
 <section class="results">
 
-  <div class="wrap">
+<div class="container">
 
-    <h2>Results</h2>
+    <div class="section-title">
 
-    <div class="hr"></div>
+        <h2>Results</h2>
 
-    <div class="result-box">
+        <div class="line"></div>
 
-      <p>
-        <strong>522 / 545</strong>
-        GRBs processed through the reconstruction pipeline.
-      </p>
-
-    </div>
-
-    <div class="result-box">
-
-      <p>
-        <strong>62%</strong>
-        mean parameter uncertainty reduction compared with the
-        benchmark reported in the project.
-      </p>
+        <p>
+            Quantitative results obtained from the implemented reconstruction
+            pipelines.
+        </p>
 
     </div>
 
-    <div class="result-box">
 
-      <p>
-        <strong>0.0196</strong>
-        test mean-squared error achieved by the ReFANN pipeline.
-      </p>
+    <div class="result-grid">
+
+
+        <div class="result">
+
+            <div class="number">
+                62%
+            </div>
+
+            <h3>Mean uncertainty reduction</h3>
+
+            <p>
+                ReFANN achieved a mean parameter uncertainty reduction of
+                62%, compared with 39% for the benchmark.
+            </p>
+
+        </div>
+
+
+        <div class="result">
+
+            <div class="number">
+                0.0196
+            </div>
+
+            <h3>Test MSE</h3>
+
+            <p>
+                ReFANN achieved a test mean-squared error of 0.0196 in the
+                evaluated reconstruction.
+            </p>
+
+        </div>
+
+
+        <div class="result">
+
+            <div class="number">
+                11.6–15.9%
+            </div>
+
+            <h3>DGP uncertainty reduction</h3>
+
+            <p>
+                The Deep Gaussian Process reduced uncertainties in log Ta,
+                log Fa and α by 11.6%, 12.3% and 15.9%, respectively.
+            </p>
+
+        </div>
+
+
+        <div class="result">
+
+            <div class="number">
+                1.92%
+            </div>
+
+            <h3>α outlier rate</h3>
+
+            <p>
+                The DGP reconstruction produced an α outlier rate of 1.92%
+                in the evaluated sample.
+            </p>
+
+        </div>
+
+
+        <div class="result">
+
+            <div class="number">
+                98.2%
+            </div>
+
+            <h3>ReFANN dataset coverage</h3>
+
+            <p>
+                The ReFANN pipeline processed 522 of the 545 GRBs in the
+                available dataset.
+            </p>
+
+        </div>
+
+
+        <div class="result">
+
+            <div class="number">
+                200
+            </div>
+
+            <h3>MC Dropout samples</h3>
+
+            <p>
+                MC Dropout convergence was investigated using repeated
+                stochastic samples to evaluate uncertainty behaviour.
+            </p>
+
+        </div>
+
 
     </div>
 
-    <p>
-      The resulting reconstructions improve the reliability of
-      physically meaningful GRB light-curve parameters and can
-      strengthen their use in statistical and cosmological studies.
-    </p>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- ================= QUANT CONNECTION ================= -->
+<!-- =========================
+     QUANTITATIVE CONNECTION
+========================= -->
 
 <section class="quant">
 
-  <div class="wrap">
+<div class="container">
 
-    <h2>Why This Work Matters Beyond Astrophysics</h2>
+    <div class="section-title">
 
-    <div class="hr"></div>
+        <h2>Quantitative & Computational Skills</h2>
 
-    <p>
-      Although the application is astrophysical, the underlying
-      problem is fundamentally quantitative: extracting signal from
-      noisy, incomplete and irregularly sampled time-series data.
-    </p>
-
-    <p>
-      The same computational principles appear in quantitative
-      research, where models must identify structure in noisy data,
-      quantify uncertainty and be validated against unseen samples.
-    </p>
-
-    <div class="quant-highlight">
-
-      <div class="quant-item">
-
-        <h3>Time-Series</h3>
-
-        <p>
-          Irregular and noisy temporal data
-        </p>
-
-      </div>
-
-      <div class="quant-item">
-
-        <h3>Inference</h3>
-
-        <p>
-          Probabilistic modelling and uncertainty estimation
-        </p>
-
-      </div>
-
-      <div class="quant-item">
-
-        <h3>Validation</h3>
-
-        <p>
-          Cross-validation, bootstrap and out-of-sample testing
-        </p>
-
-      </div>
+        <div class="line"></div>
 
     </div>
 
-  </div>
+
+    <div class="quant-box">
+
+        <p>
+            Although the scientific application is astrophysics, the underlying
+            problem is fundamentally quantitative: extracting reliable
+            information from noisy, incomplete and irregularly sampled data.
+            The project required probabilistic modelling, statistical
+            validation, uncertainty quantification, representation learning
+            and computational experimentation.
+        </p>
+
+
+        <div class="skills">
+
+            <div class="skill">Python</div>
+            <div class="skill">PyTorch</div>
+            <div class="skill">GPyTorch</div>
+            <div class="skill">Time-Series Modelling</div>
+            <div class="skill">Probabilistic Modelling</div>
+            <div class="skill">Uncertainty Quantification</div>
+            <div class="skill">Monte Carlo</div>
+            <div class="skill">Bootstrap Resampling</div>
+            <div class="skill">Cross-Validation</div>
+            <div class="skill">Model Comparison</div>
+            <div class="skill">Ablation Studies</div>
+            <div class="skill">Robust Statistics</div>
+            <div class="skill">Neural Networks</div>
+            <div class="skill">Gaussian Processes</div>
+            <div class="skill">Representation Learning</div>
+            <div class="skill">Statistical Inference</div>
+            <div class="skill">MCMC Sampling</div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </section>
 
 
-<!-- ================= COMPUTATIONAL SKILLS ================= -->
-
-<section class="darker">
-
-  <div class="wrap">
-
-    <h2>Computational Work</h2>
-
-    <div class="hr"></div>
-
-    <p>
-      The project involved designing the workflow from data preparation
-      through model training, evaluation and statistical analysis.
-    </p>
-
-    <p>
-      I worked extensively with Python and PyTorch, implementing
-      neural architectures, probabilistic models, uncertainty
-      estimation and automated data-processing workflows.
-    </p>
-
-    <p>
-      This required careful preprocessing, numerical optimisation,
-      reproducible experiments, model comparison and analysis of
-      failure cases rather than treating the machine-learning model
-      as a black box.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- ================= RESOURCES ================= -->
+<!-- =========================
+     RESOURCES
+========================= -->
 
 <section class="resources">
 
-  <div class="wrap">
+<div class="container">
 
-    <h2>Resources</h2>
+    <div class="section-title">
 
-    <div class="hr"></div>
+        <h2>Resources</h2>
 
-    <p>
-      Selected papers, code, presentations and supporting material
-      related to my GRB machine-learning research.
-    </p>
+        <div class="line"></div>
 
-    <!-- Replace # with your actual links -->
+        <p>
+            Publications, code, project material and additional technical
+            resources.
+        </p>
 
-    <a class="btn"
-       href="#"
-       target="_blank"
-       rel="noopener">
-       Published Paper
-    </a>
+    </div>
 
-    <a class="btn"
-       href="#"
-       target="_blank"
-       rel="noopener">
-       GitHub / Code
-    </a>
 
-    <a class="btn"
-       href="#"
-       target="_blank"
-       rel="noopener">
-       Research Poster
-    </a>
+    <div class="resource-grid">
 
-    <a class="btn"
-       href="#"
-       target="_blank"
-       rel="noopener">
-       Presentation
-    </a>
 
-    <a class="btn"
-       href="#"
-       target="_blank"
-       rel="noopener">
-       Related Reading
-    </a>
+        <div class="resource">
 
-  </div>
+            <h3>Published Paper</h3>
+
+            <p>
+                GRB light-curve reconstruction using machine-learning and
+                probabilistic approaches.
+            </p>
+
+            <!-- Replace # with paper link -->
+
+            <a class="btn" href="#" target="_blank">
+                Read Paper
+            </a>
+
+        </div>
+
+
+        <div class="resource">
+
+            <h3>GitHub Repository</h3>
+
+            <p>
+                Source code and computational implementation of the GRB
+                reconstruction project.
+            </p>
+
+            <!-- Replace # with GitHub link -->
+
+            <a class="btn" href="#" target="_blank">
+                View Code
+            </a>
+
+        </div>
+
+
+        <div class="resource">
+
+            <h3>Project Materials</h3>
+
+            <p>
+                Additional plots, technical documents, presentations and
+                supporting material.
+            </p>
+
+            <!-- Replace # with resource link -->
+
+            <a class="btn" href="#" target="_blank">
+                Explore
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
 
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-  <p>
-    Ritik Kumar · Indian Institute of Science, Bengaluru
-  </p>
-
-  <p>
-    Machine Learning · Statistical Inference · Scientific Computing
-  </p>
+    <p>
+        Ritik Kumar · Indian Institute of Science · Machine Learning &
+        High-Energy Astrophysics
+    </p>
 
 </footer>
 
