@@ -1,509 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<title>Ritik Kumar's Webpage</title>
-<style>
-  /* ===== ML on GRBs ===== */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritik Kumar</title>
 
-  .ml-grb{
-      position: relative;
-      min-height: 320px;
+    <!-- Icons used in the reference design -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-      background-image: url('GRB.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-      overflow: hidden;
-  }
+        html {
+            scroll-behavior: smooth;
+        }
 
-  .ml-grb::after{
-      content: "";
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f4f2eb;
+            color: #27313b;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            line-height: 1.45;
+        }
 
-      position: absolute;
+        a {
+            color: #3e78a6;
+            text-decoration: none;
+        }
 
-      top: 5%;
-      left: 5%;
+        a:hover {
+            color: #285a80;
+            text-decoration: underline;
+        }
 
-      width: 45%;
-      height: 35%;
+        /* Main page width and left/right whitespace */
+        .container {
+            width: 86%;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 12px 0 70px 0;
+        }
 
-      background-image: url('network.png');
-      background-repeat: no-repeat;
-      background-position: top left;
-      background-size: contain;
+        /* ---------------------------------------------------------
+           HEADER
+           --------------------------------------------------------- */
 
-      opacity: 0.35;
-  }
-  :root{
-    --teal:#2bb6a3;
-    --dark:#2e333d;        /* slate section bg */
-    --darker:#262a32;
-    --text:#ffffff;
-    --muted:rgba(255,255,255,0.82);
-    --accent:#ff5a3c;      /* orange button */
-    --border:rgba(255,255,255,0.55);
-  }
-  .Google-buttons{
-    margin-top:2rem;
-    display:flex;
-    justify-content:center;
-  }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 22px;
+            margin-bottom: 45px;
+        }
 
-  .Google-buttons .btn{
-    background:#ffffff;
-    color:#1a73e8;
-    border:2px solid #ffffff;
-    padding:.9rem 2rem;
-    text-transform:none;
-    letter-spacing:.05rem;
-    font-size:.9rem;
-    font-weight:700;
-    border-radius:4px;
-    transition:all .25s ease;
-  }
+        .name {
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 0;
+            color: #202b35;
+        }
 
-  .Google-buttons .btn:hover{
-    background:#1a73e8;
-    color:#ffffff;
-    border-color:#1a73e8;
-  }
+        nav {
+            display: flex;
+            gap: 27px;
+            align-items: center;
+        }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
-    color:var(--text);background:var(--dark);-webkit-font-smoothing:antialiased;line-height:1.7;
-  }
-  a{color:inherit;text-decoration:none}
+        nav a {
+            font-size: 14px;
+            color: #303841;
+        }
 
-  /* ===== fixed top bar (brand + menu) ===== */
-  .topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;
-    justify-content:space-between;padding:1.25rem 2rem;
-    background:linear-gradient(to bottom,rgba(20,22,28,0.85),rgba(20,22,28,0));
-    transition:background .3s}
-  .topbar.solid{background:var(--darker);box-shadow:0 2px 18px rgba(0,0,0,.4)}
-  .brand{font-weight:700;letter-spacing:.18rem;text-transform:uppercase;font-size:1.05rem;
-    opacity:0;transition:opacity .3s;pointer-events:none}
-  .topbar.solid .brand{opacity:1;pointer-events:auto}
-  .menu-toggle{display:flex;align-items:center;gap:.7rem;background:none;border:none;color:#fff;
-    cursor:pointer;font-size:.95rem;letter-spacing:.22rem;text-transform:uppercase;font-weight:600}
-  .menu-toggle .bars{display:inline-flex;flex-direction:column;gap:5px}
-  .menu-toggle .bars span{display:block;width:26px;height:2px;background:#fff;border-radius:2px}
+        nav a:hover {
+            color: #3e78a6;
+            text-decoration: none;
+        }
 
-  /* ===== HERO (full screen, photo background) ===== */
-  .hero{position:relative;height:100vh;min-height:100vh;width:100%;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;
-    /* >>> YOUR PHOTO GOES HERE <<< change the filename to your image */
-    background:#000 url('g.jpg') center center / cover no-repeat;
-  }
-  .hero::after{content:'';position:absolute;inset:0;
-    background:radial-gradient(60% 50% at 50% 50%,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 60%),
-               linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.45));}
-  .hero .inner{position:relative;z-index:2;max-width:60rem;animation:fade 1.3s ease both}
-  .rule{width:14rem;max-width:60vw;height:2px;background:#fff;margin:1.5rem auto}
-  .hero h1{font-size:clamp(2.6rem,7vw,4rem);font-weight:700;letter-spacing:.4rem;text-transform:uppercase;
-    text-shadow:0 2px 30px rgba(0,0,0,.85)}
-  .hero .tagline{margin-top:.4rem;color:var(--muted);font-size:clamp(.95rem,2.3vw,1.3rem);
-    letter-spacing:.16rem;text-transform:uppercase;font-weight:300;text-shadow:0 2px 18px rgba(0,0,0,.9)}
-  .scrolldown{position:absolute;bottom:2.2rem;left:0;right:0;text-align:center;z-index:2}
-  .scrolldown a{font-size:.9rem;letter-spacing:.22rem;text-transform:uppercase;font-weight:600;
-    text-shadow:0 2px 14px rgba(0,0,0,.9)}
-  .arrow{margin-top:.8rem;font-size:1.4rem;animation:bounce 2s infinite}
+        /* ---------------------------------------------------------
+           INTRO
+           --------------------------------------------------------- */
 
-  /* ===== content sections ===== */
-  section.band{padding:5rem 2rem;display:flex;justify-content:center}
-  .band .wrap{width:min(60rem,92vw);text-align:center}
-  .band h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:700;letter-spacing:.22rem;text-transform:uppercase}
-  .band .hr{width:7rem;height:2px;background:rgba(255,255,255,.6);margin:1.2rem auto 1.8rem}
-  .band p{color:var(--muted);font-size:1.08rem;margin-bottom:1.8rem}
-  .teal{background:var(--teal)}
-  .teal p{color:rgba(255,255,255,.95)}
+        .intro {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 37px;
+            margin-bottom: 62px;
+            align-items: start;
+        }
 
-  /* split rows (image + text) */
-  section.split{display:grid;grid-template-columns:1fr 1fr;min-height:62vh}
-  section.split .media{background-size:cover;background-position:center;min-height:320px}
-  section.split .body{display:flex;flex-direction:column;justify-content:center;padding:4rem clamp(1.5rem,5vw,5rem)}
-  section.split.dark{background:var(--dark)}
-  section.split.darker{background:var(--darker)}
-  section.split.text-left .media{order:2}
-  section.split.text-left .body{order:1}
-  section.split h2{font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:700;letter-spacing:.22rem;text-transform:uppercase;margin-bottom:1.4rem}
-  section.split p{color:var(--muted);font-size:1.08rem;margin-bottom:2rem}
+        .profile-photo {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
 
-  .btn{display:inline-block;align-self:flex-start;padding:.95rem 2rem;border:2px solid var(--border);
-    color:#fff;text-transform:uppercase;letter-spacing:.18rem;font-size:.8rem;font-weight:600;transition:.25s}
-  .btn:hover{background:#fff;color:#1c1f26}
-  .band .btn{align-self:center}
-  .teal .btn{border-color:#fff}
-  .teal .btn:hover{background:#fff;color:var(--teal)}
+        .intro-text h1 {
+            margin: -5px 0 5px 0;
+            font-size: 28px;
+            font-weight: 600;
+            color: #202b35;
+            line-height: 1.25;
+        }
 
-  /* get in touch banner */
-  .cta{position:relative;min-height:38vh;display:flex;align-items:center;justify-content:center;
-    background:#000 url('images/hero.jpg') center center / cover no-repeat;}
-  .cta::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5)}
-  .cta a{position:relative;z-index:2;background:var(--accent);color:#fff;padding:1.1rem 3.5rem;
-    text-transform:uppercase;letter-spacing:.2rem;font-weight:700;font-size:.95rem;width:min(40rem,86vw);text-align:center;
-    transition:filter .2s}
-  .cta a:hover{filter:brightness(1.1)}
+        .subtitle {
+            color: #4c535a;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
 
-  footer{background:var(--darker);text-align:center;padding:3rem 2rem 3.5rem;color:var(--muted)}
-  footer .socials{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:2rem;
-    margin-bottom:1rem;
-  }
+        .intro-text p {
+            margin: 0 0 14px 0;
+            color: #30363c;
+            max-width: 790px;
+        }
 
-  footer .socials a{
-    color:#ffffff;
-    font-size:1.7rem;
-    text-decoration:none;
-    transition:all 0.3s ease;
-  }
+        /* ---------------------------------------------------------
+           SOCIAL LINKS + ICONS
+           --------------------------------------------------------- */
 
-  footer .socials a:hover{
-    color:#2bb6a3;
-    transform:translateY(-3px);
-  }
-  footer .copy{font-size:.8rem;letter-spacing:.1rem;text-transform:uppercase}
+        .links {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-  /* ===== slide-out menu ===== */
-  .nav-overlay{position:fixed;inset:0;z-index:70;background:rgba(8,8,14,.6);backdrop-filter:blur(2px);
-    opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
-  .nav-overlay.open{opacity:1;visibility:visible}
-  .nav-panel{position:fixed;top:0;right:0;height:100%;z-index:80;width:min(20rem,80vw);
-    background:rgba(16,18,24,.98);border-left:1px solid rgba(255,255,255,.15);padding:5rem 2.5rem 2rem;
-    transform:translateX(100%);transition:transform .4s cubic-bezier(.7,0,.3,1)}
-  .nav-panel.open{transform:translateX(0)}
-  .nav-panel h3{font-size:.75rem;letter-spacing:.25rem;text-transform:uppercase;color:var(--muted);
-    padding-bottom:1rem;margin-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.15)}
-  .nav-panel a{display:block;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.08);
-    letter-spacing:.08rem;text-transform:uppercase;font-size:.82rem;transition:color .2s,padding-left .2s}
-  .nav-panel a:hover{color:var(--teal);padding-left:.4rem}
-  .nav-close{position:absolute;top:1.25rem;right:1.5rem;background:none;border:none;color:var(--muted);
-    font-size:1.8rem;cursor:pointer;line-height:1;transition:color .2s}
-  .nav-close:hover{color:#fff}
+        .links a {
+            margin: 0;
+            font-size: 13px;
+            white-space: nowrap;
+        }
 
-  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+        .links i {
+            margin-right: 7px;
+            font-size: 15px;
+            color: #3e78a6;
+        }
 
-  /* mobile: stack split rows, image on top */
-  @media(max-width:760px){
-    section.split{grid-template-columns:1fr}
-    section.split .media{min-height:240px;order:0 !important}
-    section.split .body{order:0 !important;padding:3rem 1.5rem}
-    section.split h2,section.band h2{letter-spacing:.12rem}
-    .topbar{padding:1rem 1.25rem}
-  }
-</style>
+        /* ---------------------------------------------------------
+           SECTIONS
+           --------------------------------------------------------- */
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            font-weight: 500;
+            color: #202b35;
+            margin: 0 0 20px 0;
+            padding-bottom: 7px;
+            border-bottom: 1px solid #aeb1b0;
+        }
+
+        /* ---------------------------------------------------------
+           RESEARCH
+           --------------------------------------------------------- */
+
+        .research-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-right: 115px;
+        }
+
+        .research-item h3 {
+            margin: 0 0 3px 0;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .research-item h3 a {
+            color: #3977a7;
+        }
+
+        .research-item p {
+            margin: 3px 0;
+            color: #41474d;
+        }
+
+        .research-meta {
+            color: #6b7075;
+            font-size: 13px;
+        }
+
+        .read-more {
+            position: absolute;
+            right: 0;
+            top: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* ---------------------------------------------------------
+           PUBLICATIONS
+           --------------------------------------------------------- */
+
+        .publication {
+            margin-bottom: 22px;
+        }
+
+        .publication-title {
+            font-weight: 600;
+            color: #3977a7;
+        }
+
+        .publication-details {
+            color: #555b60;
+            font-size: 14px;
+        }
+
+        /* ---------------------------------------------------------
+           NEWS
+           --------------------------------------------------------- */
+
+        .news-item {
+            display: grid;
+            grid-template-columns: 105px 1fr;
+            margin-bottom: 8px;
+        }
+
+        .news-date {
+            color: #555b60;
+            font-size: 14px;
+        }
+
+        /* ---------------------------------------------------------
+           FOOTER
+           --------------------------------------------------------- */
+
+        footer {
+            border-top: 1px solid #b5b7b6;
+            padding-top: 18px;
+            color: #777b7e;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        /* ---------------------------------------------------------
+           MOBILE
+           --------------------------------------------------------- */
+
+        @media (max-width: 700px) {
+            .container {
+                width: calc(100% - 40px);
+                padding: 22px 0 55px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                margin-bottom: 35px;
+            }
+
+            nav {
+                gap: 18px;
+                flex-wrap: wrap;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .profile-photo {
+                width: 145px;
+                height: 145px;
+            }
+
+            .intro-text h1 {
+                font-size: 27px;
+            }
+
+            .research-item {
+                padding-right: 0;
+            }
+
+            .read-more {
+                position: static;
+                display: inline-block;
+                margin-top: 5px;
+            }
+
+            .news-item {
+                grid-template-columns: 90px 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- top bar -->
-  <header class="topbar" id="topbar">
-    <a href="#top" class="brand">Ritik Kumar</a>
-    <button class="menu-toggle" id="menuToggle">Menu
-      <span class="bars"><span></span><span></span></span>
-    </button>
-  </header>
+<div class="container">
 
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="inner">
-      <div class="rule"></div>
-      <h1>Hello!</h1>
-      <div class="rule"></div>
-      <p class="tagline">This is the website of Ritik Kumar<br>
-        Physics · Astrophysics · Machine Learning · Quantitative Research <br>
-        5th-year BS+MS Researcher at Indian Institute of Science</p>
-     
-    <div class="Google-buttons">
-      <a class="btn"
-       href="https://scholar.google.com/citations?user=wTNSGrwAAAAJ&hl=en"
-       target="_blank"
-       rel="noopener">
-        Google Scholar
-      </a>
-    </div>
+    <header>
+        <div class="name">Ritik Kumar</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#research">Research</a>
+            <a href="#publications">Publications</a>
+            <a href="cv.html">CV</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
 
-    </div>
-    <div class="scrolldown">
-      <a href="#research">Learn More</a>
-      <div class="arrow">&darr;</div>
-    </div>
-  </section>
+    <section class="intro">
 
-  <!-- 1. Research Interests (teal band) -->
-  <section class="band teal" id="research">
-    <div class="wrap">
-      <h2>Research Interests</h2>
-      <div class="hr"></div>
-      <p>My research combines physics, machine learning, dynamic programming, statistical modelling and
-  computational data analysis. I am interested in extracting reliable
-  information from complex and noisy datasets through quantitative modelling,
-  statistical inference and machine-learning methods.
-      </p>
+        <div>
+            <img src="MY.jpeg" alt="Ritik Kumar" class="profile-photo">
+        </div>
 
-      <p>  My astrophysics research focuses on supermassive black holes, X-ray
-  observations, coronae and ultra-fast outflows. I use the XMM-Newton, NuSTAR and IXPE telescopes to study these phenomena. I do the spectral, timing and polarization study of Active Galactic Nuclei. Alongside this, I have
-  developed machine-learning methods for astronomical time-series data and
-  Monte Carlo. <p><p>
-  Across my projects, I follow a common approach: build reliable datasets, formulate models, test them rigorously, and evaluate the robustness of the results.
-      </p>
-           </p></p>
-      <div class="cv-buttons">
-        <a class="btn" href="Ritikkumar_Quant_CV.pdf" target="_blank" rel="noopener">Quant / ML CV</a>
-        <a class="btn" href="Ritikkumar_Astrophysics_CV.pdf" target="_blank" rel="noopener">Astrophysics CV</a>
-      </div>
-      
-    </div>
-  </section>
+        <div class="intro-text">
 
-  <!-- 2. Topic A (image left, text right) -->
-  <section class="split dark" id="topic1">
-    <div class="media" style="background-image:url('coronae.jpeg')"></div>
-    <div class="body">
-      <h2>Coronal Temperature</h2>
-      <p>
-  Understanding the temperature of the hot X-ray corona is essential for
-studying how supermassive black holes produce high-energy radiation and
-how energy is transferred through their accretion environment. The coronal
-state is also closely linked to the accretion flow, spectral evolution,
-and the energetic processes that can influence the surrounding AGN environment. </p>
-      </p>
-      Using multi-epoch NuSTAR observations, I study coronal temperature
-and its variability across AGN. We find significant
-changes in the coronal temperature between epochs, providing a way
-to investigate how the corona evolves with the changing state of
-the accretion system.
-      </p>
-      <a class="btn" href="coronae.html">
-        Explore Research
-      </a>
-    </div>
-  </section>
+            <h1>Welcome!</h1>
+        
+            <p>
+                I am Ritik Kumar, and I am a 5th-year BS-MS student in Physics supervised by Prof. Nirmal Raj at the
+    Indian Institute of Science, Bengaluru. My main research focus on using spectral, timing and polarization to study Central region of Active Galactic Nuclei.
+    Alongside this, I also work on machine learning and
+    statistical methods with real data, including time-series
+    reconstruction and probabilistic modelling, I develop the models to model the signal and reduce the noise, I do use computational and statistical methods to understand
+    complex signals and extract useful information from data. 
+            </p>
 
-  <!-- 3. Topic B (text left, image right) -->
-  <section class="split darker text-left" id="topic2">
-    <div class="media" style="background-image:url('outflows.jpeg')"></div>
-    <div class="body">
-      <h2>Ultra Fast Outflows</h2>
-      <p>Ultra-fast outflows are powerful winds launched from the innermost regions
-of active galaxies, carrying large amounts of energy and momentum away from
-the central black hole. Studying these outflows is important for understanding
-how black-hole accretion can influence the surrounding galaxy and contribute
-to AGN feedback and the evolution of its environment.</p>
-      </p>I developed Python-based pipelines to search and analyse large X-ray
-datasets, combining automated data processing, statistical filtering,
-parallel computation and photoionisation modelling to identify and study
-ultra-fast outflows in active galaxies.</p>
-      <a class="btn" href="outflows.html">
-        Explore Research
-      </a>
-    </div>
-  </section>
-  
-  <!-- 4. Topic C (image left, text right) -->
-<section class="split dark" id="topic3">
+            <p>
+             I am also interested in
+    quantitative methods, statistical inference, optimization, and
+    data-driven problem solving. 
+    I am currently working with Prof. C. S. Stalin at the Indian Institute of
+    Astrophysics (IIA), Prof. Maria Giovanna Dainotti at the National
+    Astronomical Observatory of Japan (NAOJ), and Dr. Thomas Dauser and
+    Prof. Jörn Wilms at ECAP, Friedrich-Alexander-Universität Erlangen-Nürnberg
+    (FAU), Germany. Through these collaborations, I work on X-ray studies of
+    active galactic nuclei, machine learning for real data analysis,
+    and X-ray spectral and timing analysis and relativistic modelling.
 
-    <div class="media ml-grb"></div>
+            </p>
 
-    <div class="body">
-        <h2>Machine Learning & Quantitative Research</h2>
+            <div class="links">
+
+                <a href="https://scholar.google.com/citations?user=wTNSGrwAAAAJ&hl=en"
+                   target="_blank" aria-label="Google Scholar">
+                    <i class="fa-solid fa-graduation-cap"></i>Google Scholar
+                </a>
+
+                <a href="https://orcid.org/0009-0009-0399-9140"
+                   target="_blank" aria-label="ORCID">
+                    <i class="fa-brands fa-orcid"></i>ORCID
+                </a>
+
+                <a href="https://github.com/Ritikkumar0730"
+                   target="_blank" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>GitHub
+                </a>
+
+                <a href="Ritikkumar_CV.pdf" target="_blank" aria-label="Quantitative CV"> 
+                    <i class="fa-solid fa-chart-line"></i>Quant_CV
+                </a>
+
+                <a href="Ritikkumar_CV1.pdf" target="_blank" aria-label="CV">
+                    <i class="fa-solid fa-file-lines"></i></i>Astrophysics_CV 
+                </a>
+
+                <a href="mailto:ritikumar@iisc.ac.in" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i>Email
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="research">
+
+        <h2 class="section-title">Research</h2>
+
+        <div class="research-item">
+
+            <h3>
+                <a href="research/agn-coronae.html">
+                    X-ray Coronae of Active Galactic Nuclei
+                </a>
+            </h3>
+
+            <p>
+                I study the hot X-ray-emitting coronae surrounding supermassive black holes
+                using X-ray spectroscopy, with a particular focus on their temperature,
+                spectral properties, and connection to the accretion disk.
+            </p>
+
+            <div class="research-meta">
+                NuSTAR · X-ray spectroscopy · Timing Analysis · AGN · Accretion physics
+            </div>
+
+            <a class="read-more" href="research/agn-coronae.html">
+                Read more →
+            </a>
+
+        </div>
+
+
+        <div class="research-item">
+
+            <h3>
+                <a href="research/agn-outflows.html">
+                    Multi-phase Outflows in Active Galactic Nuclei
+                </a>
+            </h3>
+
+            <p>
+                I investigate outflows from active galactic nuclei across different gas phases
+                using XMM-Newton observations, including the study of ultra-fast
+                outflows, multiple velocity components, and kinetics of the outflows.
+            </p>
+
+            <div class="research-meta">
+                XMM-Newton · AGN outflows · X-ray spectroscopy · Timing Analysis
+            </div>
+
+            <a class="read-more" href="research/agn-outflows.html">
+                Read more →
+            </a>
+
+        </div>
+
+
+        <div class="research-item">
+
+            <h3>
+                <a href="research/grb-reconstruction.html">
+                    Gamma-Ray Burst Light-Curve Reconstruction using Machine Learning models
+                </a>
+            </h3>
+
+            <p>
+                I work on development of statistical and machine-learning methods for reconstructing missing segments in time-series data, using Gaussian processes, neural networks, and physics-informed models for probabilistic inference and uncertainty-aware prediction.
+            </p>
+
+            <div class="research-meta">
+                GRBs · Machine Learning Models · Model Development · Data Extraction 
+            </div>
+
+            <a class="read-more" href="research/grb-reconstruction.html">
+                Read more →
+            </a>
+
+        </div>
+
+
+        <div class="research-item">
+
+            <h3>
+                <a href="research/xray-polarization.html">
+                    X-ray Polarization and Relativistic Reflection
+                </a>
+            </h3>
+
+            <p>
+                I am investigating the geometry and physical properties of AGN corona using X-ray polarization and relativistic reflection modelling,
+                combining IXPE, XMM-Newton, and NuSTAR observations.
+            </p>
+
+            <div class="research-meta">
+                IXPE · XMM-Newton · NuSTAR · Relativistic reflection
+            </div>
+
+            <a class="read-more" href="research/xray-polarization.html">
+                Read more →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section id="publications">
+
+        <h2 class="section-title">Selected Publications</h2>
+
+        <div class="publication">
+
+            <div class="publication-title">
+                Physics-Informed Neural Networks and Data-Driven Models for GRB X-ray Light-Curve Gap Reconstruction
+            </div>
+
+            <div class="publication-details">
+                Ayush Garg, Ritik Kumar, Maria G. Dainotti, et al. · 2026
+            </div>
+
+            <div>
+                <a href="https://arxiv.org/abs/2609.15261" target="_blank">arXiv pre-print →</a>
+            </div>
+
+        </div>
+
+
+        <div class="publication">
+
+            <div class="publication-title">
+                Multi-Model Framework for Reconstructing Gamma-Ray Burst Light Curves
+            </div>
+
+            <div class="publication-details">
+                Anshul, Maria G. Dainotti,,Ritik Kumar et al. · Journal of High Energy Astrophysics
+            </div>
+
+            <div>
+                <a href="https://www.sciencedirect.com/science/article/pii/S2214404825002009" target="_blank">Paper →</a>
+            </div>
+
+        </div>
+
+
+
+        <div class="publication">
+
+            <div class="publication-title">
+                An optical gamma-ray burst catalogue with measured redshift–I. Data release of 535 gamma-ray bursts and colour evolution
+            </div>
+
+            <div class="publication-details">
+                Maria G. Dainotti,,,,,,,Ritik Kumar et al. · Monthly Notices of the Royal Astronomical Society
+            </div>
+
+            <div>
+                <a href="https://academic.oup.com/mnras/article/533/4/4023/7697178" target="_blank">Paper →</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="news">
+
+        <h2 class="section-title">News</h2>
+
+        <div class="news-item">
+            <div class="news-date">Sep 2026</div>
+            <div>
+                Submitted a new manuscript on GRB X-ray light-curve reconstruction to arXiv.
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-date">2026</div>
+            <div>
+                Started Master's thesis research on X-ray polarization and relativistic reflection in AGN.
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="contact">
+
+        <h2 class="section-title">Contact</h2>
 
         <p>
-Gamma-ray bursts (GRBs) are among the most energetic transient events
-in the Universe. I develop machine-learning and statistical methods to
-reconstruct noisy and irregularly sampled GRB light curves using
-Gaussian Processes, Siamese, ReFANN neural network, and uncertainty estimation.
+            I am interested in research collaborations and discussions in high-energy
+            astrophysics, Machine Learning, Quantitative research and related work areas.
         </p>
 
         <p>
-I have also worked on Physics-Informed Neural Networks, probabilistic
-modelling, MCMC inference, cross-validation and bootstrap resampling,
-with a focus on reliable data-driven modelling.
+            <a href="mailto:ritikumar@iisc.ac.in">
+                <i class="fa-solid fa-envelope"></i>
+                ritikumar@iisc.ac.in
+            </a>
         </p>
 
-        <a class="btn" href="GRB.html">
-            Explore ML Research
-        </a>
-    </div>
-
-</section>
-    
-  </section>
-<!-- 5. Quantitative & Computational Research -->
-
-<section class="split darker text-left" id="quant">
-
-    <div class="media" style="background-image:url('quant.png')"></div>
-
-    <div class="body">
-
-        <h2>Quantitative & Computational Research</h2>
-
-        <p>
-      My research involves working with large datasets, developing automated
-      data pipelines, analysing time-series data and building statistical and
-      machine-learning models. I use Python extensively for data processing,
-      modelling and scientific computing.
-        </p>
-
-        <p>
-      My quantitative toolkit includes statistical inference, MCMC,
-      uncertainty estimation, model comparison, optimisation, machine
-      learning and parallel computation on Linux and HPC environments.
-        </p>
-
-        <a class="btn" href="quant.html">
-      Explore Quantitative Work
-        </a>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- Publications -->
+    <footer>
+        © 2026 Ritik Kumar · Indian Institute of Science
+    </footer>
 
-<section class="band" id="publications">
+</div>
 
-    <div class="wrap">
-
-       <h2>Selected Publications</h2>
-  
-       <div class="hr"></div>
-
-       <p>
-      My research includes machine learning, statistical modelling and
-      computational analysis applied to scientific datasets.
-       </p>
-
-       <p>
-      <strong>Published:</strong>
-      GRB light-curve reconstruction using machine-learning and
-      probabilistic methods.
-       </p>
-
-       <p>
-      <strong>Manuscripts in preparation:</strong>
-      Ultra-fast outflows in AGN; coronal temperature and multi-epoch
-      X-ray spectral modelling.
-       </p>
-
-       <a class="btn" href="publications.html">
-      View Publications
-       </a>
-
-     </div>
-
-</section>
-
-
-
-  <!-- 6. Beyond Research (image left, text right) -->
-  <section class="split dark text-left" id="presenting">
-    <div class="media" style="background-image:url('beyond.jpeg')"></div>
-    <div class="body">
-      <h2>Beyond Research</h2>
-      <p>Beyond my research, I enjoy learning new technical ideas, working with
-  people from different backgrounds and communicating complex concepts
-  clearly. I also enjoy badminton, cricket, snooker, travelling, hiking,
-  movies and anime.</p>
-      <a class="btn" href="#" target="_blank" rel="noopener">Learn more</a>
-    </div>
-  </section>
-
-  <!-- 6. Resources (text left, image right) -->
-  <section class="split darker" id="resources">
-    <div class="media" style="background-image:url('resources.jpeg')"></div>
-    <div class="body">
-      <h2>Resources</h2>
-      <p>I have compiled a number of various career and research resources that I have found helpful. Maybe you will too!</p>
-      <a class="btn" href="resources.html">Click Here For Resources
-    </a>
-    </div>
-  </section>
-
-  <!-- 7. Get in touch banner -->
-  <section class="cta" id="contact">
-    <a href="mailto:hrithikk048@gmail.com">Get in Touch</a>
-  </section>
-
-  <!-- footer -->
-  <footer>
-  <div class="socials">
-
-    <a href="https://github.com/Ritikkumar0730"
-       target="_blank"
-       rel="noopener"
-       title="GitHub">
-       <i class="fab fa-github"></i>
-    </a>
-
-    <a href="https://www.linkedin.com/in/ritik-kumar-3817b9223/"
-       target="_blank"
-       rel="noopener"
-       title="LinkedIn">
-       <i class="fab fa-linkedin"></i>
-    </a>
-
-    <a href="mailto:hrithikk048@gmail.com"
-       title="Email">
-       <i class="fas fa-envelope"></i>
-    </a>
-
-    <a href="https://orcid.org/0009-0009-0399-9140"
-       target="_blank"
-       rel="noopener"
-       title="ORCID">
-      <img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
-           alt="ORCID"
-           style="width:18px;height:18px;vertical-align:middle;">
-    </a>
-  
-
-  </div>
-
-  <div class="copy">
-    &copy; Ritik Kumar &nbsp;|&nbsp; Design inspired by HTML5 UP
-  </div>
-</footer>
-
-  <!-- slide-out menu -->
-  <div class="nav-overlay" id="navOverlay"></div>
-  <nav class="nav-panel" id="navPanel">
-    <button class="nav-close" id="navClose" aria-label="Close">&times;</button>
-    <h3>Menu</h3>
-    <a href="#top">Home</a>
-    <a href="#research">Research</a>
-    <a href="ml.html">ML Research</a>
-    <a href="quant.html">Quantitative Work</a>
-    <a href="#publications">Publications</a>
-    <a href="resources.html">Resources</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-<script>
-  // menu open/close
-  const t=document.getElementById('menuToggle'),o=document.getElementById('navOverlay'),
-        p=document.getElementById('navPanel'),c=document.getElementById('navClose');
-  const open=()=>{o.classList.add('open');p.classList.add('open')};
-  const close=()=>{o.classList.remove('open');p.classList.remove('open')};
-  t.onclick=open;c.onclick=close;o.onclick=close;
-  // close menu when a link is clicked (so it scrolls smoothly)
-  p.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  // solidify top bar after scrolling past hero
-  const bar=document.getElementById('topbar');
-  addEventListener('scroll',()=>{bar.classList.toggle('solid',scrollY>innerHeight*0.6)});
-</script>
 </body>
 </html>
