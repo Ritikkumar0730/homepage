@@ -4,75 +4,308 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ritik Kumar</title>
+
+    <!-- Icons used in the reference design -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            margin: 0; padding: 0; background: #ffffff; color: #333333;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                         Helvetica, Arial, sans-serif;
-            font-size: 16px; line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background: #f4f2eb;
+            color: #27313b;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            line-height: 1.45;
         }
-        a { color: #557a95; text-decoration: none; }
-        a:hover { color: #333333; text-decoration: underline; }
-        .container { max-width: 900px; margin: 0 auto; padding: 45px 30px 80px; }
+
+        a {
+            color: #3e78a6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #285a80;
+            text-decoration: underline;
+        }
+
+        /* Main page width and left/right whitespace */
+        .container {
+            width: 86%;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 12px 0 70px 0;
+        }
+
+        /* ---------------------------------------------------------
+           HEADER
+           --------------------------------------------------------- */
+
         header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding-bottom: 25px; border-bottom: 1px solid #eeeeee; margin-bottom: 55px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 22px;
+            margin-bottom: 45px;
         }
-        .name { font-size: 24px; font-weight: 500; letter-spacing: -0.3px; color: #333333; }
-        nav { display: flex; gap: 25px; }
-        nav a { font-size: 14px; color: #666666; }
-        nav a:hover { color: #333333; text-decoration: none; }
+
+        .name {
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 0;
+            color: #202b35;
+        }
+
+        nav {
+            display: flex;
+            gap: 27px;
+            align-items: center;
+        }
+
+        nav a {
+            font-size: 14px;
+            color: #303841;
+        }
+
+        nav a:hover {
+            color: #3e78a6;
+            text-decoration: none;
+        }
+
+        /* ---------------------------------------------------------
+           INTRO
+           --------------------------------------------------------- */
+
         .intro {
-            display: grid; grid-template-columns: 180px 1fr; gap: 45px; margin-bottom: 70px;
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 37px;
+            margin-bottom: 62px;
+            align-items: start;
         }
-        .profile-photo { width: 170px; height: 210px; object-fit: cover; border-radius: 2px; }
+
+        .profile-photo {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
         .intro-text h1 {
-            margin: 0 0 12px; font-size: 30px; font-weight: 500;
-            color: #333333; line-height: 1.3;
+            margin: -5px 0 5px 0;
+            font-size: 28px;
+            font-weight: 600;
+            color: #202b35;
+            line-height: 1.25;
         }
-        .subtitle { color: #777777; font-size: 15px; margin-bottom: 25px; }
-        .intro-text p { margin: 0 0 15px; }
-        .links { margin-top: 20px; }
-        .links a { margin-right: 18px; font-size: 14px; }
-        section { margin-bottom: 70px; }
+
+        .subtitle {
+            color: #4c535a;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .intro-text p {
+            margin: 0 0 14px 0;
+            color: #30363c;
+            max-width: 790px;
+        }
+
+        /* ---------------------------------------------------------
+           SOCIAL LINKS + ICONS
+           --------------------------------------------------------- */
+
+        .links {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .links a {
+            margin: 0;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .links i {
+            margin-right: 7px;
+            font-size: 15px;
+            color: #3e78a6;
+        }
+
+        /* ---------------------------------------------------------
+           SECTIONS
+           --------------------------------------------------------- */
+
+        section {
+            margin-bottom: 50px;
+        }
+
         .section-title {
-            font-size: 21px; font-weight: 500; color: #333333; margin: 0 0 28px;
-            padding-bottom: 10px; border-bottom: 1px solid #eeeeee;
+            font-size: 21px;
+            font-weight: 500;
+            color: #202b35;
+            margin: 0 0 20px 0;
+            padding-bottom: 7px;
+            border-bottom: 1px solid #aeb1b0;
         }
-        .research-item { margin-bottom: 38px; }
-        .research-item h3 { margin: 0 0 5px; font-size: 18px; font-weight: 500; }
-        .research-item h3 a { color: #557a95; }
-        .research-item p { margin: 7px 0; color: #555555; }
-        .research-meta { color: #888888; font-size: 13px; }
-        .read-more { display: inline-block; margin-top: 5px; font-size: 14px; }
-        .publication { margin-bottom: 25px; }
-        .publication-title { font-weight: 500; }
-        .publication-details { color: #666666; font-size: 14px; }
-        .news-item { display: grid; grid-template-columns: 105px 1fr; margin-bottom: 14px; }
-        .news-date { color: #888888; font-size: 14px; }
+
+        /* ---------------------------------------------------------
+           RESEARCH
+           --------------------------------------------------------- */
+
+        .research-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-right: 115px;
+        }
+
+        .research-item h3 {
+            margin: 0 0 3px 0;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .research-item h3 a {
+            color: #3977a7;
+        }
+
+        .research-item p {
+            margin: 3px 0;
+            color: #41474d;
+        }
+
+        .research-meta {
+            color: #6b7075;
+            font-size: 13px;
+        }
+
+        .read-more {
+            position: absolute;
+            right: 0;
+            top: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* ---------------------------------------------------------
+           PUBLICATIONS
+           --------------------------------------------------------- */
+
+        .publication {
+            margin-bottom: 22px;
+        }
+
+        .publication-title {
+            font-weight: 600;
+            color: #3977a7;
+        }
+
+        .publication-details {
+            color: #555b60;
+            font-size: 14px;
+        }
+
+        /* ---------------------------------------------------------
+           NEWS
+           --------------------------------------------------------- */
+
+        .news-item {
+            display: grid;
+            grid-template-columns: 105px 1fr;
+            margin-bottom: 8px;
+        }
+
+        .news-date {
+            color: #555b60;
+            font-size: 14px;
+        }
+
+        /* ---------------------------------------------------------
+           FOOTER
+           --------------------------------------------------------- */
+
         footer {
-            border-top: 1px solid #eeeeee; padding-top: 25px; color: #999999;
-            font-size: 13px; text-align: center;
+            border-top: 1px solid #b5b7b6;
+            padding-top: 18px;
+            color: #777b7e;
+            font-size: 13px;
+            text-align: left;
         }
+
+        /* ---------------------------------------------------------
+           MOBILE
+           --------------------------------------------------------- */
+
         @media (max-width: 700px) {
-            .container { padding: 30px 22px 60px; }
-            header {
-                flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 40px;
+            .container {
+                width: calc(100% - 40px);
+                padding: 22px 0 55px;
             }
-            nav { gap: 18px; flex-wrap: wrap; }
-            .intro { grid-template-columns: 1fr; gap: 25px; }
-            .profile-photo { width: 140px; height: 175px; }
-            .intro-text h1 { font-size: 27px; }
-            .news-item { grid-template-columns: 90px 1fr; }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                margin-bottom: 35px;
+            }
+
+            nav {
+                gap: 18px;
+                flex-wrap: wrap;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .profile-photo {
+                width: 145px;
+                height: 145px;
+            }
+
+            .intro-text h1 {
+                font-size: 27px;
+            }
+
+            .research-item {
+                padding-right: 0;
+            }
+
+            .read-more {
+                position: static;
+                display: inline-block;
+                margin-top: 5px;
+            }
+
+            .news-item {
+                grid-template-columns: 90px 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
+
 <div class="container">
+
     <header>
         <div class="name">Ritik Kumar</div>
+
         <nav>
             <a href="index.html">Home</a>
             <a href="#research">Research</a>
@@ -82,134 +315,268 @@
         </nav>
     </header>
 
+
     <section class="intro">
+
         <div>
             <img src="MY.jpeg" alt="Ritik Kumar" class="profile-photo">
         </div>
+
         <div class="intro-text">
+
             <h1>Ritik Kumar</h1>
+
             <div class="subtitle">
                 BS-MS (Research) Student in Physics<br>
                 Indian Institute of Science, Bengaluru
             </div>
+
             <p>
                 I am a physics student and researcher interested in
                 high-energy astrophysics, X-ray astronomy, and the
                 physics of accreting supermassive black holes.
             </p>
+
             <p>
                 My research focuses on active galactic nuclei, X-ray
                 coronae, accretion physics, and multi-phase outflows.
                 I am also interested in machine learning and
                 statistical methods for astrophysical data analysis.
             </p>
+
             <div class="links">
-                <a href="https://scholar.google.com/citations?user=wTNSGrwAAAAJ&hl=en" target="_blank">Google Scholar</a>
-                <a href="https://orcid.org/0009-0009-0399-9140" target="_blank">ORCID</a>
-                <a href="https://github.com/Ritikkumar0730" target="_blank">GitHub</a>
-                <a href="Ritikkumar_CV.pdf" target="_blank">Quant_CV</a>
-                <a href="Ritikkumar_CV1.pdf" target="_blank">Quant_CV</a>
+
+                <a href="https://scholar.google.com/citations?user=wTNSGrwAAAAJ&hl=en"
+                   target="_blank" aria-label="Google Scholar">
+                    <i class="fa-solid fa-graduation-cap"></i>Google Scholar
+                </a>
+
+                <a href="https://orcid.org/0009-0009-0399-9140"
+                   target="_blank" aria-label="ORCID">
+                    <i class="fa-brands fa-orcid"></i>ORCID
+                </a>
+
+                <a href="https://github.com/Ritikkumar0730"
+                   target="_blank" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>GitHub
+                </a>
+
+                <a href="Ritikkumar_CV.pdf" target="_blank" aria-label="CV">
+                    <i class="fa-solid fa-file-lines"></i>CV
+                </a>
+
+                <a href="Ritikkumar_CV1.pdf" target="_blank" aria-label="Quantitative CV">
+                    <i class="fa-solid fa-chart-line"></i>Quant_CV
+                </a>
+
+                <a href="mailto:YOUR_EMAIL@iisc.ac.in" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i>Email
+                </a>
+
             </div>
+
         </div>
     </section>
 
+
     <section id="research">
+
         <h2 class="section-title">Research</h2>
 
         <div class="research-item">
-            <h3><a href="research/agn-coronae.html">X-ray Coronae of Active Galactic Nuclei</a></h3>
+
+            <h3>
+                <a href="research/agn-coronae.html">
+                    X-ray Coronae of Active Galactic Nuclei
+                </a>
+            </h3>
+
             <p>
                 I study the hot X-ray-emitting coronae surrounding supermassive black holes
                 using X-ray spectroscopy, with a particular focus on their temperature,
                 spectral properties, and connection to the accretion disk.
             </p>
-            <div class="research-meta">NuSTAR · X-ray spectroscopy · AGN · Accretion physics</div>
-            <a class="read-more" href="research/agn-coronae.html">Read more →</a>
+
+            <div class="research-meta">
+                NuSTAR · X-ray spectroscopy · AGN · Accretion physics
+            </div>
+
+            <a class="read-more" href="research/agn-coronae.html">
+                Read more →
+            </a>
+
         </div>
 
+
         <div class="research-item">
-            <h3><a href="research/agn-outflows.html">Multi-phase Outflows in Active Galactic Nuclei</a></h3>
+
+            <h3>
+                <a href="research/agn-outflows.html">
+                    Multi-phase Outflows in Active Galactic Nuclei
+                </a>
+            </h3>
+
             <p>
                 I investigate outflows from active galactic nuclei across different gas phases
                 using XMM-Newton and NuSTAR observations, including the study of ultra-fast
                 outflows and multiple velocity components.
             </p>
-            <div class="research-meta">XMM-Newton · NuSTAR · AGN outflows · X-ray spectroscopy</div>
-            <a class="read-more" href="research/agn-outflows.html">Read more →</a>
+
+            <div class="research-meta">
+                XMM-Newton · NuSTAR · AGN outflows · X-ray spectroscopy
+            </div>
+
+            <a class="read-more" href="research/agn-outflows.html">
+                Read more →
+            </a>
+
         </div>
 
+
         <div class="research-item">
-            <h3><a href="research/grb-reconstruction.html">Gamma-Ray Burst Light-Curve Reconstruction</a></h3>
+
+            <h3>
+                <a href="research/grb-reconstruction.html">
+                    Gamma-Ray Burst Light-Curve Reconstruction
+                </a>
+            </h3>
+
             <p>
                 I work on reconstructing missing sections of GRB X-ray light curves using
                 machine-learning and statistical approaches, including Deep Gaussian
                 Processes, ReFANN, and physics-informed models.
             </p>
-            <div class="research-meta">GRBs · Machine Learning · Gaussian Processes · PINNs</div>
-            <a class="read-more" href="research/grb-reconstruction.html">Read more →</a>
+
+            <div class="research-meta">
+                GRBs · Machine Learning · Gaussian Processes · PINNs
+            </div>
+
+            <a class="read-more" href="research/grb-reconstruction.html">
+                Read more →
+            </a>
+
         </div>
 
+
         <div class="research-item">
-            <h3><a href="research/xray-polarization.html">X-ray Polarization and Relativistic Reflection</a></h3>
+
+            <h3>
+                <a href="research/xray-polarization.html">
+                    X-ray Polarization and Relativistic Reflection
+                </a>
+            </h3>
+
             <p>
                 I am investigating the geometry and physical properties of AGN accretion
                 systems using X-ray polarization and relativistic reflection modelling,
                 combining IXPE, XMM-Newton, and NuSTAR observations.
             </p>
-            <div class="research-meta">IXPE · XMM-Newton · NuSTAR · Relativistic reflection</div>
-            <a class="read-more" href="research/xray-polarization.html">Read more →</a>
+
+            <div class="research-meta">
+                IXPE · XMM-Newton · NuSTAR · Relativistic reflection
+            </div>
+
+            <a class="read-more" href="research/xray-polarization.html">
+                Read more →
+            </a>
+
         </div>
+
     </section>
 
+
     <section id="publications">
+
         <h2 class="section-title">Selected Publications</h2>
 
         <div class="publication">
+
             <div class="publication-title">
                 Physics-Informed Neural Networks and Data-Driven Models for GRB X-ray Light-Curve Gap Reconstruction
             </div>
-            <div class="publication-details">Ayush Garg, Ritik Kumar, Maria G. Dainotti, et al. · 2026</div>
-            <div><a href="#" target="_blank">arXiv →</a></div>
+
+            <div class="publication-details">
+                Ayush Garg, Ritik Kumar, Maria G. Dainotti, et al. · 2026
+            </div>
+
+            <div>
+                <a href="#" target="_blank">arXiv →</a>
+            </div>
+
         </div>
 
+
         <div class="publication">
-            <div class="publication-title">GRB X-ray Light-Curve Reconstruction</div>
+
+            <div class="publication-title">
+                GRB X-ray Light-Curve Reconstruction
+            </div>
+
             <div class="publication-details">
                 Ritik Kumar et al. · Journal of High Energy Astrophysics
             </div>
-            <div><a href="#" target="_blank">Paper →</a></div>
+
+            <div>
+                <a href="#" target="_blank">Paper →</a>
+            </div>
+
         </div>
+
     </section>
 
+
     <section id="news">
+
         <h2 class="section-title">News</h2>
 
         <div class="news-item">
             <div class="news-date">Sep 2026</div>
-            <div>Submitted a new manuscript on GRB X-ray light-curve reconstruction to arXiv.</div>
+            <div>
+                Submitted a new manuscript on GRB X-ray light-curve reconstruction to arXiv.
+            </div>
         </div>
 
         <div class="news-item">
             <div class="news-date">2026</div>
-            <div>Started Master's thesis research on X-ray polarization and relativistic reflection in AGN.</div>
+            <div>
+                Started Master's thesis research on X-ray polarization and relativistic reflection in AGN.
+            </div>
         </div>
 
         <div class="news-item">
             <div class="news-date">Oct 2025</div>
-            <div>Presented research on AGN coronal temperatures at the XRISM mission conference in Kyoto.</div>
+            <div>
+                Presented research on AGN coronal temperatures at the XRISM mission conference in Kyoto.
+            </div>
         </div>
+
     </section>
 
+
     <section id="contact">
+
         <h2 class="section-title">Contact</h2>
+
         <p>
             I am interested in research collaborations and discussions in high-energy
             astrophysics, X-ray astronomy, machine learning, and related areas.
         </p>
-        <p><a href="mailto:YOUR_EMAIL@iisc.ac.in">YOUR_EMAIL@iisc.ac.in</a></p>
+
+        <p>
+            <a href="mailto:YOUR_EMAIL@iisc.ac.in">
+                <i class="fa-solid fa-envelope"></i>
+                YOUR_EMAIL@iisc.ac.in
+            </a>
+        </p>
+
     </section>
 
-    <footer>© 2026 Ritik Kumar · Indian Institute of Science</footer>
+
+    <footer>
+        © 2026 Ritik Kumar · Indian Institute of Science
+    </footer>
+
 </div>
+
 </body>
 </html>
