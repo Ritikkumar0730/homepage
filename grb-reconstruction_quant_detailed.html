@@ -642,7 +642,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="contribution">
+                <div class="contribution">
                     <h3>My contribution</h3>
                     <p>
                         I worked on the Deep Gaussian Process part of the study. I used a
@@ -652,7 +652,7 @@
                         curve, but also checking how its uncertainty and reconstruction
                         quality compared with other approaches.
                     </p>
-                </div> -->
+                </div>
 
                 <div class="results">
                     <div class="result">
@@ -747,7 +747,7 @@
                         <span>Flexible neural reconstruction without a fixed analytical light-curve form.</span>
                     </div>
                     <div class="method">
-                        <strong>Quantile regression</strong>
+                        <strong>Regression</strong>
                         <span>Models different parts of the conditional distribution rather than only the mean.</span>
                     </div>
                 </div>
@@ -762,7 +762,7 @@
                 </div>
 
                 <div class="contribution">
-                    <!-- <h3>My contribution</h3>
+                    <h3>My contribution</h3>
                     <p>
                         I was the second author and co-corresponding author on this work.
                         I implemented and evaluated the uncertainty-aware neural-network
@@ -776,7 +776,7 @@
                         5-fold cross-validation, and ablation tests to check how sensitive
                         the models were to the chosen settings.
                     </p>
-                </div> -->
+                </div>
 
                 <div class="results">
                     <div class="result">
@@ -866,38 +866,17 @@
                     </ul>
                 </div>
 
-                <div class="contribution-card">
-                    <h3>4. Quantile regression</h3>
-                    <p>
-                        I implemented polynomial quantile regression as another way to
-                        describe uncertainty. Instead of predicting only the average
-                        behaviour, the model estimates different parts of the distribution.
-                        I used the 10th, 50th and 90th percentiles with pinball loss and
-                        compared the resulting intervals with the neural-network models.
-                    </p>
-                    <ul>
-                        <li>Implemented multiple quantiles: 0.1, 0.5 and 0.9.</li>
-                        <li>Used pinball loss for training.</li>
-                        <li>Compared uncertainty intervals and outlier fractions.</li>
-                    </ul>
-                </div>
+    
 
                 <div class="contribution-card">
-                    <h3>5. Finding and fixing a training failure</h3>
-                    <p>
-                        One of the most useful parts of the project was debugging a PINN
-                        that was not learning the way we expected. The model could reduce
-                        the physics loss but move towards an almost constant solution.
-                        Instead of treating this as just a bad result, I tested the
-                        training process and changed the way the losses were balanced.
-                    </p>
-                    <ul>
-                        <li>Used a value-space loss to better control the reconstruction.</li>
-                        <li>Introduced a gradual warm-up of the physics-loss weight.</li>
-                        <li>Used EMA-based loss normalisation to keep the loss terms balanced.</li>
-                        <li>Added an automatic restart when a training run failed.</li>
-                    </ul>
-                </div>
+                <h3>ReFANN: reconstructing missing light curves</h3>
+                <p>For the ReFANN work, I focused on the practical problem of reconstructing the missing part of a GRB light curve from the information that is actually available. I worked with the reference-target setup, where a complete or better-observed reference curve helps guide the reconstruction of an incomplete target curve. I worked on the machine-learning pipeline, testing how the model behaves when observations are sparse or have gaps, and checking the reconstructed curve against the known data.</p>
+                <p>What I found useful here was that the task was not simply “train a neural network and get a prediction.” I had to think about what information the model should use, how to compare different reconstruction choices, and whether the result remains sensible when the available observations change.</p>
+            </div>            <div class="contribution-card">
+                <h3>PINN: making the model respect the physics</h3>
+                <p>I also worked on the physics-informed neural-network part of the project. The idea was to add physical information to the learning process instead of relying only on the observed light curve. In practice, this was one of the harder parts of the work because the model could reduce the physics loss while moving toward an almost constant solution rather than learning the actual light-curve behaviour.</p>
+                <p>I treated this as a model-debugging problem. I changed the loss formulation to work in value space, gradually increased the contribution of the physics loss instead of applying it at full strength from the beginning, normalised the loss terms using an exponential moving average, and added an automatic restart when training became stuck. I then checked the effect of each change through ablation tests rather than assuming that the final setup was better.</p>
+            </div>>
 
                 <div class="contribution-card">
                     <h3>6. Hyperparameter search and validation</h3>
@@ -919,7 +898,7 @@
                     <p>
                         Across the two papers, I worked with several very different
                         approaches: Gaussian Processes, neural networks, Bayesian models,
-                        Siamese networks, PINNs, polynomial models, quantile regression and
+                        Siamese networks, PINNs, polynomial models, regression and
                         smoothing methods. A big part of my work was making the comparison
                         meaningful rather than looking at one metric and declaring a winner.
                     </p>
