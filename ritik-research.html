@@ -664,57 +664,55 @@ canvas {
 }
 
 /* ── Methodology ── */
-.method-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
+.pipeline-flow {
+  display: flex;
+  flex-direction: column;
+  margin-top: 52px;
+  position: relative;
 }
-
-.method-block {
-  padding: 30px 28px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.18s;
-}
-
-.method-block:hover { background: var(--surface); }
-
-.method-block:nth-child(3n) { border-right: none; }
-.method-block:nth-child(n+4) { border-bottom: none; }
-
-.method-code {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  margin-bottom: 14px;
+.pipeline-step {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 20px;
+  position: relative;
+  min-height: 36px;
 }
-
-.method-code::before {
-  content: "";
-  width: 16px;
-  height: 1px;
-  background: var(--accent);
+.pipeline-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--accent), var(--border));
+  opacity: 0.6;
 }
-
-.method-name {
-  font-size: 0.9rem;
+.step-node {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--bg);
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
   font-weight: 600;
-  color: var(--fg);
-  margin-bottom: 10px;
-  line-height: 1.35;
+  color: var(--accent);
+  letter-spacing: 0.02em;
 }
-
-.method-text {
-  font-size: 0.79rem;
-  color: var(--fg-muted);
-  line-height: 1.65;
+.step-label {
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: var(--fg);
+  line-height: 1.3;
+  padding: 10px 0;
 }
 
 /* ── Findings ── */
@@ -949,11 +947,6 @@ footer {
   .stats-with-spectrum { grid-template-columns: 1fr; }
   .overview-grid { grid-template-columns: 1fr; }
   .sources-grid { grid-template-columns: 1fr; }
-  .method-grid { grid-template-columns: 1fr 1fr; }
-  .method-block:nth-child(3n) { border-right: 1px solid var(--border); }
-  .method-block:nth-child(2n) { border-right: none; }
-  .method-block:nth-child(n+5) { border-bottom: none; }
-  .method-block:nth-child(5) { border-bottom: 1px solid var(--border); }
   .findings-grid { grid-template-columns: 1fr; }
 
   .about-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -962,10 +955,6 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .method-grid { grid-template-columns: 1fr; }
-  .method-block { border-right: none !important; }
-  .method-block:not(:last-child) { border-bottom: 1px solid var(--border) !important; }
-
   .stats-circle { width: min(320px, 88vw); gap: 3px; }
   .quad-num { font-size: 1.6rem; }
 }
@@ -1175,36 +1164,50 @@ study of a Quasar Source.</p>
       <div class="section-eyebrow">Analysis Pipeline</div>
       <h2 class="section-title">How the Research Was Done</h2>
     </div>
-    <div class="method-grid">
-      <div class="method-block">
-        <div class="method-code">M · 01</div>
-        <div class="method-name">XMM-Newton Data Reduction</div>
-        <div class="method-text">Full EPIC-pn and RGS reduction using XMM-Newton SAS. Event filtering (pattern ≤ 4), source and background region extraction, good time interval screening for soft proton flares, and exposure-weighted stacking for multi-epoch observations.</div>
+    <div class="pipeline-flow">
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">01</span></div>
+        <div class="step-label">Milli-Quas Catalog</div>
       </div>
-      <div class="method-block">
-        <div class="method-code">M · 02</div>
-        <div class="method-name">XSPEC Spectral Fitting</div>
-        <div class="method-text">Multi-component spectral modeling: power-law and Comptonization continua, ionized reflection (pexrav, relxill), neutral and ionized absorbers. χ² and C-statistic minimization with Monte Carlo confidence intervals using Markov chains.</div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">02</span></div>
+        <div class="step-label">XMM-Newton Data Reduction</div>
       </div>
-      <div class="method-block">
-        <div class="method-code">M · 03</div>
-        <div class="method-name">XSTAR Photoionization Grids</div>
-        <div class="method-text">Custom photoionization models computed with XSTAR for each source's spectral energy distribution. Grids spanning log ξ, N<sub>H</sub>, and outflow velocity to characterize the physical state of the absorbing gas beyond simple Gaussian fitting.</div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">03</span></div>
+        <div class="step-label">Spectral Modelling</div>
       </div>
-      <div class="method-block">
-        <div class="method-code">M · 04</div>
-        <div class="method-name">Flux-Resolved Spectroscopy</div>
-        <div class="method-text">Observations sorted by source flux state to track how absorption properties evolve with accretion luminosity. This method — applied to 24 years of MCG−6−30−15 data — is critical for separating intrinsic absorber variability from ionization-driven responses.</div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">04</span></div>
+        <div class="step-label">Categorisation of Sources</div>
       </div>
-      <div class="method-block">
-        <div class="method-code">M · 05</div>
-        <div class="method-name">Systematic UFO Survey (473 Sources)</div>
-        <div class="method-text">Automated spectral pipeline deployed across 473 EPIC-pn AGN observations in the XMM-Newton archive. Blind search for blue-shifted Fe absorption at ≥3σ significance, with Forest-UFO statistical treatment to control for multiple spectral feature detections.</div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">05</span></div>
+        <div class="step-label">UFO Detailed Study</div>
       </div>
-      <div class="method-block">
-        <div class="method-code">M · 06</div>
-        <div class="method-name">EPIC-pn Stacking Analysis</div>
-        <div class="method-text">Co-added spectra for sources below individual detection threshold, enabling constraints on mean outflow properties in AGN sub-populations. Weighted stacking preserving spectral resolution and S/N, with careful treatment of systematic effects from combining non-simultaneous observations.</div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">06</span></div>
+        <div class="step-label">XSTAR Photoionisation Grids</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">07</span></div>
+        <div class="step-label">Flux-Resolved Spectroscopy</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">08</span></div>
+        <div class="step-label">One Quasar Source Analysis</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">09</span></div>
+        <div class="step-label">Spectral and Timing Analysis</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">10</span></div>
+        <div class="step-label">UFO Location and Energetics</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">11</span></div>
+        <div class="step-label">Implication on Surrounding</div>
       </div>
     </div>
   </section>
