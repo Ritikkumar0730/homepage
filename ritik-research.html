@@ -896,10 +896,6 @@ footer {
 
 /* ── AGN Simulation ── */
 .sim-wrap {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: #060a18;
   position: relative;
 }
 
@@ -910,14 +906,12 @@ footer {
 }
 
 .sim-caption {
-  padding: 10px 16px;
+  margin-top: 8px;
   font-family: 'DM Mono', monospace;
   font-size: 0.63rem;
-  color: rgba(130,155,210,0.65);
-  background: #060a18;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  line-height: 1.5;
-  letter-spacing: 0.03em;
+  color: var(--fg);
+  line-height: 1.55;
+  letter-spacing: 0.02em;
 }
 
 /* ── Responsive ── */
@@ -1072,30 +1066,37 @@ footer {
       <h2 class="section-title">What the Thesis Addresses</h2>
     </div>
     <div class="overview-grid">
-      <div class="sim-wrap">
-        <canvas id="agnSim" aria-label="Animated simulation of AGN wind outflow from accretion disk"></canvas>
-        <div class="sim-caption">Simulation — AGN disk wind: wide-angle outflow launched from the accretion disk surface. UFO phase (blue-white, v~0.1–0.4c) originates at small radii; warm absorber (orange) traces the outer, lower-ionization wind. Both are disk winds — not jets.</div>
+      <div class="overview-text">
+        <p>My bachelor's thesis investigates multi-phase AGN-driven outflows through systematic X-ray spectroscopy with the XMM-Newton observatory. I developed a pipeline to simultaneously detect ultra-fast outflows (UFOs) and warm absorbers across 473 Seyfert galaxies using archival EPIC-pn and RGS data spanning two decades.</p>
+        <p>UFOs appear as blue-shifted Fe XXV/XXVI absorption at 7–10 keV, reaching velocities of 0.1–0.4c — among the fastest known non-relativistic winds. Warm absorbers are the lower-ionization phase of the same outflow, visible in the soft X-ray band (0.3–2 keV) through RGS spectroscopy. Detecting both phases simultaneously in the same source and epoch constrains whether they form a single stratified disk wind or kinematically distinct components.</p>
+        <p>Individual case studies include MCG−6−30−15, monitored across 12 XMM-Newton epochs from 2000 to 2024, revealing how wind ionization and column density respond to the ionizing continuum. JWST infrared data situates the nuclear wind properties within the broader host-galaxy feedback picture.</p>
       </div>
-      <div class="phase-cards">
-        <div class="phase-card">
-          <div class="phase-icon">⚡</div>
-          <div>
-            <div class="phase-name">Ultra-fast Outflows · Hard X-ray Phase</div>
-            <div class="phase-text">Highly ionized Fe XXV/XXVI absorption at 7–10 keV, velocities up to 0.4c. Modeled with XSPEC and custom XSTAR photoionization grids. Detected in both individual sources and the systematic survey.</div>
-          </div>
+      <div>
+        <div class="sim-wrap">
+          <canvas id="agnSim" aria-label="Animated simulation of AGN wind outflow from accretion disk"></canvas>
         </div>
-        <div class="phase-card">
-          <div class="phase-icon">🌊</div>
-          <div>
-            <div class="phase-name">Warm Absorbers · Soft X-ray Phase</div>
-            <div class="phase-text">Lower-ionization outflow gas traced with RGS spectroscopy in the 0.3–2 keV band. Simultaneous with EPIC-pn data, enabling a direct comparison of high- and low-ionization wind components in the same AGN epoch.</div>
+        <div class="sim-caption">Simulation — AGN disk wind: wide-angle outflow launched from the accretion disk surface. UFO phase (blue, v~0.1–0.4c) originates at inner radii; warm absorber (orange) traces the outer, lower-ionization wind. Both are disk winds — not jets.</div>
+        <div class="phase-cards" style="margin-top:22px;">
+          <div class="phase-card">
+            <div class="phase-icon">⚡</div>
+            <div>
+              <div class="phase-name">Ultra-fast Outflows · Hard X-ray Phase</div>
+              <div class="phase-text">Highly ionized Fe XXV/XXVI absorption at 7–10 keV, velocities up to 0.4c. Modeled with XSPEC and custom XSTAR photoionization grids. Detected in both individual sources and the systematic survey.</div>
+            </div>
           </div>
-        </div>
-        <div class="phase-card">
-          <div class="phase-icon">🌌</div>
-          <div>
-            <div class="phase-name">Feedback Connection · Multi-wavelength</div>
-            <div class="phase-text">JWST infrared observations place X-ray wind measurements in the broader feedback context, connecting nuclear outflow properties to host-galaxy emission on larger spatial scales.</div>
+          <div class="phase-card">
+            <div class="phase-icon">🌊</div>
+            <div>
+              <div class="phase-name">Warm Absorbers · Soft X-ray Phase</div>
+              <div class="phase-text">Lower-ionization outflow gas traced with RGS spectroscopy in the 0.3–2 keV band. Simultaneous with EPIC-pn data, enabling a direct comparison of high- and low-ionization wind components in the same AGN epoch.</div>
+            </div>
+          </div>
+          <div class="phase-card">
+            <div class="phase-icon">🌌</div>
+            <div>
+              <div class="phase-name">Feedback Connection · Multi-wavelength</div>
+              <div class="phase-text">JWST infrared observations place X-ray wind measurements in the broader feedback context, connecting nuclear outflow properties to host-galaxy emission on larger spatial scales.</div>
+            </div>
           </div>
         </div>
       </div>
