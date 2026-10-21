@@ -1451,20 +1451,22 @@ function drawToolsWheel() {
     { color: dark ? '#6aa0f4' : '#1653c0',
       tools: ['XSPEC 12', 'XSTAR 2.5', 'PyXSPEC', 'HEASOFT'] },
     { color: dark ? '#f0a824' : '#bf7a10',
-      tools: ['XMM-Newton SAS', 'EPIC-pn pipeline', 'RGS pipeline', 'JWST Pipeline'] },
+      tools: ['XMM-Newton SAS', 'EPIC-pn pipeline', 'RGS pipeline'] },
     { color: dark ? '#a585f0' : '#6b4ec7',
-      tools: ['Python 3', 'Astropy', 'NumPy / SciPy', 'Matplotlib'] },
+      tools: ['Python 3', 'Astropy', 'NumPy / SciPy', 'Matplotlib', 'dsplot', 'DS9', 'ftool', 'TOPCAT'] },
     { color: dark ? '#40c98a' : '#1f9e6a',
       tools: ['XMM Archive', 'NASA HEASARC', 'MAST Archive', 'LaTeX / Overleaf'] },
   ];
 
-  const n = 16, step = Math.PI * 2 / n, s0 = -Math.PI / 2;
+  const n = groups.reduce((s, g) => s + g.tools.length, 0);
+  const step = Math.PI * 2 / n, s0 = -Math.PI / 2;
   ctx.clearRect(0, 0, S, S);
 
-  // Draw 16 equal sectors
+  // Draw equal sectors per tool
+  let _si = 0;
   for (let g = 0; g < 4; g++) {
-    for (let t = 0; t < 4; t++) {
-      const i = g * 4 + t;
+    for (let t = 0; t < groups[g].tools.length; t++) {
+      const i = _si + t;
       const a1 = s0 + i * step, a2 = a1 + step, midA = a1 + step / 2;
       const alpha = 0.52 + t * 0.12;
 
@@ -1502,11 +1504,14 @@ function drawToolsWheel() {
       }
       ctx.restore();
     }
+    _si += groups[g].tools.length;
   }
 
-  // Inner colored quadrant ring
+  // Inner colored ring (proportional to each group's tool count)
+  let _gi = 0;
   for (let g = 0; g < 4; g++) {
-    const a1 = s0 + g * 4 * step, a2 = a1 + 4 * step;
+    const a1 = s0 + _gi * step, a2 = a1 + groups[g].tools.length * step;
+    _gi += groups[g].tools.length;
     ctx.beginPath();
     ctx.arc(cx, cy, Ri - 1, a1 + 0.04, a2 - 0.04);
     ctx.arc(cx, cy, Rc,     a2 - 0.04, a1 + 0.04, true);
