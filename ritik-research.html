@@ -1,0 +1,1503 @@
+<script>try{var _t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',_t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}</script>
+<title>Ritik Kumar — AGN Outflow Research</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap">
+
+<style>
+/* ── Design tokens ──────────────────────────────────────────────
+   Layout : sticky nav → hero (2-col) → stats strip → sections → footer
+   Type   : Spectral (display, italic), DM Sans (body), DM Mono (data)
+   Color  : deep navy / X-ray blue / spectral amber accent
+   ─────────────────────────────────────────────────────────────── */
+
+:root {
+  --bg:           #ffffff;
+  --surface:      #f7f8fc;
+  --surface-2:    #eceef7;
+  --surface-3:    #e0e4f0;
+  --fg:           #0f1626;
+  --fg-muted:     #4a5373;
+  --fg-faint:     #9199b8;
+  --accent:       #1653c0;
+  --accent-lt:    #2e6ee1;
+  --accent-alt:   #bf7a10;
+  --accent-purple:#6b4ec7;
+  --accent-green: #1f9e6a;
+  --accent-glow:  rgba(22,83,192,0.10);
+  --border:       rgba(15,22,38,0.08);
+  --border-strong:rgba(15,22,38,0.16);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:           #060a14;
+    --surface:      #0c1222;
+    --surface-2:    #111830;
+    --surface-3:    #182040;
+    --fg:           #dde3f5;
+    --fg-muted:     #8a98c0;
+    --fg-faint:     #424e72;
+    --accent:       #6aa0f4;
+    --accent-lt:    #90baf7;
+    --accent-alt:   #f0a824;
+    --accent-purple:#a585f0;
+    --accent-green: #40c98a;
+    --accent-glow:  rgba(106,160,244,0.12);
+    --border:       rgba(255,255,255,0.07);
+    --border-strong:rgba(255,255,255,0.13);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:           #060a14;
+  --surface:      #0c1222;
+  --surface-2:    #111830;
+  --surface-3:    #182040;
+  --fg:           #dde3f5;
+  --fg-muted:     #8a98c0;
+  --fg-faint:     #424e72;
+  --accent:       #6aa0f4;
+  --accent-lt:    #90baf7;
+  --accent-alt:   #f0a824;
+  --accent-purple:#a585f0;
+  --accent-green: #40c98a;
+  --accent-glow:  rgba(106,160,244,0.12);
+  --border:       rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.13);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ── Nav ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 200;
+  background: var(--bg);
+}
+
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-block: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav-logo em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.theme-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s;
+  font-family: inherit;
+}
+
+.theme-btn:hover { border-color: var(--accent); color: var(--fg); }
+
+/* ── Page wrapper ── */
+.page { max-width: 1080px; margin: 0 auto; }
+
+/* ── Hero ── */
+.hero {
+  padding-block: 100px 76px;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 72px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+
+.hero-eyebrow-line {
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.hero-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(2.8rem, 5.5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+.hero-name strong {
+  font-weight: 600;
+}
+
+.hero-thesis {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--fg-muted);
+  line-height: 1.55;
+  margin-bottom: 26px;
+  max-width: 490px;
+  text-wrap: balance;
+}
+
+.hero-summary {
+  font-size: 0.95rem;
+  color: var(--fg-muted);
+  line-height: 1.82;
+  max-width: 490px;
+  margin-bottom: 38px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 7px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.18s, transform 0.18s, border-color 0.18s, color 0.18s;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1.5px solid var(--accent);
+}
+
+.btn-primary:hover { opacity: 0.86; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg-muted);
+  border: 1.5px solid var(--border-strong);
+}
+
+.btn-ghost:hover { color: var(--fg); border-color: var(--accent); }
+
+/* Hero visual */
+.hero-visual { min-width: 0; }
+
+.spectrum-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spectrum-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, var(--accent-glow) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.spectrum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.spectrum-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.live-dot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-green);
+}
+
+.live-dot::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.spectrum-canvas-wrap {
+  position: relative;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spectrum-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--fg-faint);
+}
+
+.spectrum-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.67rem;
+  color: var(--fg-faint);
+}
+
+.legend-line {
+  width: 18px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid;
+}
+
+/* ── Stats circle ── */
+.stats-circle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 64px 72px;
+  border-bottom: 1px solid var(--border);
+  gap: 20px;
+}
+
+.stats-circle-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.stats-circle {
+  width: min(480px, 86vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  background: var(--border-strong);
+  box-shadow: 0 0 0 4px var(--border-strong);
+  position: relative;
+}
+
+.quad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 20px;
+  background: var(--bg);
+  transition: background 0.2s;
+  cursor: default;
+}
+
+.quad:hover { background: var(--surface); }
+
+.quad-num {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px;
+}
+
+.quad-num em { font-style: normal; }
+
+.q1 .quad-num em { color: var(--accent); }
+.q2 .quad-num em { color: var(--accent-alt); }
+.q3 .quad-num em { color: var(--accent-purple); }
+.q4 .quad-num em { color: var(--accent-green); }
+
+.quad-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.q1 .quad-label { color: var(--accent); }
+.q2 .quad-label { color: var(--accent-alt); }
+.q3 .quad-label { color: var(--accent-purple); }
+.q4 .quad-label { color: var(--accent-green); }
+
+.quad-sub {
+  font-size: 0.68rem;
+  color: var(--fg-faint);
+  line-height: 1.45;
+  max-width: 120px;
+}
+
+/* ── Sections ── */
+.section {
+  padding-block: 84px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header {
+  margin-bottom: 52px;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-title {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: var(--fg);
+  text-wrap: balance;
+  max-width: 560px;
+}
+
+/* ── Research overview ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.overview-text p {
+  font-size: 0.94rem;
+  color: var(--fg-muted);
+  line-height: 1.88;
+  margin-bottom: 16px;
+}
+
+.overview-text p:last-child { margin-bottom: 0; }
+
+.phase-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.phase-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  align-items: flex-start;
+  transition: border-color 0.18s;
+}
+
+.phase-card:hover { border-color: var(--accent); }
+
+.phase-icon {
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.phase-name {
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 5px;
+}
+
+.phase-text {
+  font-size: 0.79rem;
+  color: var(--fg-muted);
+  line-height: 1.58;
+}
+
+/* ── Key sources ── */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.source-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 26px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.source-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+
+.source-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+
+.source-card:nth-child(1) .source-accent { background: var(--accent); }
+.source-card:nth-child(2) .source-accent { background: var(--accent-alt); }
+.source-card:nth-child(3) .source-accent { background: var(--accent-purple); }
+
+.source-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: 6px;
+  margin-top: 8px;
+}
+
+.source-type {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.source-card:nth-child(1) .source-type { color: var(--accent); }
+.source-card:nth-child(2) .source-type { color: var(--accent-alt); }
+.source-card:nth-child(3) .source-type { color: var(--accent-purple); }
+
+.source-desc {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  background: var(--surface-2);
+  color: var(--fg-muted);
+  padding: 4px 9px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ── Methodology ── */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.method-block {
+  padding: 30px 28px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+
+.method-block:hover { background: var(--surface); }
+
+.method-block:nth-child(3n) { border-right: none; }
+.method-block:nth-child(n+4) { border-bottom: none; }
+
+.method-code {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.method-code::before {
+  content: "";
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.method-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.method-text {
+  font-size: 0.79rem;
+  color: var(--fg-muted);
+  line-height: 1.65;
+}
+
+/* ── Findings ── */
+.findings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.finding-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.finding-icon-wrap {
+  width: 42px;
+  height: 42px;
+  background: var(--accent-glow);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.finding-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.finding-text {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+/* ── Tools ── */
+.tools-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.tool-group { display: flex; flex-direction: column; gap: 8px; }
+
+.tool-group-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-bottom: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tool-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  transition: border-color 0.18s, color 0.18s;
+}
+
+.tool-item:hover { border-color: var(--accent); color: var(--fg); }
+
+.tool-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── About / Contact ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 0.94rem;
+  color: var(--fg-muted);
+  line-height: 1.88;
+  margin-bottom: 16px;
+}
+
+.about-text p:last-child { margin-bottom: 0; }
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 10% 90%, var(--accent-glow) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.contact-heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-bottom: 24px;
+}
+
+.contact-row {
+  margin-bottom: 20px;
+}
+
+.contact-row:last-child { margin-bottom: 0; }
+
+.contact-lbl {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-bottom: 4px;
+}
+
+.contact-val {
+  font-size: 0.88rem;
+  color: var(--fg);
+  user-select: all;
+  font-family: 'DM Mono', monospace;
+}
+
+.contact-val.plain {
+  font-family: inherit;
+  font-size: 0.86rem;
+}
+
+.copy-btn {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  transition: opacity 0.18s;
+}
+
+.copy-btn:hover { opacity: 0.75; }
+
+/* ── Footer ── */
+footer {
+  padding-block: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--fg-muted);
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-item {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--fg-faint);
+  letter-spacing: 0.06em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding-block: 64px 52px; }
+  .hero-visual { display: none; }
+  .stats-circle { width: min(380px, 86vw); }
+  .overview-grid { grid-template-columns: 1fr; }
+  .sources-grid { grid-template-columns: 1fr; }
+  .method-grid { grid-template-columns: 1fr 1fr; }
+  .method-block:nth-child(3n) { border-right: 1px solid var(--border); }
+  .method-block:nth-child(2n) { border-right: none; }
+  .method-block:nth-child(n+5) { border-bottom: none; }
+  .method-block:nth-child(5) { border-bottom: 1px solid var(--border); }
+  .findings-grid { grid-template-columns: 1fr; }
+  .tools-section-grid { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .nav-links { display: none; }
+  .section { padding-block: 60px; }
+}
+
+@media (max-width: 600px) {
+  .method-grid { grid-template-columns: 1fr; }
+  .method-block { border-right: none !important; }
+  .method-block:not(:last-child) { border-bottom: 1px solid var(--border) !important; }
+  .tools-section-grid { grid-template-columns: 1fr; }
+  .stats-circle { width: min(320px, 88vw); gap: 3px; }
+  .quad-num { font-size: 1.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+</style>
+
+<!-- Navigation -->
+<nav>
+  <div class="page">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">Ritik <em>Kumar</em></a>
+      <ul class="nav-links">
+        <li><a href="#research">Research</a></li>
+        <li><a href="#sources">Sources</a></li>
+        <li><a href="#methods">Methods</a></li>
+        <li><a href="#findings">Findings</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">◑ Theme</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page" id="top">
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        Indian Institute of Science · High-Energy Astrophysics
+      </div>
+      <h1 class="hero-name"><strong>Ritik</strong> Kumar</h1>
+      <p class="hero-thesis">Tracing Outflows Across Different Gas Phases<br>in Active Galactic Nuclei</p>
+      <p class="hero-summary">
+        Systematic X-ray spectroscopy of AGN-driven winds using 24+ years of XMM-Newton archival
+        observations. I searched for ultra-fast outflows (UFOs) across 473 AGN, performed
+        flux-resolved multi-phase spectral analysis of individual Seyfert galaxies, and
+        connected nuclear X-ray winds to the broader AGN feedback picture using XSTAR
+        photoionization modeling and JWST data.
+      </p>
+      <div class="hero-cta">
+        <a href="https://www.overleaf.com/project/68f0ad45480e36fd5ae8d23d" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1.5 6.5h10M6.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Read Thesis
+        </a>
+        <a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#research" class="btn btn-ghost">Explore ↓</a>
+      </div>
+    </div>
+
+    <!-- X-ray spectrum visualization -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="spectrum-card">
+        <div class="spectrum-header">
+          <div class="spectrum-badge">
+            XMM-Newton · EPIC-pn<br>MCG−6−30−15 · Rev 4425
+          </div>
+          <div class="live-dot">XMM Archive</div>
+        </div>
+        <div class="spectrum-canvas-wrap">
+          <canvas id="specCanvas" width="356" height="200"></canvas>
+        </div>
+        <div class="spectrum-axis">
+          <span>0.3 keV</span>
+          <span>Fe Kα 6.4 keV</span>
+          <span>UFO ∼7.7 keV</span>
+          <span>10 keV</span>
+        </div>
+        <div class="spectrum-legend">
+          <div class="legend-item">
+            <div class="legend-line" id="leg-data" style="background:var(--accent);"></div>
+            <span>Data (EPIC-pn)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background:var(--accent-alt);border-top:2px dashed var(--accent-alt);height:0;"></div>
+            <span>Best-fit model</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="border-color:#e04444;"></div>
+            <span>UFO absorption</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats circle ── -->
+  <div class="stats-circle-wrap">
+    <div class="stats-circle-label">Research at a glance</div>
+    <div class="stats-circle" role="list" aria-label="Key research statistics">
+      <div class="quad q1" role="listitem">
+        <div class="quad-num">47<em>3</em></div>
+        <div class="quad-label">AGN Sources</div>
+        <div class="quad-sub">Systematic EPIC-pn survey</div>
+      </div>
+      <div class="quad q2" role="listitem">
+        <div class="quad-num">2<em>4</em>+</div>
+        <div class="quad-label">Years of Archive</div>
+        <div class="quad-sub">XMM-Newton 2000–2024</div>
+      </div>
+      <div class="quad q3" role="listitem">
+        <div class="quad-num"><em>2</em></div>
+        <div class="quad-label">Instruments</div>
+        <div class="quad-sub">EPIC-pn + RGS simultaneous</div>
+      </div>
+      <div class="quad q4" role="listitem">
+        <div class="quad-num">1<em>2</em></div>
+        <div class="quad-label">MCG−6−30−15 Obs.</div>
+        <div class="quad-sub">24-year multi-epoch baseline</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Research Overview ── -->
+  <section class="section" id="research">
+    <div class="section-header">
+      <div class="section-eyebrow">Research Overview</div>
+      <h2 class="section-title">What the Thesis Addresses</h2>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-text">
+        <p>
+          Active Galactic Nuclei (AGN) are powered by accretion onto supermassive black holes and
+          represent the primary mechanism by which energy is injected back into the host galaxy —
+          a process called AGN feedback. Understanding how this feedback operates is one of the
+          central open questions in modern astrophysics: it determines why massive galaxies stopped
+          forming stars, and how black hole mass correlates with galaxy properties across cosmic time.
+        </p>
+        <p>
+          Ultra-fast outflows (UFOs) are highly ionized, relativistic winds detected as
+          blue-shifted Fe XXV/XXVI absorption features in the hard X-ray band (∼7–10 keV).
+          Moving at 0.1–0.4c, they carry enough kinetic energy to drive large-scale feedback.
+          But how do these nuclear winds connect to the warm absorbers seen at lower ionization,
+          or to the molecular outflows detected at galactic scales? Answering this requires
+          tracing the outflow across multiple gas phases simultaneously.
+        </p>
+        <p>
+          This thesis provides that multi-phase picture. Using simultaneous EPIC-pn and RGS
+          spectroscopy from XMM-Newton, I characterize outflow properties — ionization parameter,
+          column density, and outflow velocity — across the full X-ray band, in both a systematic
+          survey of 473 sources and in precision analyses of three well-studied individual AGN.
+        </p>
+      </div>
+      <div class="phase-cards">
+        <div class="phase-card">
+          <div class="phase-icon">⚡</div>
+          <div>
+            <div class="phase-name">Ultra-fast Outflows · Hard X-ray Phase</div>
+            <div class="phase-text">Highly ionized Fe XXV/XXVI absorption at 7–10 keV, velocities up to 0.4c. Modeled with XSPEC and custom XSTAR photoionization grids. Detected in both individual sources and the systematic survey.</div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-icon">🌊</div>
+          <div>
+            <div class="phase-name">Warm Absorbers · Soft X-ray Phase</div>
+            <div class="phase-text">Lower-ionization outflow gas traced with RGS spectroscopy in the 0.3–2 keV band. Simultaneous with EPIC-pn data, enabling a direct comparison of high- and low-ionization wind components in the same AGN epoch.</div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-icon">🌌</div>
+          <div>
+            <div class="phase-name">Feedback Connection · Multi-wavelength</div>
+            <div class="phase-text">JWST infrared observations place X-ray wind measurements in the broader feedback context, connecting nuclear outflow properties to host-galaxy emission on larger spatial scales.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Key sources ── -->
+  <section class="section" id="sources">
+    <div class="section-header">
+      <div class="section-eyebrow">Key Sources Studied</div>
+      <h2 class="section-title">Individual AGN Precision Analysis</h2>
+    </div>
+    <div class="sources-grid">
+      <div class="source-card">
+        <div class="source-accent"></div>
+        <div class="source-name">MCG−6−30−15</div>
+        <div class="source-type">Canonical Warm Absorber · Seyfert 1.2</div>
+        <div class="source-desc">
+          The benchmark AGN for X-ray warm absorber and UFO studies. With 12 XMM-Newton observations
+          spanning 2000–2024, MCG−6−30−15 provides an unmatched 24-year temporal baseline. Flux-resolved
+          spectral analysis reveals how UFO ionization state and column density respond to changes in
+          the ionizing luminosity — a critical test for discriminating between models of variable
+          covering fraction and variable ionization.
+        </div>
+        <div class="tag-row">
+          <span class="tag">12 observations</span>
+          <span class="tag">2000–2024</span>
+          <span class="tag">Flux-resolved</span>
+          <span class="tag">EPIC-pn + RGS</span>
+          <span class="tag">Warm absorber</span>
+        </div>
+      </div>
+      <div class="source-card">
+        <div class="source-accent"></div>
+        <div class="source-name">1H 0707−495</div>
+        <div class="source-type">Extreme Variability · Narrow-Line Seyfert 1</div>
+        <div class="source-desc">
+          One of the most spectacularly variable AGN known, with a soft X-ray spectrum that drops
+          steeply above 7 keV. This source tests competing physical models — ionized reflection
+          versus complex warm absorption — in a high-accretion-rate NLS1 regime. Multi-epoch
+          analysis probes whether the extreme spectral variability is driven by changes in the
+          absorbing column or in the reflected fraction.
+        </div>
+        <div class="tag-row">
+          <span class="tag">NLS1</span>
+          <span class="tag">High variability</span>
+          <span class="tag">Reflection vs absorption</span>
+          <span class="tag">High accretion rate</span>
+        </div>
+      </div>
+      <div class="source-card">
+        <div class="source-accent"></div>
+        <div class="source-name">PG 1126−041</div>
+        <div class="source-type">Confirmed UFO Host · Radio-quiet Quasar</div>
+        <div class="source-desc">
+          A radio-quiet quasar with a well-characterized ultra-fast outflow, used as a
+          precision benchmark for XSTAR photoionization modeling of Fe XXV/XXVI absorption.
+          Detailed spectral fitting constrains log ξ, N<sub>H</sub>, and v<sub>out</sub> for the
+          absorbing gas, providing a calibration point for the systematic survey pipeline.
+        </div>
+        <div class="tag-row">
+          <span class="tag">UFO confirmed</span>
+          <span class="tag">XSTAR modeling</span>
+          <span class="tag">Fe XXV/XXVI</span>
+          <span class="tag">Survey calibration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Methodology ── -->
+  <section class="section" id="methods">
+    <div class="section-header">
+      <div class="section-eyebrow">Analysis Pipeline</div>
+      <h2 class="section-title">How the Research Was Done</h2>
+    </div>
+    <div class="method-grid">
+      <div class="method-block">
+        <div class="method-code">M · 01</div>
+        <div class="method-name">XMM-Newton Data Reduction</div>
+        <div class="method-text">Full EPIC-pn and RGS reduction using XMM-Newton SAS. Event filtering (pattern ≤ 4), source and background region extraction, good time interval screening for soft proton flares, and exposure-weighted stacking for multi-epoch observations.</div>
+      </div>
+      <div class="method-block">
+        <div class="method-code">M · 02</div>
+        <div class="method-name">XSPEC Spectral Fitting</div>
+        <div class="method-text">Multi-component spectral modeling: power-law and Comptonization continua, ionized reflection (pexrav, relxill), neutral and ionized absorbers. χ² and C-statistic minimization with Monte Carlo confidence intervals using Markov chains.</div>
+      </div>
+      <div class="method-block">
+        <div class="method-code">M · 03</div>
+        <div class="method-name">XSTAR Photoionization Grids</div>
+        <div class="method-text">Custom photoionization models computed with XSTAR for each source's spectral energy distribution. Grids spanning log ξ, N<sub>H</sub>, and outflow velocity to characterize the physical state of the absorbing gas beyond simple Gaussian fitting.</div>
+      </div>
+      <div class="method-block">
+        <div class="method-code">M · 04</div>
+        <div class="method-name">Flux-Resolved Spectroscopy</div>
+        <div class="method-text">Observations sorted by source flux state to track how absorption properties evolve with accretion luminosity. This method — applied to 24 years of MCG−6−30−15 data — is critical for separating intrinsic absorber variability from ionization-driven responses.</div>
+      </div>
+      <div class="method-block">
+        <div class="method-code">M · 05</div>
+        <div class="method-name">Systematic UFO Survey (473 Sources)</div>
+        <div class="method-text">Automated spectral pipeline deployed across 473 EPIC-pn AGN observations in the XMM-Newton archive. Blind search for blue-shifted Fe absorption at ≥3σ significance, with Forest-UFO statistical treatment to control for multiple spectral feature detections.</div>
+      </div>
+      <div class="method-block">
+        <div class="method-code">M · 06</div>
+        <div class="method-name">EPIC-pn Stacking Analysis</div>
+        <div class="method-text">Co-added spectra for sources below individual detection threshold, enabling constraints on mean outflow properties in AGN sub-populations. Weighted stacking preserving spectral resolution and S/N, with careful treatment of systematic effects from combining non-simultaneous observations.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Findings ── -->
+  <section class="section" id="findings">
+    <div class="section-header">
+      <div class="section-eyebrow">Scientific Contributions</div>
+      <h2 class="section-title">What This Research Contributes</h2>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <div class="finding-icon-wrap">📡</div>
+        <div class="finding-title">The Largest XMM-Newton UFO Census to Date</div>
+        <div class="finding-text">A systematic, homogeneous search for ultra-fast outflows across 473 AGN in the EPIC-pn archive — building a statistical foundation for understanding UFO occurrence rates, velocity and ionization distributions, and their dependence on AGN luminosity, accretion rate, and black hole mass.</div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon-wrap">🔗</div>
+        <div class="finding-title">Multi-phase Outflow Connection in Individual AGN</div>
+        <div class="finding-text">Simultaneous EPIC-pn + RGS analysis directly connects the high-ionization UFO phase to the lower-ionization warm absorber in the same source and observational epoch, placing physical constraints on whether these phases represent a single outflow at different temperatures or kinematically distinct wind components.</div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon-wrap">📊</div>
+        <div class="finding-title">Flux-State Dependence of UFO Properties in MCG−6−30−15</div>
+        <div class="finding-text">24 years of XMM-Newton monitoring reveals how the warm absorber and UFO respond to changes in the ionizing luminosity. Flux-resolved spectroscopy across 12 epochs probes the physical mechanism driving absorption variability and provides constraints on the distance and geometry of the outflowing gas.</div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon-wrap">🔭</div>
+        <div class="finding-title">Multi-wavelength Context with JWST</div>
+        <div class="finding-text">JWST infrared analysis connects X-ray wind measurements to the host-galaxy scale, situating the nuclear outflow properties within the broader AGN feedback framework. This multi-wavelength approach provides observational context for models linking UFO kinetic energy to large-scale molecular outflow driving.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Technical stack ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Technical Stack</div>
+      <h2 class="section-title">Tools &amp; Software</h2>
+    </div>
+    <div class="tools-section-grid">
+      <div class="tool-group">
+        <div class="tool-group-label">X-ray Spectroscopy</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent);"></span>XSPEC 12</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent);"></span>XSTAR 2.5</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent);"></span>PyXSPEC</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent);"></span>HEASOFT</div>
+      </div>
+      <div class="tool-group">
+        <div class="tool-group-label">Observatory Pipelines</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-alt);"></span>XMM-Newton SAS</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-alt);"></span>EPIC-pn pipeline</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-alt);"></span>RGS pipeline</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-alt);"></span>JWST Pipeline</div>
+      </div>
+      <div class="tool-group">
+        <div class="tool-group-label">Data &amp; Scripting</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-purple);"></span>Python 3</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-purple);"></span>Astropy</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-purple);"></span>NumPy / SciPy</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-purple);"></span>Matplotlib</div>
+      </div>
+      <div class="tool-group">
+        <div class="tool-group-label">Archives &amp; Writing</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-green);"></span>XMM-Newton Archive</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-green);"></span>NASA HEASARC</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-green);"></span>MAST Archive</div>
+        <div class="tool-item"><span class="tool-dot" style="background:var(--accent-green);"></span>LaTeX / Overleaf</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About / Contact ── -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <div class="section-eyebrow">About</div>
+      <h2 class="section-title">Ritik Kumar</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am an astrophysics researcher completing my bachelor's degree at the
+          <strong>Indian Institute of Science (IISc), Bangalore</strong>, with a deep
+          specialization in high-energy astrophysics and X-ray spectroscopy. My thesis work
+          sits at the intersection of large-scale observational surveys and precision physical
+          modeling — searching for and characterizing the winds that connect supermassive black
+          holes to the galaxies they inhabit.
+        </p>
+        <p>
+          My research demonstrates both breadth (systematic survey of 473 XMM-Newton AGN) and
+          depth (multi-epoch, multi-instrument analysis of individual benchmark sources),
+          underpinned by quantitative photoionization modeling with XSTAR and a command of
+          modern X-ray data reduction pipelines.
+        </p>
+        <p>
+          I am applying to PhD programs in astrophysics with the goal of extending this work into
+          the XRISM and Athena era, where the combination of micro-calorimeter spectral resolution
+          and large effective area will transform our ability to characterize AGN outflows and test
+          feedback models at high precision. I am particularly interested in groups working on
+          high-resolution X-ray spectroscopy, AGN variability, and galaxy co-evolution.
+        </p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-heading">Contact &amp; Info</div>
+        <div class="contact-row">
+          <div class="contact-lbl">Email</div>
+          <div class="contact-val">hrithikk048@gmail.com</div>
+          <button class="copy-btn" onclick="copyEmail(this)">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><rect x="0.5" y="2.5" width="7" height="8" rx="1" stroke="currentColor" stroke-width="1.1"/><path d="M3 2.5V2a1 1 0 011-1h5a1 1 0 011 1v7a1 1 0 01-1 1H9" stroke="currentColor" stroke-width="1.1"/></svg>
+            Copy address
+          </button>
+        </div>
+        <div class="contact-row">
+          <div class="contact-lbl">Research Focus</div>
+          <div class="contact-val plain">X-ray Spectroscopy · AGN Outflows · Galaxy Feedback</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-lbl">Institution</div>
+          <div class="contact-val plain">Indian Institute of Science, Bangalore</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-lbl">GitHub</div>
+          <a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener" class="contact-val" style="text-decoration:none;color:var(--accent);">github.com/Ritikkumar0730</a>
+        </div>
+        <div class="contact-row">
+          <div class="contact-lbl">Applying</div>
+          <div class="contact-val plain">PhD Programs in Astrophysics, 2025</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-lbl">Thesis</div>
+          <div class="contact-val plain">Tracing Outflows Across Different Gas Phases in AGN</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-name">Ritik Kumar · Indian Institute of Science</div>
+    <div class="footer-right">
+      <span class="footer-item">Bachelor's Thesis 2025</span>
+      <a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener" class="footer-item" style="text-decoration:none;color:var(--fg-faint);transition:color 0.18s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--fg-faint)'">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /page -->
+
+<script>
+// ── Theme ──────────────────────────────────────────────────────
+const root = document.documentElement;
+const btn  = document.getElementById('theme-btn');
+
+function isDark() {
+  const t = root.getAttribute('data-theme');
+  if (t) return t === 'dark';
+  return window.matchMedia('(prefers-color-scheme:dark)').matches;
+}
+
+function applyTheme(dark) {
+  root.setAttribute('data-theme', dark ? 'dark' : 'light');
+  btn.textContent = dark ? '☀ Theme' : '◑ Theme';
+  try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e){}
+  drawSpectrum();
+}
+
+function toggleTheme() { applyTheme(!isDark()); }
+
+try {
+  const saved = localStorage.getItem('theme');
+  applyTheme(saved === 'dark');
+} catch(e){ applyTheme(false); }
+
+window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', e => {
+  if (!root.getAttribute('data-theme')) { btn.textContent = e.matches ? '☀ Theme' : '◑ Theme'; drawSpectrum(); }
+});
+
+// ── Copy email ──────────────────────────────────────────────────
+function copyEmail(el) {
+  const email = 'hrithikk048@gmail.com';
+  navigator.clipboard.writeText(email).then(() => {
+    el.textContent = '✓ Copied';
+    setTimeout(() => { el.innerHTML = '<svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><rect x="0.5" y="2.5" width="7" height="8" rx="1" stroke="currentColor" stroke-width="1.1"/><path d="M3 2.5V2a1 1 0 011-1h5a1 1 0 011 1v7a1 1 0 01-1 1H9" stroke="currentColor" stroke-width="1.1"/></svg> Copy address'; }, 2000);
+  }).catch(() => {
+    el.textContent = 'hrithikk048@gmail.com';
+  });
+}
+
+// ── X-ray spectrum canvas ──────────────────────────────────────
+function drawSpectrum() {
+  const canvas = document.getElementById('specCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const dark = isDark();
+
+  const col = {
+    accent:    dark ? '#6aa0f4' : '#1653c0',
+    model:     dark ? '#f0a824' : '#bf7a10',
+    grid:      dark ? 'rgba(66,78,114,0.22)' : 'rgba(156,163,175,0.22)',
+    ufoMarker: '#e04444',
+    feMarker:  dark ? '#a585f0' : '#6b4ec7',
+  };
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Light grid
+  ctx.strokeStyle = col.grid;
+  ctx.lineWidth = 0.5;
+  for (let gx = 0; gx <= W; gx += W / 8) {
+    ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
+  }
+  for (let gy = 0; gy <= H; gy += H / 4) {
+    ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
+  }
+
+  // Spectrum model: power law + soft excess + Fe Kα + UFO absorption
+  const E_MIN = 0.3, E_MAX = 10.0, E_RANGE = E_MAX - E_MIN;
+
+  function model(px) {
+    const E = E_MIN + (px / W) * E_RANGE;
+    let f = Math.pow(E, -1.65) * 72;               // power law Γ=1.65
+    f += 14 * Math.exp(-3.5 * Math.pow(E - 0.55, 2)); // soft excess
+    f += 8  * Math.exp(-0.4 * Math.pow(E - 6.4, 2));  // reflection hump
+    f += 7  * Math.exp(-12  * Math.pow(E - 6.4, 2));  // Fe Kα emission
+    const ufoE = 7.7;
+    f -= 7.5 * Math.exp(-18 * Math.pow(E - ufoE, 2)); // UFO absorption
+    if (E > 0.5 && E < 2.2) {
+      f *= (0.88 + 0.12 * Math.sin(E * 3.2));          // warm absorber modulation
+    }
+    return Math.max(f, 0.5);
+  }
+
+  function toY(f) {
+    const maxF = 90;
+    return H - 10 - Math.max(0, Math.min(f / maxF, 1)) * (H - 18);
+  }
+
+  // Draw smooth model line
+  ctx.strokeStyle = col.model;
+  ctx.lineWidth = 1.6;
+  ctx.setLineDash([5, 3]);
+  ctx.beginPath();
+  for (let px = 0; px <= W; px++) {
+    const y = toY(model(px));
+    px === 0 ? ctx.moveTo(px, y) : ctx.lineTo(px, y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Data points with scatter and error bars
+  const rng = (seed) => { let x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); };
+  let seed = 1;
+
+  ctx.strokeStyle = col.accent + '88';
+  ctx.lineWidth = 0.9;
+  for (let px = 5; px < W - 4; px += 6) {
+    const f = model(px);
+    const noise = (rng(seed++) - 0.5) * f * 0.14;
+    const ey = toY(f + noise);
+    const errH = 2.5 + rng(seed++) * 4.5;
+    ctx.beginPath(); ctx.moveTo(px, ey - errH); ctx.lineTo(px, ey + errH); ctx.stroke();
+  }
+
+  seed = 1;
+  ctx.fillStyle = col.accent;
+  for (let px = 5; px < W - 4; px += 6) {
+    const f = model(px);
+    const noise = (rng(seed++) - 0.5) * f * 0.14;
+    seed++;
+    const ey = toY(f + noise);
+    ctx.beginPath(); ctx.arc(px, ey, 1.7, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // Fe Kα marker
+  const feX = (6.4 - E_MIN) / E_RANGE * W;
+  const feY = toY(model(feX));
+  ctx.strokeStyle = col.feMarker;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(feX, feY - 16); ctx.lineTo(feX, feY - 4);
+  ctx.stroke();
+
+  // UFO absorption marker
+  const ufoX = (7.7 - E_MIN) / E_RANGE * W;
+  const ufoY = toY(model(ufoX));
+  ctx.strokeStyle = col.ufoMarker;
+  ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.arc(ufoX, ufoY, 5, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(ufoX - 9, ufoY); ctx.lineTo(ufoX - 5, ufoY);
+  ctx.moveTo(ufoX + 5, ufoY); ctx.lineTo(ufoX + 9, ufoY);
+  ctx.stroke();
+
+  // Vertical dashed lines at Fe Kα and UFO
+  ctx.setLineDash([2, 3]);
+  ctx.lineWidth = 0.7;
+  ctx.strokeStyle = col.feMarker + '55';
+  ctx.beginPath(); ctx.moveTo(feX, 0); ctx.lineTo(feX, H); ctx.stroke();
+  ctx.strokeStyle = col.ufoMarker + '55';
+  ctx.beginPath(); ctx.moveTo(ufoX, 0); ctx.lineTo(ufoX, H); ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+drawSpectrum();
+new MutationObserver(() => drawSpectrum()).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
