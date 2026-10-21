@@ -525,6 +525,31 @@ canvas {
 
 .overview-text p:last-child { margin-bottom: 0; }
 
+.overview-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.overview-bullets li {
+  font-size: 0.94rem;
+  color: var(--fg-muted);
+  line-height: 1.78;
+  padding-left: 20px;
+  position: relative;
+}
+
+.overview-bullets li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .phase-cards {
   display: flex;
   flex-direction: column;
@@ -1048,9 +1073,13 @@ study of a Quasar Source.</p>
     </div>
     <div class="overview-grid">
       <div class="overview-text">
-        <p>My bachelor's thesis investigates multi-phase AGN-driven outflows through systematic X-ray spectroscopy with the XMM-Newton observatory. I developed a pipeline to simultaneously detect ultra-fast outflows (UFOs) and warm absorbers across 473 Seyfert galaxies using archival EPIC-pn and RGS data spanning two decades.</p>
-        <p>UFOs appear as blue-shifted Fe XXV/XXVI absorption at 7–10 keV, reaching velocities of 0.1–0.4c — among the fastest known non-relativistic winds. Warm absorbers are the lower-ionization phase of the same outflow, visible in the soft X-ray band (0.3–2 keV) through RGS spectroscopy. Detecting both phases simultaneously in the same source and epoch constrains whether they form a single stratified disk wind or kinematically distinct components.</p>
-        <p>Individual case studies include MCG−6−30−15, monitored across 12 XMM-Newton epochs from 2000 to 2024, revealing how wind ionization and column density respond to the ionizing continuum. JWST infrared data situates the nuclear wind properties within the broader host-galaxy feedback picture.</p>
+        <ul class="overview-bullets">
+          <li>Systematic study of the Milli-Quas catalog with XMM-Newton data: spectral analysis of 473 sources, categorised by spectral features shown in their EPIC-pn spectra.</li>
+          <li>Detailed spectral study of 26 sources exhibiting outflows (blue-shifted Fe XXV/XXVI absorption lines) that have not been studied in this context before.</li>
+          <li>Highly detailed spectral and timing analysis of a quasar observed across two epochs, revealing two stratified UFO components that persist between observations.</li>
+          <li>Estimation of outflow location and energetics, and assessment of how these winds influence the surrounding environment and host galaxy.</li>
+          <li>Analysis uses both EPIC-MOS1/2 and RGS1/2 data throughout.</li>
+        </ul>
       </div>
       <div>
         <div class="phase-cards">
