@@ -278,21 +278,15 @@ nav {
 .hero-visual { min-width: 0; }
 
 .spectrum-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.spectrum-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 80% 20%, var(--accent-glow) 0%, transparent 65%);
-  pointer-events: none;
-}
+.spectrum-card::before { display: none; }
 
 .spectrum-header {
   display: flex;
