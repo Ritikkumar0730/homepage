@@ -1609,14 +1609,14 @@ new MutationObserver(() => drawSpectrum()).observe(root, { attributes: true, att
     tick++;
 
     // White background
-    ctx.fillStyle = '#f5f7ff'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
 
     // Disk glow halo — broad, equatorial (not polar), reflecting disk wind geometry
     ctx.save(); ctx.translate(cx, cy); ctx.scale(1, DB / DA * 2.2);
     const dh = ctx.createRadialGradient(0, 0, 0, 0, 0, DA * 1.70);
     dh.addColorStop(0, 'rgba(255,148,32,0.38)');
     dh.addColorStop(0.38, 'rgba(255,85,15,0.16)');
-    dh.addColorStop(1, 'rgba(245,247,255,0)');
+    dh.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = dh; ctx.beginPath(); ctx.arc(0, 0, DA * 1.70, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
 
@@ -1660,7 +1660,7 @@ new MutationObserver(() => drawSpectrum()).observe(root, { attributes: true, att
 
     // BH photon ring glow
     const bhr = ctx.createRadialGradient(cx, cy, W * 0.022, cx, cy, W * 0.075);
-    bhr.addColorStop(0, 'rgba(255,175,55,0.95)'); bhr.addColorStop(0.45, 'rgba(255,100,20,0.38)'); bhr.addColorStop(1, 'rgba(245,247,255,0)');
+    bhr.addColorStop(0, 'rgba(255,175,55,0.95)'); bhr.addColorStop(0.45, 'rgba(255,100,20,0.38)'); bhr.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = bhr; ctx.beginPath(); ctx.arc(cx, cy, W * 0.075, 0, Math.PI * 2); ctx.fill();
 
     // BH shadow
@@ -1671,9 +1671,9 @@ new MutationObserver(() => drawSpectrum()).observe(root, { attributes: true, att
     lbl('Black Hole',                  cx + W*0.023, cy - W*0.010, cx + W*0.115, cy - H*0.085);
     lbl('Accretion Disk',              cx + DA*0.70, cy + DB*0.75, cx + DA*0.92, cy + H*0.115);
     // UFO: inner disk wind, close to launch region, high ionisation (blue-white)
-    lbl('UFO · disk wind · v~0.1–0.4c', cx + DA*0.52, cy - H*0.145, cx + DA*1.08, cy - H*0.195);
+    lbl('UFO · v~0.1–0.4c', cx + DA*0.52, cy - H*0.145, cx + DA*0.82, cy - H*0.195);
     // Warm absorber: outer / further wind, lower ionisation (orange)
-    lbl('Warm Absorber · outer wind',   cx + DA*0.45, cy - H*0.305, cx + DA*1.08, cy - H*0.358);
+    lbl('Warm Absorber',   cx + DA*0.45, cy - H*0.305, cx + DA*0.82, cy - H*0.358);
 
     raf = requestAnimationFrame(frame);
   }
