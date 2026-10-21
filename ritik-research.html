@@ -386,8 +386,8 @@ canvas {
 /* ── Stats circle ── */
 .stats-with-spectrum {
   display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: 64px;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
   align-items: center;
   padding-block: 64px 72px;
   border-bottom: 1px solid var(--border);
@@ -1044,30 +1044,11 @@ study of a Quasar Source.</p>
         </div>
       </div>
     </div>
-    <div class="stats-circle-wrap">
-    <div class="stats-circle-label">Research at a glance</div>
-    <div class="stats-circle" role="list" aria-label="Key research statistics">
-      <div class="quad q1" role="listitem">
-        <div class="quad-num">47<em>3</em></div>
-        <div class="quad-label">AGN Sources</div>
-        <div class="quad-sub">Systematic EPIC-pn survey</div>
+    <div>
+      <div class="sim-wrap">
+        <canvas id="agnSim" aria-label="Animated simulation of AGN wind outflow from accretion disk"></canvas>
       </div>
-      <div class="quad q2" role="listitem">
-        <div class="quad-num">2<em>4</em>+</div>
-        <div class="quad-label">Years of Archive</div>
-        <div class="quad-sub">XMM-Newton 2000–2024</div>
-      </div>
-      <div class="quad q3" role="listitem">
-        <div class="quad-num"><em>2</em></div>
-        <div class="quad-label">Instruments</div>
-        <div class="quad-sub">EPIC-pn + RGS simultaneous</div>
-      </div>
-      <div class="quad q4" role="listitem">
-        <div class="quad-num">1<em>2</em></div>
-        <div class="quad-label">MCG−6−30−15 Obs.</div>
-        <div class="quad-sub">24-year multi-epoch baseline</div>
-      </div>
-    </div>
+      <div class="sim-caption">Simulation — AGN disk wind: wide-angle outflow launched from the accretion disk surface. UFO phase (blue, v~0.1–0.4c) originates at inner radii; warm absorber (orange) traces the outer, lower-ionization wind. Both are disk winds — not jets.</div>
     </div>
   </div>
 
@@ -1084,11 +1065,7 @@ study of a Quasar Source.</p>
         <p>Individual case studies include MCG−6−30−15, monitored across 12 XMM-Newton epochs from 2000 to 2024, revealing how wind ionization and column density respond to the ionizing continuum. JWST infrared data situates the nuclear wind properties within the broader host-galaxy feedback picture.</p>
       </div>
       <div>
-        <div class="sim-wrap">
-          <canvas id="agnSim" aria-label="Animated simulation of AGN wind outflow from accretion disk"></canvas>
-        </div>
-        <div class="sim-caption">Simulation — AGN disk wind: wide-angle outflow launched from the accretion disk surface. UFO phase (blue, v~0.1–0.4c) originates at inner radii; warm absorber (orange) traces the outer, lower-ionization wind. Both are disk winds — not jets.</div>
-        <div class="phase-cards" style="margin-top:22px;">
+        <div class="phase-cards">
           <div class="phase-card">
             <div class="phase-icon">⚡</div>
             <div>
