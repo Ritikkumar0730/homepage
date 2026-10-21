@@ -174,8 +174,8 @@ nav {
   padding-block: 80px 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .hero-eyebrow {
@@ -213,31 +213,32 @@ nav {
 
 .hero-thesis {
   font-family: 'Spectral', Georgia, serif;
-  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
   font-weight: 300;
   font-style: italic;
   color: var(--fg);
-  line-height: 1.28;
-  margin-bottom: 28px;
-  max-width: 740px;
+  line-height: 1.18;
+  margin-bottom: 32px;
+  max-width: 100%;
   text-wrap: balance;
-  text-align: center;
+  text-align: left;
+  letter-spacing: -0.02em;
 }
 
 .hero-summary {
   font-size: 0.95rem;
   color: var(--fg-muted);
   line-height: 1.82;
-  max-width: 660px;
+  max-width: 800px;
   margin-bottom: 38px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-cta {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .btn {
