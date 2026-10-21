@@ -894,6 +894,32 @@ footer {
   letter-spacing: 0.06em;
 }
 
+/* ── AGN Simulation ── */
+.sim-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #060a18;
+  position: relative;
+}
+
+#agnSim {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+}
+
+.sim-caption {
+  padding: 10px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
+  color: rgba(130,155,210,0.65);
+  background: #060a18;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-block: 64px 52px; }
@@ -1046,28 +1072,9 @@ footer {
       <h2 class="section-title">What the Thesis Addresses</h2>
     </div>
     <div class="overview-grid">
-      <div class="overview-text">
-        <p>
-          Active Galactic Nuclei (AGN) are powered by accretion onto supermassive black holes and
-          represent the primary mechanism by which energy is injected back into the host galaxy —
-          a process called AGN feedback. Understanding how this feedback operates is one of the
-          central open questions in modern astrophysics: it determines why massive galaxies stopped
-          forming stars, and how black hole mass correlates with galaxy properties across cosmic time.
-        </p>
-        <p>
-          Ultra-fast outflows (UFOs) are highly ionized, relativistic winds detected as
-          blue-shifted Fe XXV/XXVI absorption features in the hard X-ray band (∼7–10 keV).
-          Moving at 0.1–0.4c, they carry enough kinetic energy to drive large-scale feedback.
-          But how do these nuclear winds connect to the warm absorbers seen at lower ionization,
-          or to the molecular outflows detected at galactic scales? Answering this requires
-          tracing the outflow across multiple gas phases simultaneously.
-        </p>
-        <p>
-          This thesis provides that multi-phase picture. Using simultaneous EPIC-pn and RGS
-          spectroscopy from XMM-Newton, I characterize outflow properties — ionization parameter,
-          column density, and outflow velocity — across the full X-ray band, in both a systematic
-          survey of 473 sources and in precision analyses of three well-studied individual AGN.
-        </p>
+      <div class="sim-wrap">
+        <canvas id="agnSim" aria-label="Animated simulation of AGN wind outflow from accretion disk"></canvas>
+        <div class="sim-caption">Simulation — AGN disk wind: wide-angle outflow launched from the accretion disk surface. UFO phase (blue-white, v~0.1–0.4c) originates at small radii; warm absorber (orange) traces the outer, lower-ionization wind. Both are disk winds — not jets.</div>
       </div>
       <div class="phase-cards">
         <div class="phase-card">
@@ -1500,4 +1507,177 @@ function drawSpectrum() {
 
 drawSpectrum();
 new MutationObserver(() => drawSpectrum()).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+// ── AGN Wind Simulation ────────────────────────────────────────────
+(function () {
+  const cv = document.getElementById('agnSim');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let W, H, cx, cy, DA, DB, raf, tick = 0;
+  let ring = [], wind = [];
+
+  function setup() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = cv.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    cx = W / 2; cy = H * 0.52;
+    DA = W * 0.24; DB = W * 0.062;
+
+    ring = Array.from({ length: 270 }, () => {
+      const r = DA * (0.15 + Math.pow(Math.random(), 0.45) * 0.85);
+      const spd = (0.006 + 0.036 * Math.pow(DA * 0.15 / r, 0.5)) * (Math.random() > 0.5 ? 1 : -1);
+      const br = Math.max(0, 1 - (r - DA * 0.15) / (DA * 0.85));
+      return { r, ang: Math.random() * Math.PI * 2, spd, sz: 0.6 + Math.random() * 1.5, br };
+    });
+
+    wind = [];
+    for (let i = 0; i < 160; i++) spawnWind(Math.random() * 130);
+  }
+
+  // Disk wind: launch from DISK SURFACE at various radii, wide-angle outflow.
+  // UFOs originate at inner disk (small rFrac), warm absorbers at larger radii.
+  // This is disk wind geometry — NOT jet geometry.
+  function spawnWind(age) {
+    const upper = Math.random() > 0.5;
+    // Launch radius: inner disk to mid disk (8%–68% of DA)
+    const rFrac = 0.08 + Math.pow(Math.random(), 0.55) * 0.60;
+    const launchR = DA * rFrac;
+    // Azimuthal angle: spread across the visible disk face
+    const phi = (Math.random() - 0.5) * Math.PI * 1.05;
+    // Screen-space launch position on disk surface
+    const lx = cx + launchR * Math.cos(phi);
+    const ly = cy + launchR * Math.sin(phi) * (DB / DA);
+    // Speed: faster from inner disk (v_esc ∝ r^-0.5 for Keplerian)
+    const baseSpd = (1.0 + Math.random() * 2.2) * Math.pow(0.14 / (rFrac + 0.06), 0.38);
+    // Elevation angle from disk plane: 20°–72° wide-angle disk wind (NOT collimated jet)
+    const elevSin = 0.34 + Math.random() * 0.62;   // sin of elevation above disk plane
+    const elevCos = Math.sqrt(Math.max(0, 1 - elevSin * elevSin));
+    // Radial outward unit vector in screen coordinates
+    const radX = Math.cos(phi);
+    const radY = Math.sin(phi) * (DB / DA);
+    wind.push({
+      x: lx, y: ly,
+      // vx: radially outward across disk plane; vy: up/down off disk surface
+      vx: radX * elevCos * baseSpd * 0.75 + (Math.random() - 0.5) * 0.22,
+      vy: (upper ? -1 : 1) * elevSin * baseSpd + radY * elevCos * baseSpd * 0.45,
+      age: age || 0,
+      life: 85 + Math.random() * 88,
+      sz: 1.0 + Math.random() * 1.85,
+      launchR, rFrac
+    });
+  }
+
+  // Color for white background: UFO = deep blue (visible on white); warm absorber = orange.
+  function wCol(dist, launchR, a) {
+    const distF = Math.min(dist / (H * 0.42), 1);
+    const radF  = launchR / DA;
+    const f = Math.min(distF * 0.65 + radF * 0.45, 1);
+    let r, g, b;
+    if (f < 0.24) {
+      r = Math.round(22 + f / 0.24 * 48); g = Math.round(88 + f / 0.24 * 72); b = 228;
+    } else if (f < 0.54) {
+      const t = (f - 0.24) / 0.30;
+      r = Math.round(70 + t * 185); g = Math.round(160 - t * 58); b = Math.round(228 - t * 208);
+    } else {
+      const t = (f - 0.54) / 0.46;
+      r = 255; g = Math.round(102 - t * 57); b = Math.round(20 - t * 20);
+    }
+    return `rgba(${r},${g},${b},${Math.max(0, a)})`;
+  }
+
+  function lbl(text, ax, ay, lx, ly) {
+    ctx.save();
+    ctx.beginPath(); ctx.arc(ax, ay, 2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(40,75,180,0.60)'; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(lx, ly);
+    ctx.strokeStyle = 'rgba(50,90,190,0.32)'; ctx.lineWidth = 0.8;
+    ctx.setLineDash([4, 3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = '10px "DM Mono",monospace';
+    ctx.fillStyle = 'rgba(12,30,88,0.90)';
+    ctx.textAlign = lx >= cx ? 'left' : 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, lx + (lx >= cx ? 5 : -5), ly);
+    ctx.restore();
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    tick++;
+
+    // White background
+    ctx.fillStyle = '#f5f7ff'; ctx.fillRect(0, 0, W, H);
+
+    // Disk glow halo — broad, equatorial (not polar), reflecting disk wind geometry
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(1, DB / DA * 2.2);
+    const dh = ctx.createRadialGradient(0, 0, 0, 0, 0, DA * 1.70);
+    dh.addColorStop(0, 'rgba(255,148,32,0.38)');
+    dh.addColorStop(0.38, 'rgba(255,85,15,0.16)');
+    dh.addColorStop(1, 'rgba(245,247,255,0)');
+    ctx.fillStyle = dh; ctx.beginPath(); ctx.arc(0, 0, DA * 1.70, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+
+    // Disk body
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(1, DB / DA);
+    const dg = ctx.createRadialGradient(0, 0, DA * 0.07, 0, 0, DA);
+    dg.addColorStop(0,    'rgba(255,245,145,1)');
+    dg.addColorStop(0.11, 'rgba(255,195,70,0.95)');
+    dg.addColorStop(0.28, 'rgba(255,118,30,0.82)');
+    dg.addColorStop(0.52, 'rgba(205,55,15,0.56)');
+    dg.addColorStop(0.78, 'rgba(130,24,8,0.28)');
+    dg.addColorStop(1,    'rgba(55,8,3,0)');
+    ctx.fillStyle = dg; ctx.beginPath(); ctx.arc(0, 0, DA, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+
+    // Orbiting ring particles (Keplerian disk)
+    ring.forEach(p => {
+      p.ang += p.spd;
+      const ex = cx + p.r * Math.cos(p.ang);
+      const ey = cy + p.r * Math.sin(p.ang) * (DB / DA);
+      const rr = 255, gg = Math.round(p.br > 0.5 ? 198 + p.br * 57 : 95 + p.br * 103), bb = Math.round(p.br * 155);
+      ctx.beginPath(); ctx.arc(ex, ey, p.sz * (0.35 + p.br * 0.65), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${rr},${gg},${bb},${0.38 + p.br * 0.62})`; ctx.fill();
+    });
+
+    // Disk wind particles — wide-angle outflow from disk surface
+    wind.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.age++;
+      const dist = Math.hypot(p.x - cx, p.y - cy);
+      const lf = p.age / p.life;
+      const a = Math.min(1, lf * 7) * (1 - Math.pow(lf, 1.35)) * 0.92;
+      if (a > 0.013) {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.sz * 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = wCol(dist, p.launchR, a * 0.10); ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI * 2);
+        ctx.fillStyle = wCol(dist, p.launchR, a); ctx.fill();
+      }
+    });
+    wind = wind.filter(p => p.age < p.life);
+    while (wind.length < 160) spawnWind(0);
+
+    // BH photon ring glow
+    const bhr = ctx.createRadialGradient(cx, cy, W * 0.022, cx, cy, W * 0.075);
+    bhr.addColorStop(0, 'rgba(255,175,55,0.95)'); bhr.addColorStop(0.45, 'rgba(255,100,20,0.38)'); bhr.addColorStop(1, 'rgba(245,247,255,0)');
+    ctx.fillStyle = bhr; ctx.beginPath(); ctx.arc(cx, cy, W * 0.075, 0, Math.PI * 2); ctx.fill();
+
+    // BH shadow
+    ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx, cy, W * 0.021, 0, Math.PI * 2); ctx.fill();
+
+    // Labels — UFO and warm absorber are DISK WINDS (not jets).
+    // Anchors placed on actual wind particle zones above/below the disk surface.
+    lbl('Black Hole',                  cx + W*0.023, cy - W*0.010, cx + W*0.115, cy - H*0.085);
+    lbl('Accretion Disk',              cx + DA*0.70, cy + DB*0.75, cx + DA*0.92, cy + H*0.115);
+    // UFO: inner disk wind, close to launch region, high ionisation (blue-white)
+    lbl('UFO · disk wind · v~0.1–0.4c', cx + DA*0.52, cy - H*0.145, cx + DA*1.08, cy - H*0.195);
+    // Warm absorber: outer / further wind, lower ionisation (orange)
+    lbl('Warm Absorber · outer wind',   cx + DA*0.45, cy - H*0.305, cx + DA*1.08, cy - H*0.358);
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  setup(); frame();
+  window.addEventListener('resize', () => { cancelAnimationFrame(raf); setup(); frame(); });
+})();
 </script>
