@@ -555,6 +555,13 @@ canvas {
   flex-direction: column;
   gap: 14px;
 }
+.phase-cards-wide {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  flex-direction: unset;
+  margin-top: 48px;
+  gap: 20px;
+}
 
 .phase-card {
   background: var(--surface);
@@ -945,7 +952,7 @@ footer {
   .hero-visual { display: none; }
   .stats-circle { width: min(380px, 86vw); }
   .stats-with-spectrum { grid-template-columns: 1fr; }
-  .overview-grid { grid-template-columns: 1fr; }
+  .phase-cards-wide { grid-template-columns: 1fr; }
   .sources-grid { grid-template-columns: 1fr; }
   .findings-grid { grid-template-columns: 1fr; }
 
@@ -1056,39 +1063,26 @@ study of a Quasar Source.</p>
       <div class="section-eyebrow">Research Overview</div>
       <h2 class="section-title">What the Thesis Addresses</h2>
     </div>
-    <div class="overview-grid">
-      <div class="overview-text">
-        <ul class="overview-bullets">
-          <li>Systematic study of the Milli-Quas catalog with XMM-Newton data: spectral analysis of 473 sources, categorised by spectral features shown in their EPIC-pn spectra.</li>
-          <li>Detailed spectral study of 26 sources exhibiting outflows (blue-shifted Fe XXV/XXVI absorption lines) that have not been studied in this context before.</li>
-          <li>Highly detailed spectral and timing analysis of a quasar observed across two epochs, revealing two stratified UFO components that persist between observations.</li>
-          <li>Estimation of outflow location and energetics, and assessment of how these winds influence the surrounding environment and host galaxy.</li>
-          <li>Analysis uses both EPIC-MOS1/2 and RGS1/2 data throughout.</li>
-        </ul>
+    <div class="phase-cards phase-cards-wide">
+      <div class="phase-card">
+        <div class="phase-icon">⚡</div>
+        <div>
+          <div class="phase-name">Ultra-fast Outflows · Hard X-ray Phase</div>
+          <div class="phase-text">Highly ionized Fe XXV/XXVI absorption at 7–10 keV, velocities up to 0.4c. Modeled with XSPEC and custom XSTAR photoionization grids. Detected in both individual sources and the systematic survey.</div>
+        </div>
       </div>
-      <div>
-        <div class="phase-cards">
-          <div class="phase-card">
-            <div class="phase-icon">⚡</div>
-            <div>
-              <div class="phase-name">Ultra-fast Outflows · Hard X-ray Phase</div>
-              <div class="phase-text">Highly ionized Fe XXV/XXVI absorption at 7–10 keV, velocities up to 0.4c. Modeled with XSPEC and custom XSTAR photoionization grids. Detected in both individual sources and the systematic survey.</div>
-            </div>
-          </div>
-          <div class="phase-card">
-            <div class="phase-icon">🌊</div>
-            <div>
-              <div class="phase-name">Warm Absorbers · Soft X-ray Phase</div>
-              <div class="phase-text">Lower-ionization outflow gas traced with RGS spectroscopy in the 0.3–2 keV band. Simultaneous with EPIC-pn data, enabling a direct comparison of high- and low-ionization wind components in the same AGN epoch.</div>
-            </div>
-          </div>
-          <div class="phase-card">
-            <div class="phase-icon">🌌</div>
-            <div>
-              <div class="phase-name">Feedback Connection · Multi-wavelength</div>
-              <div class="phase-text">JWST infrared observations place X-ray wind measurements in the broader feedback context, connecting nuclear outflow properties to host-galaxy emission on larger spatial scales.</div>
-            </div>
-          </div>
+      <div class="phase-card">
+        <div class="phase-icon">🌊</div>
+        <div>
+          <div class="phase-name">Warm Absorbers · Soft X-ray Phase</div>
+          <div class="phase-text">Lower-ionization outflow gas traced with RGS spectroscopy in the 0.3–2 keV band. Simultaneous with EPIC-pn data, enabling a direct comparison of high- and low-ionization wind components in the same AGN epoch.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-icon">🌌</div>
+        <div>
+          <div class="phase-name">Feedback Connection · Multi-wavelength</div>
+          <div class="phase-text">JWST infrared observations place X-ray wind measurements in the broader feedback context, connecting nuclear outflow properties to host-galaxy emission on larger spatial scales.</div>
         </div>
       </div>
     </div>
