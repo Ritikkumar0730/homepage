@@ -171,11 +171,11 @@ nav {
 
 /* ── Hero ── */
 .hero {
-  padding-block: 100px 76px;
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 72px;
+  padding-block: 80px 60px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .hero-eyebrow {
@@ -213,28 +213,31 @@ nav {
 
 .hero-thesis {
   font-family: 'Spectral', Georgia, serif;
-  font-size: clamp(1rem, 1.8vw, 1.15rem);
-  font-weight: 400;
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+  font-weight: 300;
   font-style: italic;
-  color: var(--fg-muted);
-  line-height: 1.55;
-  margin-bottom: 26px;
-  max-width: 490px;
+  color: var(--fg);
+  line-height: 1.28;
+  margin-bottom: 28px;
+  max-width: 740px;
   text-wrap: balance;
+  text-align: center;
 }
 
 .hero-summary {
   font-size: 0.95rem;
   color: var(--fg-muted);
   line-height: 1.82;
-  max-width: 490px;
+  max-width: 660px;
   margin-bottom: 38px;
+  text-align: center;
 }
 
 .hero-cta {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn {
@@ -380,12 +383,19 @@ canvas {
 }
 
 /* ── Stats circle ── */
+.stats-with-spectrum {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 64px;
+  align-items: center;
+  padding-block: 64px 72px;
+  border-bottom: 1px solid var(--border);
+}
+
 .stats-circle-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-block: 64px 72px;
-  border-bottom: 1px solid var(--border);
   gap: 20px;
 }
 
@@ -919,6 +929,7 @@ footer {
   .hero { grid-template-columns: 1fr; padding-block: 64px 52px; }
   .hero-visual { display: none; }
   .stats-circle { width: min(380px, 86vw); }
+  .stats-with-spectrum { grid-template-columns: 1fr; }
   .overview-grid { grid-template-columns: 1fr; }
   .sources-grid { grid-template-columns: 1fr; }
   .method-grid { grid-template-columns: 1fr 1fr; }
@@ -969,71 +980,61 @@ footer {
 
   <!-- ── Hero ── -->
   <section class="hero">
-    <div>
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        Indian Institute of Science · High-Energy Astrophysics
-      </div>
-      <h1 class="hero-name"><strong>Ritik</strong> Kumar</h1>
-      <p class="hero-thesis">Tracing Outflows Across Different Gas Phases<br>in Active Galactic Nuclei</p>
-      <p class="hero-summary">
-        Systematic X-ray spectroscopy of AGN-driven winds using 24+ years of XMM-Newton archival
-        observations. I searched for ultra-fast outflows (UFOs) across 473 AGN, performed
-        flux-resolved multi-phase spectral analysis of individual Seyfert galaxies, and
-        connected nuclear X-ray winds to the broader AGN feedback picture using XSTAR
-        photoionization modeling and JWST data.
-      </p>
-      <div class="hero-cta">
-        <a href="https://www.overleaf.com/project/68f0ad45480e36fd5ae8d23d" target="_blank" rel="noopener" class="btn btn-primary">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1.5 6.5h10M6.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Read Thesis
-        </a>
-        <a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="#research" class="btn btn-ghost">Explore ↓</a>
-      </div>
-    </div>
-
-    <!-- X-ray spectrum visualization -->
-    <div class="hero-visual" aria-hidden="true">
-      <div class="spectrum-card">
-        <div class="spectrum-header">
-          <div class="spectrum-badge">
-            XMM-Newton · EPIC-pn<br>MCG−6−30−15 · Rev 4425
-          </div>
-          <div class="live-dot">XMM Archive</div>
-        </div>
-        <div class="spectrum-canvas-wrap">
-          <canvas id="specCanvas" width="356" height="200"></canvas>
-        </div>
-        <div class="spectrum-axis">
-          <span>0.3 keV</span>
-          <span>Fe Kα 6.4 keV</span>
-          <span>UFO ∼7.7 keV</span>
-          <span>10 keV</span>
-        </div>
-        <div class="spectrum-legend">
-          <div class="legend-item">
-            <div class="legend-line" id="leg-data" style="background:var(--accent);"></div>
-            <span>Data (EPIC-pn)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-line" style="background:var(--accent-alt);border-top:2px dashed var(--accent-alt);height:0;"></div>
-            <span>Best-fit model</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="border-color:#e04444;"></div>
-            <span>UFO absorption</span>
-          </div>
-        </div>
-      </div>
+    <p class="hero-thesis">Tracing Outflows Across Different Gas Phases<br>in Active Galactic Nuclei</p>
+    <p class="hero-summary">
+      Systematic X-ray spectroscopy of AGN-driven winds using 24+ years of XMM-Newton archival
+      observations. I searched for ultra-fast outflows (UFOs) across 473 AGN, performed
+      flux-resolved multi-phase spectral analysis of individual Seyfert galaxies, and
+      connected nuclear X-ray winds to the broader AGN feedback picture using XSTAR
+      photoionization modeling and JWST data.
+    </p>
+    <div class="hero-cta">
+      <a href="https://www.overleaf.com/project/68f0ad45480e36fd5ae8d23d" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1.5 6.5h10M6.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Read Thesis
+      </a>
+      <a href="https://github.com/Ritikkumar0730" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="#research" class="btn btn-ghost">Explore ↓</a>
     </div>
   </section>
 
-  <!-- ── Stats circle ── -->
-  <div class="stats-circle-wrap">
+  <!-- ── Stats + Spectrum ── -->
+  <div class="stats-with-spectrum">
+    <div class="spectrum-card">
+      <div class="spectrum-header">
+        <div class="spectrum-badge">
+          XMM-Newton · EPIC-pn<br>MCG−6−30−15 · Rev 4425
+        </div>
+        <div class="live-dot">XMM Archive</div>
+      </div>
+      <div class="spectrum-canvas-wrap">
+        <canvas id="specCanvas" width="356" height="200"></canvas>
+      </div>
+      <div class="spectrum-axis">
+        <span>0.3 keV</span>
+        <span>Fe Kα 6.4 keV</span>
+        <span>UFO ∼7.7 keV</span>
+        <span>10 keV</span>
+      </div>
+      <div class="spectrum-legend">
+        <div class="legend-item">
+          <div class="legend-line" id="leg-data" style="background:var(--accent);"></div>
+          <span>Data (EPIC-pn)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-line" style="background:var(--accent-alt);border-top:2px dashed var(--accent-alt);height:0;"></div>
+          <span>Best-fit model</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="border-color:#e04444;"></div>
+          <span>UFO absorption</span>
+        </div>
+      </div>
+    </div>
+    <div class="stats-circle-wrap">
     <div class="stats-circle-label">Research at a glance</div>
     <div class="stats-circle" role="list" aria-label="Key research statistics">
       <div class="quad q1" role="listitem">
@@ -1056,6 +1057,7 @@ footer {
         <div class="quad-label">MCG−6−30−15 Obs.</div>
         <div class="quad-sub">24-year multi-epoch baseline</div>
       </div>
+    </div>
     </div>
   </div>
 
