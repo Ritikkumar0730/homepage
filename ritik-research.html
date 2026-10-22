@@ -1159,7 +1159,6 @@ function isDark() {
 
 function applyTheme(dark) {
   root.setAttribute('data-theme', dark ? 'dark' : 'light');
-  btn.textContent = dark ? '☀ Theme' : '◑ Theme';
   try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e){}
   drawSpectrum();
 }
@@ -1172,7 +1171,7 @@ try {
 } catch(e){ applyTheme(false); }
 
 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', e => {
-  if (!root.getAttribute('data-theme')) { btn.textContent = e.matches ? '☀ Theme' : '◑ Theme'; drawSpectrum(); }
+  if (!root.getAttribute('data-theme')) { drawSpectrum(); }
 });
 
 // ── Copy email ──────────────────────────────────────────────────
