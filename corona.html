@@ -242,27 +242,24 @@ canvas#spec {
 <div class="metrics">
   <div class="metric">
     <div class="metric-label">Corona radius r<sub>src</sub></div>
-    <div class="metric-val">4.12<span class="metric-unit">r<sub>g</sub></span></div>
   </div>
   <div class="metric">
     <div class="metric-label">BH Spin a*</div>
-    <div class="metric-val">0.90</div>
   </div>
   <div class="metric">
     <div class="metric-label">Inclination</div>
-    <div class="metric-val">36.7<span class="metric-unit">°</span></div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Polar angle θ<sub>src</sub></div>
   </div>
   <div class="metric">
     <div class="metric-label">Refl. Fraction</div>
-    <div class="metric-val">2.77</div>
   </div>
   <div class="metric">
     <div class="metric-label">Photon Index Γ</div>
-    <div class="metric-val">2.20</div>
   </div>
   <div class="metric">
     <div class="metric-label">log ξ (ionisation)</div>
-    <div class="metric-val">1.42</div>
   </div>
 </div>
 
@@ -300,7 +297,7 @@ canvas#spec {
   <canvas id="spec" height="200"></canvas>
   <div class="spec-legend">
     <div class="leg-item"><div class="leg-swatch" style="background:#1a7db5"></div>Power-law continuum</div>
-    <div class="leg-item"><div class="leg-swatch" style="background:#c95a10"></div>Relativistic reflection (relxill_ring)</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:#8b0000"></div>Relativistic reflection (relxill_ring)</div>
     <div class="leg-item"><div class="leg-swatch" style="background:#9a6e00"></div>Fe Kα line (~6.4 keV)</div>
     <div class="leg-item"><div class="leg-swatch" style="background:#7040b0"></div>Warm absorber</div>
   </div>
@@ -580,7 +577,7 @@ function drawSpectrum() {
     i === 0 ? sctx.moveTo(eToX(e), fToY(Math.min(f, 0.95)))
              : sctx.lineTo(eToX(e), fToY(Math.min(f, 0.95)));
   }
-  sctx.strokeStyle = '#c95a10';
+  sctx.strokeStyle = '#8b0000';
   sctx.lineWidth = 1.8;
   sctx.stroke();
 
