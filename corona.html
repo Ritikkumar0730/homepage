@@ -34,6 +34,7 @@ body {
   padding-block: 36px 28px;
   max-width: 720px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .journal-tag {
@@ -176,11 +177,10 @@ h1 em { font-style: italic; color: var(--accent); }
 
 .toggle-btn.active { background: var(--accent); color: #fff; }
 
-/* canvas: no border, no radius — seamless with white page */
+/* canvas: full page width, no border, no radius, no max-width — seamless */
 canvas#sim {
   display: block;
   width: 100%;
-  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -313,7 +313,7 @@ canvas#spec {
       <button class="toggle-btn" id="btn-lamp" onclick="setMode('lamp')">Lamp-post</button>
     </div>
   </div>
-  <canvas id="sim" height="420"></canvas>
+  <canvas id="sim" height="500"></canvas>
   <div class="sliders">
     <div class="slider-row">
       <label>Corona radius r<sub>src</sub> <span id="lbl-rsrc">4.1 r<sub>g</sub></span></label>
@@ -382,21 +382,24 @@ document.getElementById('sl-incl').addEventListener('input', e => {
 function resize() {
   const dpr = window.devicePixelRatio || 1;
   const w = simCanvas.clientWidth;
-  const h = 420;
+  const h = 500;
   simCanvas.width = w * dpr;
   simCanvas.height = h * dpr;
   ctx.scale(dpr, dpr);
 }
 
 function draw() {
-  const W = simCanvas.clientWidth, H = 420;
+  const W = simCanvas.clientWidth, H = 500;
   // clear to pure white — seamless with page background
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, W, H);
 
   const cx = W / 2, cy = H / 2;
-  const scale = Math.min(W, H) / 10;
+
+  // scale: ensures diskOuter (9 rg) always stays within canvas at any inclination
+  // H/18 guarantees vertical fit even at tilt≈1 (face-on disk); W/20 guarantees horizontal fit
+  const scale = Math.min(W / 20, H / 18);
 
   const rISCO = 6 * (1 - 0.54 * spin);
   const diskInner = rISCO * scale;
