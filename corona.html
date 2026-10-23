@@ -1,18 +1,13 @@
 <title>IRAS 09149 Corona</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500&display=swap">
 
 <style>
 :root {
   --bg: #ffffff;
-  --bg2: #f6f8fc;
-  --panel: #eef1f7;
-  --border: #dde2ec;
   --fg: #1a2030;
-  --fg2: #56657a;
+  --fg2: #3a4a5a;
   --accent: #1a7db5;
-  --accent2: #c95a10;
-  --gold: #9a6e00;
   color-scheme: light;
 }
 
@@ -22,650 +17,60 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 0;
 }
 
-.header {
-  border-bottom: 1px solid var(--border);
-  padding-block: 36px 28px;
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.journal-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: .12em;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 18px;
+.page {
+  width: 100%;
+  padding-top: 72px;
+  padding-bottom: 80px;
 }
 
 h1 {
   font-family: 'Crimson Pro', Georgia, serif;
-  font-size: clamp(22px, 4vw, 34px);
+  font-size: clamp(26px, 5vw, 52px);
   font-weight: 300;
-  line-height: 1.25;
+  line-height: 1.2;
   text-wrap: balance;
   color: var(--fg);
-  margin-bottom: 6px;
+  text-align: center;
+  margin-bottom: 52px;
 }
 
-h1 em { font-style: italic; color: var(--accent); }
-
-.author-line {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  color: var(--fg2);
-  margin-top: 12px;
-  letter-spacing: .04em;
-}
-
-.abstract-section {
-  max-width: 720px;
-  margin: 28px auto 32px;
-  padding: 22px 26px;
-  background: var(--bg2);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-}
-
-.abstract-section h2 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.abstract-section p {
-  font-family: 'Crimson Pro', Georgia, serif;
-  font-size: 17px;
-  line-height: 1.75;
-  color: #2a3545;
-}
-
-.abstract-section p strong { color: var(--gold); font-weight: 600; }
-
-.metrics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  max-width: 720px;
-  margin: 0 auto 40px;
-}
-
-.metric {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 18px;
-  flex: 1 1 130px;
-  min-width: 0;
-}
-
-.metric-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .1em;
-  color: var(--fg2);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.metric-val {
-  font-family: 'Crimson Pro', Georgia, serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gold);
-  line-height: 1.1;
-}
-
-.metric-unit { font-size: 13px; color: var(--fg2); margin-left: 2px; }
-
-/* simulation: no background band, no border — blends into page white */
-.sim-wrap {
-  padding-block: 24px;
-  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
-  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-
-.sim-header {
-  max-width: 720px;
-  margin: 0 auto 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.sim-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+h1 em {
+  font-style: italic;
   color: var(--accent);
 }
 
-.toggle-group {
-  display: flex;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.toggle-btn {
-  background: none;
-  border: none;
+.abstract {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.85;
   color: var(--fg2);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: .08em;
-  padding: 6px 14px;
-  cursor: pointer;
-  transition: background .15s, color .15s;
-}
-
-.toggle-btn.active { background: var(--accent); color: #fff; }
-
-/* canvas: full page width, no border, no radius, no max-width — seamless */
-canvas#sim {
-  display: block;
-  width: 100%;
+  max-width: 820px;
   margin: 0 auto;
+  text-align: justify;
 }
-
-.sliders {
-  max-width: 720px;
-  margin: 16px auto 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.slider-row label {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--fg2);
-  margin-bottom: 6px;
-  letter-spacing: .05em;
-}
-
-.slider-row label span { color: var(--gold); }
-input[type=range] { width: 100%; accent-color: var(--accent); height: 4px; }
-
-.spectrum-section {
-  max-width: 720px;
-  margin: 36px auto 0;
-  padding-bottom: 48px;
-  border-top: 1px solid var(--border);
-  padding-top: 28px;
-}
-
-.spec-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 14px;
-}
-
-canvas#spec {
-  width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.spec-legend {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.leg-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
-  color: var(--fg2);
-}
-
-.leg-swatch { width: 20px; height: 3px; border-radius: 2px; }
 </style>
 
-<div class="header">
-  <div class="journal-tag">X-ray Reflection Spectroscopy · IRAS 09149−6206</div>
-  <h1>Constraining the Coronal Geometry with a Ring-like Corona Model</h1>
-  <div class="author-line">Ritik Kumar &nbsp;·&nbsp; XMM-Newton + NuSTAR (0.3–79 keV) &nbsp;·&nbsp; relxill_ring framework</div>
-</div>
+<div class="page">
+  <h1>Constraining the Coronal Geometry of <em>IRAS&nbsp;09149−6206</em><br>with a Ring-like Corona Model</h1>
 
-<div class="abstract-section">
-  <h2>Abstract</h2>
-  <p>
-    In this work, we have used simultaneous observation of XMM-Newton and NuSTAR data of a source which is highly rotating. 
-    During the working I have used the complete set of modelling while covering for every features such as warm absorber, outflows, emission, distant and near reflection.
-    While working, we have also explored the MCMC analysis to get better ideas of parameters space.
-    Some of other things I have checked such as effect of returning radiation, effect of different geometry and also the effect of different ionization parameter, and the illumination profile of the disk. 
-    This work is in preparation for publication.
+  <p class="abstract">
+    We present a broadband X-ray spectral analysis of the Type-I Seyfert galaxy IRAS&nbsp;09149−6206
+    (z&nbsp;=&nbsp;0.0573, d<sub>L</sub>&nbsp;=&nbsp;267 Mpc) using simultaneous XMM-Newton and NuSTAR observations
+    covering 0.3–79 keV. We apply the newly introduced relxill_ring model, which extends the
+    conventional lamp-post geometry by representing the X-ray corona as a radially extended ring
+    above the accretion disk, characterised by a spherical source radius r<sub>src</sub> and polar angle
+    θ<sub>src</sub>. Accounting for a multi-component warm absorber and a distant neutral reflector,
+    we constrain the corona to r<sub>src</sub>&nbsp;=&nbsp;4.12<sup>+0.23</sup><sub>−0.25</sub> r<sub>g</sub>,
+    placing it in a compact, near-equatorial configuration close to the black hole. We measure a high
+    black-hole spin of a*&nbsp;=&nbsp;0.90&nbsp;±&nbsp;0.03, a disk inclination of i&nbsp;=&nbsp;36.7&nbsp;±&nbsp;1.1°,
+    and a large reflection fraction of R<sub>frac</sub>&nbsp;=&nbsp;2.77, consistent with strong light bending
+    near the black hole. These results are robust with respect to the inclusion of returning radiation
+    and are consistent with prior lamp-post analysis, while demonstrating that the ring geometry
+    provides a physically richer description of the coronal structure in this source.
   </p>
 </div>
-
-<div class="metrics">
-  <div class="metric">
-    <div class="metric-label">Corona radius r<sub>src</sub></div>
-    <div class="metric-val">4.12<span class="metric-unit">r<sub>g</sub></span></div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">BH Spin a*</div>
-    <div class="metric-val">0.90</div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">Inclination</div>
-    <div class="metric-val">36.7<span class="metric-unit">°</span></div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">Refl. Fraction</div>
-    <div class="metric-val">2.77</div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">Photon Index Γ</div>
-    <div class="metric-val">2.20</div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">log ξ (ionisation)</div>
-    <div class="metric-val">1.42</div>
-  </div>
-</div>
-
-<div class="sim-wrap">
-  <div class="sim-header">
-    <div class="sim-title">Corona Geometry Simulation</div>
-    <div class="toggle-group">
-      <button class="toggle-btn active" id="btn-ring" onclick="setMode('ring')">Ring</button>
-      <button class="toggle-btn" id="btn-lamp" onclick="setMode('lamp')">Lamp-post</button>
-    </div>
-  </div>
-  <canvas id="sim" height="500"></canvas>
-  <div class="sliders">
-    <div class="slider-row">
-      <label>Corona radius r<sub>src</sub> <span id="lbl-rsrc">4.1 r<sub>g</sub></span></label>
-      <input type="range" id="sl-rsrc" min="2" max="12" step="0.1" value="4.1">
-    </div>
-    <div class="slider-row">
-      <label>BH Spin a* <span id="lbl-spin">0.90</span></label>
-      <input type="range" id="sl-spin" min="0" max="0.998" step="0.01" value="0.90">
-    </div>
-    <div class="slider-row">
-      <label>Polar angle θ<sub>src</sub> <span id="lbl-theta">20°</span></label>
-      <input type="range" id="sl-theta" min="0" max="60" step="1" value="20">
-    </div>
-    <div class="slider-row">
-      <label>Disk inclination <span id="lbl-incl">37°</span></label>
-      <input type="range" id="sl-incl" min="10" max="70" step="1" value="37">
-    </div>
-  </div>
-</div>
-
-<div class="spectrum-section">
-  <div class="spec-title">Schematic X-ray Reflected Spectrum</div>
-  <canvas id="spec" height="200"></canvas>
-  <div class="spec-legend">
-    <div class="leg-item"><div class="leg-swatch" style="background:#1a7db5"></div>Power-law continuum</div>
-    <div class="leg-item"><div class="leg-swatch" style="background:#c95a10"></div>Relativistic reflection (relxill_ring)</div>
-    <div class="leg-item"><div class="leg-swatch" style="background:#9a6e00"></div>Fe Kα line (~6.4 keV)</div>
-    <div class="leg-item"><div class="leg-swatch" style="background:#7040b0"></div>Warm absorber</div>
-  </div>
-</div>
-
-<script>
-let mode = 'ring';
-let rsrc = 4.1, spin = 0.90, theta = 20, incl = 37;
-let photons = [];
-let t = 0;
-
-const simCanvas = document.getElementById('sim');
-const ctx = simCanvas.getContext('2d');
-
-function setMode(m) {
-  mode = m;
-  document.getElementById('btn-ring').classList.toggle('active', m === 'ring');
-  document.getElementById('btn-lamp').classList.toggle('active', m === 'lamp');
-}
-
-document.getElementById('sl-rsrc').addEventListener('input', e => {
-  rsrc = +e.target.value;
-  document.getElementById('lbl-rsrc').textContent = rsrc.toFixed(1) + ' rg';
-  photons = [];
-});
-document.getElementById('sl-spin').addEventListener('input', e => {
-  spin = +e.target.value;
-  document.getElementById('lbl-spin').textContent = spin.toFixed(2);
-});
-document.getElementById('sl-theta').addEventListener('input', e => {
-  theta = +e.target.value;
-  document.getElementById('lbl-theta').textContent = theta + '°';
-  photons = [];
-});
-document.getElementById('sl-incl').addEventListener('input', e => {
-  incl = +e.target.value;
-  document.getElementById('lbl-incl').textContent = incl + '°';
-});
-
-function resize() {
-  const dpr = window.devicePixelRatio || 1;
-  const w = simCanvas.clientWidth;
-  const h = 500;
-  simCanvas.width = w * dpr;
-  simCanvas.height = h * dpr;
-  ctx.scale(dpr, dpr);
-}
-
-function draw() {
-  const W = simCanvas.clientWidth, H = 500;
-  // clear to pure white — seamless with page background
-  ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, W, H);
-
-  const cx = W / 2, cy = H / 2;
-
-  // scale: ensures diskOuter (9 rg) always stays within canvas at any inclination
-  // H/18 guarantees vertical fit even at tilt≈1 (face-on disk); W/20 guarantees horizontal fit
-  const scale = Math.min(W / 20, H / 18);
-
-  const rISCO = 6 * (1 - 0.54 * spin);
-  const diskInner = rISCO * scale;
-  const diskOuter = 9 * scale;
-
-  const inclRad = (incl * Math.PI) / 180;
-  const tilt = Math.cos(inclRad);
-
-  // subtle glow behind the whole scene — white-to-very-light, so no hard edge
-  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, diskOuter * 1.2);
-  grd.addColorStop(0, 'rgba(230,240,255,0.55)');
-  grd.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, 0, W, H);
-
-  // accretion disk rings
-  const nRings = 30;
-  for (let i = nRings; i >= 0; i--) {
-    const r = diskInner + (diskOuter - diskInner) * (i / nRings);
-    const frac = i / nRings;
-    // inner: warm orange-red; outer: cool blue-indigo
-    const rr = Math.round(220 - 100 * frac);
-    const gg = Math.round(80 + 40 * frac);
-    const bb = Math.round(30 + 190 * frac);
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * tilt, 0, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(${rr},${gg},${bb},0.65)`;
-    ctx.lineWidth = (diskOuter - diskInner) / nRings * 1.1;
-    ctx.stroke();
-  }
-
-  // ergosphere glow (golden, spin-dependent)
-  const ergo = (1 + Math.sqrt(1 - spin * spin)) * scale;
-  ctx.beginPath();
-  ctx.ellipse(cx, cy, ergo * 0.55, ergo * 0.55, 0, 0, Math.PI * 2);
-  ctx.strokeStyle = 'rgba(180,130,0,0.18)';
-  ctx.lineWidth = ergo * 0.5;
-  ctx.stroke();
-
-  // black hole
-  const bhR = Math.max(4, (1 + Math.sqrt(1 - spin * spin)) * scale * 0.4);
-  const bhGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, bhR * 2.5);
-  bhGrd.addColorStop(0, 'rgba(10,10,20,1)');
-  bhGrd.addColorStop(0.55, 'rgba(20,20,40,0.9)');
-  bhGrd.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.beginPath();
-  ctx.arc(cx, cy, bhR * 2.5, 0, Math.PI * 2);
-  ctx.fillStyle = bhGrd;
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(cx, cy, bhR, 0, Math.PI * 2);
-  ctx.fillStyle = '#0a0a14';
-  ctx.fill();
-  // photon ring
-  ctx.beginPath();
-  ctx.arc(cx, cy, bhR * 1.35, 0, Math.PI * 2);
-  ctx.strokeStyle = 'rgba(200,150,20,0.5)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // corona sources
-  const coronaSources = [];
-  const thetaRad = (theta * Math.PI) / 180;
-  const coronaY_lamp = cy - rsrc * scale;
-
-  if (mode === 'lamp') {
-    coronaSources.push({ x: cx, y: coronaY_lamp });
-    // axis dashes
-    ctx.beginPath();
-    ctx.setLineDash([4, 4]);
-    ctx.moveTo(cx, cy - bhR);
-    ctx.lineTo(cx, coronaY_lamp - 7);
-    ctx.strokeStyle = 'rgba(26,125,181,0.35)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.setLineDash([]);
-    // source dot
-    ctx.beginPath();
-    ctx.arc(cx, coronaY_lamp, 7, 0, Math.PI * 2);
-    ctx.fillStyle = '#1a7db5';
-    ctx.shadowColor = '#1a7db5';
-    ctx.shadowBlur = 14;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.font = '10px JetBrains Mono, monospace';
-    ctx.fillStyle = 'rgba(26,125,181,0.85)';
-    ctx.fillText(`h = ${rsrc.toFixed(1)} rg`, cx + 12, coronaY_lamp + 4);
-  } else {
-    const nSrc = 8;
-    for (let i = 0; i < nSrc; i++) {
-      const phi = (i / nSrc) * Math.PI * 2 + t * 0.004;
-      const rx = rsrc * scale * Math.cos(phi);
-      const ry = rsrc * scale * Math.sin(phi) * tilt;
-      const ht = rsrc * scale * Math.sin(thetaRad);
-      coronaSources.push({ x: cx + rx, y: cy - ry * 0.3 - ht });
-    }
-    // ring outline
-    ctx.beginPath();
-    ctx.ellipse(cx, cy - rsrc * scale * Math.sin(thetaRad),
-      rsrc * scale, rsrc * scale * tilt, 0, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(26,125,181,0.5)';
-    ctx.lineWidth = 2;
-    ctx.shadowColor = '#1a7db5';
-    ctx.shadowBlur = 8;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-    coronaSources.forEach(s => {
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, 4, 0, Math.PI * 2);
-      ctx.fillStyle = '#1a7db5';
-      ctx.shadowColor = '#1a7db5';
-      ctx.shadowBlur = 8;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
-    ctx.font = '10px JetBrains Mono, monospace';
-    ctx.fillStyle = 'rgba(26,125,181,0.85)';
-    ctx.fillText(`rsrc = ${rsrc.toFixed(1)} rg, θ = ${theta}°`,
-      cx - 72, cy - rsrc * scale * Math.sin(thetaRad) - rsrc * scale - 8);
-  }
-
-  // photons
-  if (t % 12 === 0 && coronaSources.length) {
-    const src = coronaSources[Math.floor(Math.random() * coronaSources.length)];
-    const phi = Math.random() * Math.PI * 2;
-    const r = diskInner + Math.random() * (diskOuter - diskInner) * 0.7;
-    const tx = cx + r * Math.cos(phi);
-    const ty = cy + r * Math.sin(phi) * tilt;
-    photons.push({ sx: src.x, sy: src.y, ex: tx, ey: ty, p: 0, type: 'direct', alpha: 1 });
-    const dx = src.x - cx, dy = src.y - cy;
-    const len = Math.sqrt(dx*dx+dy*dy) || 1;
-    photons.push({ sx: tx, sy: ty, ex: tx + (dx/len)*W*0.3, ey: ty + (dy/len)*H*0.3,
-      p: 0, type: 'reflected', alpha: 1 });
-  }
-
-  photons = photons.filter(p => p.alpha > 0.02);
-  photons.forEach(ph => {
-    const x = ph.sx + (ph.ex - ph.sx) * ph.p;
-    const y = ph.sy + (ph.ey - ph.sy) * ph.p;
-    ctx.beginPath();
-    ctx.arc(x, y, ph.type === 'direct' ? 2.5 : 2, 0, Math.PI * 2);
-    if (ph.type === 'direct') {
-      ctx.fillStyle = `rgba(26,125,181,${ph.alpha})`;
-      ctx.shadowColor = '#1a7db5';
-    } else {
-      ctx.fillStyle = `rgba(201,90,16,${ph.alpha})`;
-      ctx.shadowColor = '#c95a10';
-    }
-    ctx.shadowBlur = 7;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ph.p += 0.025;
-    if (ph.p > 1) ph.alpha -= 0.08;
-  });
-
-  // labels
-  ctx.font = '11px JetBrains Mono, monospace';
-  ctx.fillStyle = 'rgba(154,110,0,0.75)';
-  ctx.fillText('Accretion disk', cx + diskOuter * 0.62, cy + diskOuter * tilt * 0.62);
-  ctx.fillStyle = 'rgba(60,70,90,0.55)';
-  ctx.fillText('Black hole', cx + bhR + 5, cy + 4);
-
-  ctx.font = '10px JetBrains Mono, monospace';
-  ctx.fillStyle = mode === 'ring' ? '#1a7db5' : '#9a6e00';
-  ctx.fillText(mode === 'ring' ? '◉ RING corona' : '● LAMP-POST corona', 12, 18);
-
-  t++;
-  requestAnimationFrame(draw);
-}
-
-window.addEventListener('resize', () => { resize(); });
-resize();
-draw();
-
-// spectrum
-const specCanvas = document.getElementById('spec');
-const sctx = specCanvas.getContext('2d');
-
-function drawSpectrum() {
-  const dpr = window.devicePixelRatio || 1;
-  const W = specCanvas.clientWidth, H = 200;
-  specCanvas.width = W * dpr;
-  specCanvas.height = H * dpr;
-  sctx.scale(dpr, dpr);
-
-  sctx.clearRect(0, 0, W, H);
-  sctx.fillStyle = '#f6f8fc';
-  sctx.fillRect(0, 0, W, H);
-
-  const pad = { l: 48, r: 16, t: 16, b: 32 };
-  const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
-
-  const eMin = Math.log10(0.3), eMax = Math.log10(79);
-  function eToX(e) { return pad.l + (Math.log10(e) - eMin) / (eMax - eMin) * pw; }
-  function fToY(f) { return pad.t + ph - f * ph; }
-
-  // grid
-  sctx.strokeStyle = 'rgba(200,210,225,0.9)';
-  sctx.lineWidth = 1;
-  [0.5, 1, 2, 5, 10, 20, 50].forEach(e => {
-    const x = eToX(e);
-    sctx.beginPath(); sctx.moveTo(x, pad.t); sctx.lineTo(x, pad.t + ph); sctx.stroke();
-  });
-
-  // power-law continuum
-  sctx.beginPath();
-  for (let i = 0; i <= 200; i++) {
-    const e = Math.pow(10, eMin + i/200*(eMax-eMin));
-    const f = Math.pow(e, -(2.2-2)) * Math.exp(-e/200) * 0.78;
-    const x = eToX(e), y = fToY(Math.min(f, 0.98));
-    i === 0 ? sctx.moveTo(x, y) : sctx.lineTo(x, y);
-  }
-  sctx.strokeStyle = '#1a7db5';
-  sctx.lineWidth = 1.8;
-  sctx.stroke();
-
-  // warm absorber
-  sctx.beginPath();
-  for (let i = 0; i <= 200; i++) {
-    const e = Math.pow(10, eMin + i/200*(eMax-eMin));
-    const pl = Math.pow(e, -(2.2-2)) * Math.exp(-e/200);
-    const abs = 1 - 0.45 * Math.exp(-Math.pow((Math.log10(e)-Math.log10(0.7))/0.3, 2));
-    const f = pl * abs * 0.78;
-    i === 0 ? sctx.moveTo(eToX(e), fToY(Math.min(f, 0.98)))
-             : sctx.lineTo(eToX(e), fToY(Math.min(f, 0.98)));
-  }
-  sctx.strokeStyle = 'rgba(112,64,176,0.75)';
-  sctx.lineWidth = 1.5;
-  sctx.stroke();
-
-  // reflection hump
-  sctx.beginPath();
-  for (let i = 0; i <= 200; i++) {
-    const e = Math.pow(10, eMin + i/200*(eMax-eMin));
-    const hump = 0.28 * Math.exp(-Math.pow((Math.log10(e)-1.35)/0.22, 2));
-    const soft = 0.15 * Math.exp(-Math.pow((Math.log10(e)-0.15)/0.25, 2));
-    const f = (hump + soft) * 0.9;
-    i === 0 ? sctx.moveTo(eToX(e), fToY(Math.min(f, 0.95)))
-             : sctx.lineTo(eToX(e), fToY(Math.min(f, 0.95)));
-  }
-  sctx.strokeStyle = '#c95a10';
-  sctx.lineWidth = 1.8;
-  sctx.stroke();
-
-  // Fe Kα
-  sctx.beginPath();
-  for (let i = 0; i <= 200; i++) {
-    const e = Math.pow(10, eMin + i/200*(eMax-eMin));
-    const fe = 0.55 * Math.exp(-Math.pow((Math.log10(e)-Math.log10(6.4))/0.08, 2))
-             + 0.2  * Math.exp(-Math.pow((Math.log10(e)-Math.log10(5.5))/0.15, 2));
-    const f = fe * 0.75;
-    i === 0 ? sctx.moveTo(eToX(e), fToY(Math.min(f, 0.95)))
-             : sctx.lineTo(eToX(e), fToY(Math.min(f, 0.95)));
-  }
-  sctx.strokeStyle = '#9a6e00';
-  sctx.lineWidth = 2.2;
-  sctx.stroke();
-
-  // axes
-  sctx.strokeStyle = 'rgba(80,100,120,0.5)';
-  sctx.lineWidth = 1;
-  sctx.beginPath();
-  sctx.moveTo(pad.l, pad.t);
-  sctx.lineTo(pad.l, pad.t + ph);
-  sctx.lineTo(pad.l + pw, pad.t + ph);
-  sctx.stroke();
-
-  sctx.font = '9px JetBrains Mono, monospace';
-  sctx.fillStyle = 'rgba(80,100,120,0.8)';
-  [0.5, 1, 2, 5, 10, 20, 50].forEach(e => {
-    sctx.fillText(e < 1 ? e.toFixed(1) : e, eToX(e) - 5, pad.t + ph + 14);
-  });
-  sctx.fillText('Energy (keV)', pad.l + pw/2 - 30, H - 4);
-  sctx.save();
-  sctx.translate(11, pad.t + ph/2 + 40);
-  sctx.rotate(-Math.PI/2);
-  sctx.fillText('keV² (Photons cm⁻² s⁻¹ keV⁻¹)', 0, 0);
-  sctx.restore();
-}
-
-window.addEventListener('resize', () => { drawSpectrum(); });
-drawSpectrum();
-</script>
