@@ -275,7 +275,7 @@ canvas#spec {
   <div class="sliders">
     <div class="slider-row">
       <label>Corona radius r<sub>src</sub> <span id="lbl-rsrc">4.1 r<sub>g</sub></span></label>
-      <input type="range" id="sl-rsrc" min="2" max="12" step="0.1" value="4.1">
+      <input type="range" id="sl-rsrc" min="1" max="100" step="0.5" value="4.1">
     </div>
     <div class="slider-row">
       <label>BH Spin a* <span id="lbl-spin">0.90</span></label>
@@ -353,43 +353,67 @@ function draw() {
   ctx.fillRect(0, 0, W, H);
 
   const cx = W / 2, cy = H / 2;
-  const scale = Math.min(W / 20, H / 18);
 
-  const rISCO = 6 * (1 - 0.54 * spin);
-  const diskInner = rISCO * scale;
-  const diskOuter = 9 * scale;
+  // Disk outer radius — standard relxill default (García & Dauser 2014)
+  const diskOuterRg = 400;
+
+  // Exact ISCO — Bardeen (1972) prograde orbit around Kerr BH
+  const a = Math.min(Math.abs(spin), 0.998);
+  const Z1 = 1 + Math.cbrt(1 - a*a) * (Math.cbrt(1+a) + Math.cbrt(1-a));
+  const Z2 = Math.sqrt(3*a*a + Z1*Z1);
+  const rISCO = 3 + Z2 - Math.sqrt((3-Z1)*(3+Z1+2*Z2));
+  const rHorizon = 1 + Math.sqrt(1 - a*a);
+
+  // Logarithmic radial scale: maps rg → screen pixels
+  const logMin = Math.log10(rHorizon * 0.55);
+  const logMax = Math.log10(diskOuterRg);
+  const maxR = Math.min(W * 0.46, H * 0.46);
+  function rToS(r) {
+    if (r <= 0) return 0;
+    return Math.max(0, (Math.log10(r) - logMin) / (logMax - logMin) * maxR);
+  }
 
   const inclRad = (incl * Math.PI) / 180;
   const tilt = Math.cos(inclRad);
 
-  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, diskOuter * 1.2);
+  const diskInnerS = rToS(rISCO);
+  const diskOuterS = maxR;
+
+  // Background glow
+  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, diskOuterS * 1.15);
   grd.addColorStop(0, 'rgba(230,240,255,0.55)');
   grd.addColorStop(1, 'rgba(255,255,255,0)');
   ctx.fillStyle = grd;
   ctx.fillRect(0, 0, W, H);
 
-  const nRings = 30;
+  // Disk rings — log-spaced from ISCO to 400 rg
+  const nRings = 38;
   for (let i = nRings; i >= 0; i--) {
-    const r = diskInner + (diskOuter - diskInner) * (i / nRings);
+    const logR = Math.log10(rISCO) + (Math.log10(diskOuterRg) - Math.log10(rISCO)) * (i / nRings);
+    const r_s = rToS(Math.pow(10, logR));
+    const logRn = Math.log10(rISCO) + (Math.log10(diskOuterRg) - Math.log10(rISCO)) * ((i+1) / nRings);
+    const r_sn = rToS(Math.pow(10, logRn));
     const frac = i / nRings;
     const rr = Math.round(220 - 100 * frac);
     const gg = Math.round(80 + 40 * frac);
     const bb = Math.round(30 + 190 * frac);
     ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * tilt, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, r_s, r_s * tilt, 0, 0, Math.PI * 2);
     ctx.strokeStyle = `rgba(${rr},${gg},${bb},0.65)`;
-    ctx.lineWidth = (diskOuter - diskInner) / nRings * 1.1;
+    ctx.lineWidth = Math.max(0.7, (r_sn - r_s) * 1.05);
     ctx.stroke();
   }
 
-  const ergo = (1 + Math.sqrt(1 - spin * spin)) * scale;
+  // Ergosphere (equatorial radius = 2 rg for all spins)
+  const ergoS = rToS(2.0);
   ctx.beginPath();
-  ctx.ellipse(cx, cy, ergo * 0.55, ergo * 0.55, 0, 0, Math.PI * 2);
-  ctx.strokeStyle = 'rgba(180,130,0,0.18)';
-  ctx.lineWidth = ergo * 0.5;
+  ctx.ellipse(cx, cy, ergoS, ergoS, 0, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(180,130,0,0.22)';
+  ctx.lineWidth = Math.max(3, ergoS * 0.35);
   ctx.stroke();
 
-  const bhR = Math.max(4, (1 + Math.sqrt(1 - spin * spin)) * scale * 0.4);
+  // Event horizon + BH
+  const bhR = Math.max(5, rToS(rHorizon));
   const bhGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, bhR * 2.5);
   bhGrd.addColorStop(0, 'rgba(10,10,20,1)');
   bhGrd.addColorStop(0.55, 'rgba(20,20,40,0.9)');
@@ -408,22 +432,23 @@ function draw() {
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
+  // Corona
   const coronaSources = [];
   const thetaRad = (theta * Math.PI) / 180;
-  const coronaY_lamp = cy - rsrc * scale;
 
   if (mode === 'lamp') {
-    coronaSources.push({ x: cx, y: coronaY_lamp });
+    const coronaYlamp = cy - rToS(rsrc);
+    coronaSources.push({ x: cx, y: coronaYlamp });
     ctx.beginPath();
     ctx.setLineDash([4, 4]);
     ctx.moveTo(cx, cy - bhR);
-    ctx.lineTo(cx, coronaY_lamp - 7);
+    ctx.lineTo(cx, coronaYlamp - 7);
     ctx.strokeStyle = 'rgba(26,125,181,0.35)';
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.setLineDash([]);
     ctx.beginPath();
-    ctx.arc(cx, coronaY_lamp, 7, 0, Math.PI * 2);
+    ctx.arc(cx, coronaYlamp, 7, 0, Math.PI * 2);
     ctx.fillStyle = '#1a7db5';
     ctx.shadowColor = '#1a7db5';
     ctx.shadowBlur = 14;
@@ -431,19 +456,21 @@ function draw() {
     ctx.shadowBlur = 0;
     ctx.font = '10px JetBrains Mono, monospace';
     ctx.fillStyle = 'rgba(26,125,181,0.85)';
-    ctx.fillText(`h = ${rsrc.toFixed(1)} rg`, cx + 12, coronaY_lamp + 4);
+    ctx.fillText(`h = ${rsrc.toFixed(1)} rg`, cx + 12, coronaYlamp + 4);
   } else {
+    const ringRadiusRg = rsrc * Math.sin(thetaRad);
+    const ringHeightRg = rsrc * Math.cos(thetaRad);
+    const ringRadiusS = rToS(Math.max(ringRadiusRg, 0.1));
+    const ringHeightS = ringHeightRg > 0.1 ? rToS(ringHeightRg) : 0;
     const nSrc = 8;
-    const ringRadius = rsrc * scale * Math.sin(thetaRad);
-    const ringHeight = rsrc * scale * Math.cos(thetaRad);
     for (let i = 0; i < nSrc; i++) {
       const phi = (i / nSrc) * Math.PI * 2 + t * 0.004;
-      const rx = ringRadius * Math.cos(phi);
-      const ry = ringRadius * Math.sin(phi) * tilt;
-      coronaSources.push({ x: cx + rx, y: cy - ringHeight + ry });
+      const rx = ringRadiusS * Math.cos(phi);
+      const ry = ringRadiusS * Math.sin(phi) * tilt;
+      coronaSources.push({ x: cx + rx, y: cy - ringHeightS + ry });
     }
     ctx.beginPath();
-    ctx.ellipse(cx, cy - ringHeight, ringRadius, ringRadius * tilt, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy - ringHeightS, ringRadiusS, ringRadiusS * tilt, 0, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(26,125,181,0.5)';
     ctx.lineWidth = 2;
     ctx.shadowColor = '#1a7db5';
@@ -462,51 +489,152 @@ function draw() {
     ctx.font = '10px JetBrains Mono, monospace';
     ctx.fillStyle = 'rgba(26,125,181,0.85)';
     ctx.fillText(`rsrc = ${rsrc.toFixed(1)} rg, θ = ${theta}°`,
-      cx - 72, cy - ringHeight - ringRadius * tilt - 8);
+      cx - 72, cy - ringHeightS - ringRadiusS * tilt - 8);
   }
 
-  if (t % 12 === 0 && coronaSources.length) {
+  // --- Illumination glow on inner disk (ring corona concentrates flux near BH) ---
+  if (mode === 'ring') {
+    const glowR = rToS(rISCO * 6);
+    const innerGlow = ctx.createRadialGradient(cx, cy, diskInnerS * 0.8, cx, cy, glowR);
+    innerGlow.addColorStop(0, 'rgba(255,160,40,0.22)');
+    innerGlow.addColorStop(1, 'rgba(255,160,40,0)');
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, glowR, glowR * tilt, 0, 0, Math.PI * 2);
+    ctx.fillStyle = innerGlow;
+    ctx.fill();
+  }
+
+  // --- Photon spawning: ring mode fires more, focused on inner disk ---
+  // Ring corona: Rfrac large → most X-rays hit disk, concentrated near BH
+  // Lamp-post: some photons escape upward without hitting disk
+  const spawnInterval = mode === 'ring' ? 7 : 14;
+  const escapeChance = mode === 'ring' ? 0.05 : 0.35;
+  if (t % spawnInterval === 0 && coronaSources.length) {
     const src = coronaSources[Math.floor(Math.random() * coronaSources.length)];
     const phi = Math.random() * Math.PI * 2;
-    const r = diskInner + Math.random() * (diskOuter - diskInner) * 0.7;
+
+    // Ring: concentrate toward inner disk (rISCO to ~8×rISCO); lamp-post: more spread
+    const innerMax = mode === 'ring' ? Math.min(diskOuterRg, rISCO * 8) : Math.min(diskOuterRg, rsrc * 20);
+    const logRand = Math.log10(rISCO) + Math.random() * (Math.log10(innerMax) - Math.log10(rISCO));
+    const r = rToS(Math.pow(10, logRand));
     const tx = cx + r * Math.cos(phi);
     const ty = cy + r * Math.sin(phi) * tilt;
-    photons.push({ sx: src.x, sy: src.y, ex: tx, ey: ty, p: 0, type: 'direct', alpha: 1 });
-    const dx = src.x - cx, dy = src.y - cy;
-    const len = Math.sqrt(dx*dx+dy*dy) || 1;
-    photons.push({ sx: tx, sy: ty, ex: tx + (dx/len)*W*0.3, ey: ty + (dy/len)*H*0.3,
-      p: 0, type: 'reflected', alpha: 1 });
+
+    if (Math.random() < escapeChance) {
+      // Escape photon — goes upward away from BH (lamp-post leaks more)
+      const ex = src.x + (src.x - cx) * 1.5;
+      const ey = src.y - H * 0.35;
+      photons.push({ sx: src.x, sy: src.y, ex, ey, p: 0, type: 'escape', alpha: 0.7 });
+    } else {
+      // Direct photon: corona → disk
+      photons.push({ sx: src.x, sy: src.y, ex: tx, ey: ty, p: 0, type: 'direct', alpha: 1 });
+      // Reflected photon: disk → away from BH
+      const dx = tx - cx, dy = ty - cy;
+      const len = Math.sqrt(dx*dx+dy*dy) || 1;
+      const reflEx = tx + (dx/len) * W * 0.28;
+      const reflEy = ty - Math.abs(dy/len) * H * 0.22 - 15;
+      photons.push({ sx: tx, sy: ty, ex: reflEx, ey: reflEy, p: 0, type: 'reflected', alpha: 1 });
+    }
   }
 
+  // Draw photon trails with arrowhead at leading edge
   photons = photons.filter(p => p.alpha > 0.02);
   photons.forEach(ph => {
     const x = ph.sx + (ph.ex - ph.sx) * ph.p;
     const y = ph.sy + (ph.ey - ph.sy) * ph.p;
+    const xp = ph.sx + (ph.ex - ph.sx) * Math.max(0, ph.p - 0.06);
+    const yp = ph.sy + (ph.ey - ph.sy) * Math.max(0, ph.p - 0.06);
+
+    let col;
+    if (ph.type === 'direct')   col = `rgba(26,125,181,${ph.alpha})`;
+    else if (ph.type === 'reflected') col = `rgba(201,90,16,${ph.alpha})`;
+    else col = `rgba(140,200,140,${ph.alpha * 0.7})`;
+
+    // Trail line
+    ctx.beginPath();
+    ctx.moveTo(xp, yp);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = col;
+    ctx.lineWidth = ph.type === 'direct' ? 1.5 : 1.2;
+    ctx.shadowColor = col;
+    ctx.shadowBlur = 5;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Leading dot
     ctx.beginPath();
     ctx.arc(x, y, ph.type === 'direct' ? 2.5 : 2, 0, Math.PI * 2);
-    if (ph.type === 'direct') {
-      ctx.fillStyle = `rgba(26,125,181,${ph.alpha})`;
-      ctx.shadowColor = '#1a7db5';
-    } else {
-      ctx.fillStyle = `rgba(201,90,16,${ph.alpha})`;
-      ctx.shadowColor = '#c95a10';
-    }
+    ctx.fillStyle = col;
+    ctx.shadowColor = col;
     ctx.shadowBlur = 7;
     ctx.fill();
     ctx.shadowBlur = 0;
-    ph.p += 0.025;
-    if (ph.p > 1) ph.alpha -= 0.08;
+
+    ph.p += 0.028;
+    if (ph.p > 1) ph.alpha -= 0.1;
   });
 
+  // --- Labels ---
   ctx.font = '11px JetBrains Mono, monospace';
   ctx.fillStyle = 'rgba(154,110,0,0.75)';
-  ctx.fillText('Accretion disk', cx + diskOuter * 0.62, cy + diskOuter * tilt * 0.62);
+  ctx.fillText('Accretion disk (400 rg)', cx + diskOuterS * 0.38, cy + diskOuterS * tilt * 0.58);
   ctx.fillStyle = 'rgba(60,70,90,0.55)';
   ctx.fillText('Black hole', cx + bhR + 5, cy + 4);
+
+  ctx.font = '9px JetBrains Mono, monospace';
+  ctx.fillStyle = 'rgba(154,110,0,0.55)';
+  ctx.fillText(`ISCO: ${rISCO.toFixed(2)} rg`, cx + diskInnerS * 0.5, cy - diskInnerS * tilt - 4);
 
   ctx.font = '10px JetBrains Mono, monospace';
   ctx.fillStyle = mode === 'ring' ? '#1a7db5' : '#9a6e00';
   ctx.fillText(mode === 'ring' ? '◉ RING corona' : '● LAMP-POST corona', 12, 18);
+
+  // --- Left-side annotation panel ---
+  const px = 10, py = 36;
+  ctx.font = 'bold 9px JetBrains Mono, monospace';
+  if (mode === 'ring') {
+    ctx.fillStyle = 'rgba(26,125,181,0.85)';
+    ctx.fillText('RING CORONA', px, py);
+    ctx.font = '8.5px JetBrains Mono, monospace';
+    ctx.fillStyle = 'rgba(40,50,70,0.72)';
+    const lines = [
+      '─ equatorial halo',
+      '─ illuminates',
+      '  inner disk',
+      '─ large Rfrac:',
+      '  most photons',
+      '  → disk',
+      '─ strong Fe Kα',
+      '  + Compton hump',
+    ];
+    lines.forEach((l, i) => ctx.fillText(l, px, py + 14 + i * 12));
+    // blue arrow label
+    ctx.fillStyle = 'rgba(26,125,181,0.65)';
+    ctx.fillText('● irradiation', px, py + 14 + lines.length * 12 + 6);
+    ctx.fillStyle = 'rgba(201,90,16,0.65)';
+    ctx.fillText('● reflection', px, py + 14 + lines.length * 12 + 20);
+  } else {
+    ctx.fillStyle = 'rgba(154,110,0,0.85)';
+    ctx.fillText('LAMP-POST', px, py);
+    ctx.font = '8.5px JetBrains Mono, monospace';
+    ctx.fillStyle = 'rgba(40,50,70,0.72)';
+    const lines = [
+      '─ point source',
+      '  above BH',
+      '─ uniform disk',
+      '  illumination',
+      '─ lower Rfrac:',
+      '  some photons',
+      '  escape',
+      '─ weaker inner',
+      '  disk signal',
+    ];
+    lines.forEach((l, i) => ctx.fillText(l, px, py + 14 + i * 12));
+    ctx.fillStyle = 'rgba(26,125,181,0.65)';
+    ctx.fillText('● irradiation', px, py + 14 + lines.length * 12 + 6);
+    ctx.fillStyle = 'rgba(140,200,140,0.75)';
+    ctx.fillText('● escaped photon', px, py + 14 + lines.length * 12 + 20);
+  }
 
   t++;
   requestAnimationFrame(draw);
