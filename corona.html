@@ -434,16 +434,16 @@ function draw() {
     ctx.fillText(`h = ${rsrc.toFixed(1)} rg`, cx + 12, coronaY_lamp + 4);
   } else {
     const nSrc = 8;
+    const ringRadius = rsrc * scale * Math.sin(thetaRad);
+    const ringHeight = rsrc * scale * Math.cos(thetaRad);
     for (let i = 0; i < nSrc; i++) {
       const phi = (i / nSrc) * Math.PI * 2 + t * 0.004;
-      const rx = rsrc * scale * Math.cos(phi);
-      const ry = rsrc * scale * Math.sin(phi) * tilt;
-      const ht = rsrc * scale * Math.sin(thetaRad);
-      coronaSources.push({ x: cx + rx, y: cy - ry * 0.3 - ht });
+      const rx = ringRadius * Math.cos(phi);
+      const ry = ringRadius * Math.sin(phi) * tilt;
+      coronaSources.push({ x: cx + rx, y: cy - ringHeight + ry });
     }
     ctx.beginPath();
-    ctx.ellipse(cx, cy - rsrc * scale * Math.sin(thetaRad),
-      rsrc * scale, rsrc * scale * tilt, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy - ringHeight, ringRadius, ringRadius * tilt, 0, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(26,125,181,0.5)';
     ctx.lineWidth = 2;
     ctx.shadowColor = '#1a7db5';
@@ -462,7 +462,7 @@ function draw() {
     ctx.font = '10px JetBrains Mono, monospace';
     ctx.fillStyle = 'rgba(26,125,181,0.85)';
     ctx.fillText(`rsrc = ${rsrc.toFixed(1)} rg, θ = ${theta}°`,
-      cx - 72, cy - rsrc * scale * Math.sin(thetaRad) - rsrc * scale - 8);
+      cx - 72, cy - ringHeight - ringRadius * tilt - 8);
   }
 
   if (t % 12 === 0 && coronaSources.length) {
